@@ -1,0 +1,56 @@
+<!-- <p>dashboard works!</p> -->
+<!-- <button (click)="getData()">click</button>
+<button (click)="postData()">post click</button>
+<button (click)="cacheDelete()">refresh data</button>
+<button (click)="navigateByUrl()">link</button> -->
+<input [(ngModel)]="listSelected" (ngModelChange)="changedDropdown()" placeholder="search and to list"/>
+
+<table style="border: 1px gray;">
+    <thead>
+        <tr>
+            <th>Label</th>
+            <th>ID</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tr *ngFor="let list of listEnterprises">
+        <td>{{list?.title}}</td>
+        <td>{{list?.nse_scrip_code}}</td>
+        <td *ngIf="list?.nse_scrip_code"><button (click)="selectedOption(list)" >Add</button></td>
+    </tr>
+</table>
+{{finalSelected|json}}
+<br>
+<div class="fixwidth">
+    <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>
+    <button (click)="toggle()">{{order}}</button>
+    <button (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
+</div>
+
+<!-- <div *ngFor="let tmp of myData">
+    <p>{{tmp?.dat?.name}}</p>
+</div> -->
+<table style="border: 1px gray;">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Price</th>
+            <th>Percentage</th>
+            <th>open Price</th>
+            <th>last Price</th>
+            <th>Today Low</th>
+            <th>Today High</th>
+          </tr>
+    </thead>
+
+    <tr *ngFor="let list of myData">
+        <td>{{list?.Tittle}}(<small>{{list?.symbol}}</small>)</td>
+        <td><b>{{list?.ltp}}</b></td>
+        <td><span  [ngClass]="list?.dayChangePerc>0 ?  'active' : 'inactive'">{{list?.dayChangePerc | number : '1.2-2' }}</span></td>
+        <td>{{list?.open}}</td>
+        <td>{{list?.close}}</td>
+        <td>{{list?.low}}</td>
+        <td>{{list?.high}}</td>
+    </tr>
+</table>

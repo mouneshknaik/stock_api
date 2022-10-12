@@ -1,0 +1,16 @@
+table { border-collapse: collapse; }
+tr,td { border: solid thin;min-width: 100px; }
+.active{
+    color: green;
+    font-weight: bold;
+}
+.inactive{
+    color: red;
+    font-weight: bold;
+}
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.fixwidth{
+    width: 800px;
+}
