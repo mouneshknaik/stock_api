@@ -20,6 +20,11 @@
         <td *ngIf="list?.nse_scrip_code"><button (click)="selectedOption(list)" >Add</button></td>
     </tr>
 </table>
+<!-- <button (click)="linkPage('/all-stock')">See ALL</button> -->
+<a
+[routerLink]="['/all-stock']">
+Link All Page
+</a>
 {{finalSelected|json}}
 <br>
 <div class="fixwidth">
@@ -39,9 +44,17 @@
             <th>Percentage</th>
             <th>open Price</th>
             <th>last Price</th>
-            <th>Today Low</th>
-            <th>Today High</th>
+            <!-- <th>Today Low</th> -->
+            <!-- <th>Today High</th> -->
+            <th *ngFor="let list of uniquDates" rowspan="3" class="dateCell">{{list}}
+                <tr style="border: 0;">
+                    <th>Close Price </th>
+                    <th>Gain/Loss </th>
+                    <th>Percentage </th>
+                  </tr>
+            </th>
           </tr>
+
     </thead>
 
     <tr *ngFor="let list of myData">
@@ -50,7 +63,14 @@
         <td><span  [ngClass]="list?.dayChangePerc>0 ?  'active' : 'inactive'">{{list?.dayChangePerc | number : '1.2-2' }}</span></td>
         <td>{{list?.open}}</td>
         <td>{{list?.close}}</td>
-        <td>{{list?.low}}</td>
-        <td>{{list?.high}}</td>
+        <!-- <td>{{list?.low}}</td> -->
+        <!-- <td>{{list?.high}}</td> -->
+        <td *ngFor="let uniDate of uniquDates" class="dateCell">
+            <tr class="border">
+                <td class="border" *ngIf="list[uniDate]"> {{list[uniDate]['CLOSE_PRICE']}}</td>
+                <td class="border"  *ngIf="list[uniDate]" [ngClass]="list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE'] |number:'1.2-2'}}<span *ngIf="list[uniDate]['CLOSE_PRICE']">Rs</span></td>
+                <td class="border"  *ngIf="list[uniDate]" [ngClass]="list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{((list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE'])/list[uniDate]['PREV_CLOSE'])*100 |number:'1.2-2'}}<span *ngIf="list[uniDate]['CLOSE_PRICE']">%</span></td>
+            </tr>
+        </td>
     </tr>
 </table>

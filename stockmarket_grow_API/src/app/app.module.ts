@@ -10,6 +10,7 @@ import { NewCacheInterceptor } from './intercepter/cacheMap/cache-interceptor.se
 import { CacheResolverService } from './intercepter/cacheMap/cache-resolver.service';
 import { PageComponent } from './page/page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AllStockComponent } from './all-stock/all-stock.component';
 
 @NgModule({
   declarations: [

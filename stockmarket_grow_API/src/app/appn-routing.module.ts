@@ -7,6 +7,9 @@ const routes: Routes = [{
 },{
   path: 'page',
   loadChildren: () => import('./page/page.module').then(m => m.PageModule)
+},{
+  path: 'all-stock',
+  loadChildren: () => import('./all-stock/all-stock.module').then(m => m.AllStockModule)
 }];
 
 @NgModule({

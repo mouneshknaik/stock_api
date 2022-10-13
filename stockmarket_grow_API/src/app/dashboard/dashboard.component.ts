@@ -7,7 +7,7 @@ import { CacheInterceptor } from '../intercepter/cacheInterceptor.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   data: any;
@@ -21,8 +21,10 @@ export class DashboardComponent implements OnInit {
   fetScope: any;
   filterTable:any;
   rawData: any;
+  reportData: any;
   constructor(private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
-
+  
+uniquDates:any=[];
   ngOnInit(): void {
 
     // this.data$ = this.http.get('http://localhost:3000/').pipe(
@@ -32,28 +34,62 @@ export class DashboardComponent implements OnInit {
     // );
     // getData() {
       // this.data$.subscribe((data:any) => this.myData = data?.data);
+
     this.loadData();
+
     let timeInverval=60*60*6;
     if(new Date().getHours()>=8 && new Date().getHours()<=15){
       timeInverval=5
     }
-    setInterval(()=>{
-      this.loadData();
-    },1000*timeInverval)
+    // setInterval(()=>{
+    //   this.loadData();
+    // },1000*timeInverval)
+  }
+  fetchreportData(list:any){
+    return new Promise((resolve,reject)=>{
+      this.http.post('http://localhost:3000/getData',{"list":list}).subscribe((reportData:any)=>{
+        console.log(reportData);
+        this.reportData=reportData
+        Object.values(reportData).forEach((ele:any)=>{
+          this.uniquDates=Object.keys(ele).toString();
+          // if(!this.uniquDates.includes(date)){
+          //   this.uniquDates.push(date);
+          // }
+        });
+        this.uniquDates=this.uniquDates.split(',');
+        // console.log(this.uniquDates);
+        this.uniquDates=this.uniquDates.filter((ele:any)=>ele!='');
+        // console.log(this.uniquDates);
+        resolve(this.uniquDates);
+      });
+    })
+
   }
   loadData(){
     this.loading=true;
-    this.http.get('http://localhost:3000/getAll').subscribe((val:any)=>{
-        
-      // this.myData = val.map((ele:any)=>JSON.parse(ele));
+    this.http.get('http://localhost:3000/getAll').subscribe(async (val:any)=>{
       this.myData=val;
       this.rawData=val;
+      if(this.uniquDates.length==0){
+        let list=this.myData.map((ele:any)=>ele.symbol);
+        await this.fetchreportData(list);
+      }
+      // this.myData = val.map((ele:any)=>JSON.parse(ele));
+      this.replaceReportData(this.myData);
       this.loading=false;
       this.assendingOrder();
+      console.log( this.myData);
       // this.descOrder();
       // this.assendingOrder();
       // console.log(JSON.parse(val[0]));
     })
+  }
+  replaceReportData(data:any){
+    data.forEach((ele:any)=>{
+      this.uniquDates.forEach((element:any) => {
+        ele[element]=this.reportData?.[ele['symbol']]?this.reportData[ele['symbol']][element]:'';
+      });
+    });
   }
   filterTableData(){
     this.myData=this.rawData;
@@ -135,5 +171,8 @@ export class DashboardComponent implements OnInit {
   }
   clearData() {
     this.myData = null;
+  }
+  linkPage(link:string){
+    // this.router.navigate('link')
   }
 }

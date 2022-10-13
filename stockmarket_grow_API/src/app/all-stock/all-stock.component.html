@@ -1,0 +1,48 @@
+
+<div class="fixwidth">
+    <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>
+    <button (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
+</div>
+
+<!-- <div *ngFor="let tmp of myData">
+    <p>{{tmp?.dat?.name}}</p>
+</div> -->
+    
+<!-- <mat-form-field appearance="fill">
+    <mat-label>Input & change events</mat-label>
+    <input matInput [matDatepicker]="picker"
+           (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>    -->
+<h2>{{myData[0]['DATE1']}}</h2>
+    <input [(ngModel)]="dateSelected">
+<button (click)="loadData()">Load By Date</button>
+<button (click)="toggle()">{{order}}</button>
+
+
+<input [(ngModel)]="selectedSymbol">
+<button (click)="loadDataBySymbol()">loadDataBySymbol</button>
+<table style="border: 1px gray;">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Price</th>
+            <th>last Price</th>
+            <th>Loss/Gain</th>
+            <th>Percentage</th>
+            <th>Date</th>
+            </tr>
+
+    </thead>
+
+    <tr *ngFor="let list of myData">
+        <td>{{list?.SYMBOL}}</td>
+        <td class="border" *ngIf="list"> {{list['CLOSE_PRICE']}}</td>
+        <td class="border" *ngIf="list"> {{list['PREV_CLOSE']}}</td>
+        <td class="border"  *ngIf="list" [ngClass]="list['CLOSE_PRICE']-list['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{list['CLOSE_PRICE']-list['PREV_CLOSE'] |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">Rs</span></td>
+        <td class="border"  *ngIf="list" [ngClass]="list['CLOSE_PRICE']-list['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{((list['CLOSE_PRICE']-list['PREV_CLOSE'])/list['PREV_CLOSE'])*100 |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">%</span></td>
+        <td>{{list['DATE1']}}</td>
+    </tr>
+</table>

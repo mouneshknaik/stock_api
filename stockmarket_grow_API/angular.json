@@ -77,7 +77,6 @@
           "defaultConfiguration": "development",
           "options": {
             "browserTarget":"move-safe:build",
-            "proxyConfig":"./proxy.config.json",
             "port": 4000
           }
         },
