@@ -5,7 +5,7 @@ tr,td { border: solid thin;min-width: 100px; }
     font-weight: bold;
     span{
         color: gray;
-        font-size: 6px;
+        font-size: 10px;
     }
 }
 .inactive{
@@ -27,4 +27,15 @@ tr,td { border: solid thin;min-width: 100px; }
 }
 .dateCell{
     font-size: 12px;
+}
+.input_fileupload--hidden{
+    display:none;
+  }
+.upload.layout {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.red{
+    color: red;
 }

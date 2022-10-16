@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CacheInterceptor } from '../intercepter/cacheInterceptor.service';
 
@@ -24,13 +25,21 @@ export class AllStockComponent implements OnInit {
   reportData: any;
   dateSelected:any;
   selectedSymbol:any;
-  constructor(private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
+  fileUploadnew: any;
+  uploadLoader: boolean=false;
+  message:any;
+  constructor(private sanitizer: DomSanitizer,private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
 
 
   ngOnInit(): void {
-    this.dateSelected='13-Oct-2022';
-    this.selectedSymbol='HINDCON';
+    this.dateSelected=this.dateFormat(new Date());
+    this.selectedSymbol='CIPLA';
     this.loadData();
+  }
+  dateForm(date:any){
+    let tmp=new Date(date);
+    let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return tmp.getDate()+"-"+monthList[tmp.getMonth()]+"-"+tmp.getFullYear();
   }
   loadData(){
     this.loading=true;
@@ -70,7 +79,11 @@ loadDataBySymbol(){
     // console.log(JSON.parse(val[0]));
   })
 }
-
+dateFormat(date:any){
+  let tmp=new Date(date);
+  let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return tmp.getDate()+"-"+monthList[tmp.getMonth()]+"-"+(tmp.getFullYear()).toString().substring(2, 4);
+}
   assendingOrder(val:string){
     let key='dayChangePerc';
     if(val){
@@ -103,6 +116,23 @@ loadDataBySymbol(){
       })
     }
   }
+  onInput(event:any) {
+  }
+  inputFileName: string=''
+  onFileSelected(event:any) {
+    let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+    this.fileUploadnew=files[0];
+    // for (let i = 0; i < files.length; i++) {
+    //   let file = files[i];
+    //     file.objectURL = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(files[i])));
+    //     console.log(file);
+    //   }
+  }
+  @ViewChild('fileUpload')  fileUpload: ElementRef
+  onClick(event:any) {
+    if (this.fileUpload)
+      this.fileUpload.nativeElement.click()
+  }
   descOrder(val:string){
     let key='dayChangePerc';
     if(val){
@@ -110,4 +140,21 @@ loadDataBySymbol(){
     }
     this.myData.sort((a:any,b:any)=> (a[key] < b[key] ? 1 : -1))
   }
+ async uploadFile() {
+  this.uploadLoader=true;
+  this.message='';
+    let formData = new FormData();
+     formData.append("fileupload", this.fileUploadnew);
+     await fetch('http://localhost:3100/upload', {
+        method: "POST",
+        body: formData
+    }).then(result=>{
+      console.log(result);
+      if(result.status===200){
+        this.message={message:'uploaded succesfull'};
+      }
+      this.uploadLoader=true;
+    });
+    }
+
 }

@@ -4,7 +4,6 @@
 <button (click)="cacheDelete()">refresh data</button>
 <button (click)="navigateByUrl()">link</button> -->
 <input [(ngModel)]="listSelected" (ngModelChange)="changedDropdown()" placeholder="search and to list"/>
-
 <table style="border: 1px gray;">
     <thead>
         <tr>
@@ -29,8 +28,8 @@ Link All Page
 <br>
 <div class="fixwidth">
     <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>
-    <button (click)="toggle()">{{order}}</button>
-    <button (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
+    <button  mat-raised-button color="primary" (click)="toggle()">{{order}}</button>
+    <button  mat-fab color="primary" (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
 </div>
 
 <!-- <div *ngFor="let tmp of myData">

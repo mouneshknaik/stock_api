@@ -164,6 +164,13 @@ app.get('/getBySymbol',async(req,res)=>{
 	  res.send(result);
 	});
 });
+app.get('/getFundamentals',async(req,res)=>{
+	let sql=`SELECT * FROM companyinfo`
+	con.query(sql, function (err, result) {
+	  if (err) throw err;
+	  res.send(result);
+	});
+});
 async function serialCall(listOfCompanies,res){
 	let promiseData=[];
 	let finalResult=[];

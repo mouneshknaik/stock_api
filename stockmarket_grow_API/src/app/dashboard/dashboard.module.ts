@@ -9,6 +9,8 @@ import { NewCacheInterceptor } from '../intercepter/cacheMap/cache-interceptor.s
 import { CacheResolverService } from '../intercepter/cacheMap/cache-resolver.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 // import {MatNativeDateModule} from '@angular/material/core';
 @NgModule({
   declarations: [DashboardComponent],
@@ -18,6 +20,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule
   ],
   exports:[DashboardComponent],
   providers:[ 
