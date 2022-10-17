@@ -36,6 +36,7 @@
             <th>Loss/Gain</th>
             <th>Percentage</th>
             <th>Date</th>
+            <th>Market Cap</th>
             </tr>
 
     </thead>
@@ -47,6 +48,7 @@
         <td class="border"  *ngIf="list" [ngClass]="list['CLOSE_PRICE']-list['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{list['CLOSE_PRICE']-list['PREV_CLOSE'] |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">Rs</span></td>
         <td class="border"  *ngIf="list" [ngClass]="list['CLOSE_PRICE']-list['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{((list['CLOSE_PRICE']-list['PREV_CLOSE'])/list['PREV_CLOSE'])*100 |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">%</span></td>
         <td>{{list['DATE1']}}</td>
+        <td>{{list['MARKETCAP']}}</td>
     </tr>
 </table>
 <h2 *ngIf="myData.length==0" class="red alert">No Data for the day</h2>

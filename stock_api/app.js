@@ -99,7 +99,7 @@ app.post('/getData',async(req,res)=>{
 	// 	}
 	// ]
 	//   let tempnew=Object.values(req.body.list);
-	  let sql=`SELECT * FROM reportdata WHERE SYMBOL IN (?) ORDER BY DATE1 DESC `
+	  let sql=`SELECT * FROM reportdata WHERE SYMBOL IN (?) ORDER BY DATE1 DESC limit 5`
 	  con.query(sql,[req.body.list], function (err, result) {
 		if (err) throw err;
 		// console.log(result);
@@ -150,7 +150,7 @@ app.get('/getAll',async(req,res)=>{
 });
 app.get('/getAllStocks',async(req,res)=>{
 	console.log(req.query);
-	let sql=`SELECT * FROM reportdata WHERE DATE1="${req.query.date}"`
+	let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE r.DATE1="${req.query.date}"`
 	con.query(sql, function (err, result) {
 	  if (err) throw err;
 	  res.send(result);

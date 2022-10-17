@@ -125,36 +125,81 @@ csv()
 
 });
 app.get('/fetchList',async(req,res)=>{
-	console.log(req.query.q);
-  // let sql=`SELECT count(SYMBOL) as count FROM reportdata WHERE SYMBOL='${data.SYMBOL}' and DATE1='${data.DATE1}'`;
-  //     con.query(sql, function (err, result) {
-
+  // let sql=`SELECT DISTINCT(SYMBOL) FROM reportdata`;
+  //     con.query(sql, async function (err, result) {
+  //         for (const val of result){
+  //           let data=await callAPI(`https://groww.in/v1/api/search/v1/entity?app=false&entity_type=stocks&page=0&q=${val.SYMBOL}&size=10`,val.SYMBOL);
+  //           console.log(data);
+  //           updateField(data);
+  //         }
   //     });
-  let list=['20MICRONS','3IINFOLTD','A2ZINFRA'];
-  list.forEach(async(ele)=>{
-  let data=await callAPI(`https://groww.in/v1/api/search/v1/entity?app=false&entity_type=stocks&page=0&q=${ele}&size=10`);
-    console.log(data);
-  });
-  // let data=await callAPI(`https://groww.in/v1/api/search/v1/entity?app=false&entity_type=stocks&page=0&q=${req.query.q}&size=10`);
+  let sql=`SELECT SEARCHID FROM companyinfo`;
+      con.query(sql, async function (err, result) {
+          for (const val of result){
+            let data=await callAPI(`https://groww.in/v1/api/stocks_data/v1/company/search_id/${val.SEARCHID}?page=0&size=10`);
+            // console.log(data);
+            updateField(data,val.SEARCHID);
+          }
+      });
 
+});
+app.get('/updateDate',async(req,res)=>{
+  let sql=`SELECT DATE1 FROM reportdata limit 3`;
+  con.query(sql, async function (err, result) {
+      for (const val of result){
+          console.log(val);
+      }
+    });
 });
 app.listen(3100,()=>{
 	console.log('server stared 3100')
 })
-function callAPI(url,label){
+function inter(i){
+  return new Promise((res,rej)=>{
+    setTimeout(()=>{
+      i++;
+      res(i);
+    },2000)
+  })
+}
+function updateField(tmp,searchId){
+  return new Promise((resolve,reject)=>{
+      let tempnew=Object.values(tmp);
+      let keys=Object.keys(tmp);
+      console.log(searchId+"-"+tmp['MARKETCAP']);
+      // let sql="UPDATE companyinfo SET `STATS`='"+tmp['STATS']+"',`FUNDAMENTALS`='"+tmp['FUNDAMENTALS']+"',      `SHAREHOLDINGPATTERN`='"+tmp['SHAREHOLDINGPATTERN']+"',      `FUNDSINVESTED`='"+tmp['FUNDSINVESTED']+"',`PRICEDATA`='"+tmp['PRICEDATA']+"',      `FINANCIALSTATEMENT`='"+tmp['FINANCIALSTATEMENT']+"',      `EXPERTRATING`='"+tmp['EXPERTRATING']+"',      `LOGO`='"+tmp['LOGO']+"',      `INDUSTRY`='"+tmp['INDUSTRY']+"' where SEARCHID='"+searchId+"'";
+      let sql="UPDATE companyinfo SET STATS='"+tmp['STATS']+"',MARKETCAP='"+tmp['MARKETCAP']+"', LOGO='"+tmp['LOGO']+"' where SEARCHID='"+searchId+"'";
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        resolve(result);
+      });
+  })
+}
+function callAPI(url){
 	return new Promise((res,rej)=>{
-		 request(url, function (error, response, body) {
-	    if (!error && response.statusCode === 200) {
-	    	let tmp=JSON.parse(body);
-	    	if(label){
-	    		tmp['Tittle']=label['label'];
-	    	}
-	        res(tmp);
-	     }else{
-	     	console.log(error);
-	     	res({});
-	     }
-		})
+    // setTimeout(()=>{
+       request(url, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+          let tmp={}
+          let data=JSON.parse(body);
+          tmp['STATS']=(JSON.stringify(data.stats));
+          tmp['FUNDAMENTALS']=encodeURI(JSON.stringify(data.fundamentals));
+          tmp['SHAREHOLDINGPATTERN']=encodeURI(JSON.stringify(data.shareHoldingPattern));
+          tmp['FUNDSINVESTED']=encodeURI(JSON.stringify(data.fundsInvested));
+          tmp['PRICEDATA']=encodeURI(JSON.stringify(data.priceData));
+          tmp['FINANCIALSTATEMENT']=encodeURI(JSON.stringify(data.financialStatement));
+          tmp['EXPERTRATING']=encodeURI(JSON.stringify(data.expertRating));
+          tmp['LOGO']=data.header?.logoUrl;
+          tmp['INDUSTRY']=encodeURI(JSON.stringify(data.header));
+          tmp['MARKETCAP']=data?.fundamentals?.[0]?.value;
+            res(tmp);
+         }else{
+         	console.log(error);
+         	res({});
+         }
+      })
+    // },10);
+
 	})
 
 }

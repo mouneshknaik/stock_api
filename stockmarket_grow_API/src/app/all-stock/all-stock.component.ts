@@ -35,6 +35,7 @@ export class AllStockComponent implements OnInit {
     this.dateSelected=this.dateFormat(new Date());
     this.selectedSymbol='CIPLA';
     this.loadData();
+    this.loadFundamentals();
   }
   dateForm(date:any){
     let tmp=new Date(date);
@@ -74,8 +75,8 @@ loadDataBySymbol(){
     });
     
     console.log( this.myData);
-    // this.descOrder();
-    this.assendingOrder('timestamp');
+    this.descOrder('timestamp');
+    // this.assendingOrder('timestamp');
     // console.log(JSON.parse(val[0]));
   })
 }
@@ -115,6 +116,11 @@ dateFormat(date:any){
 
       })
     }
+  }
+  loadFundamentals(){
+    this.http.get('http://localhost:3000/getFundamentals').subscribe((val:any)=>{
+          console.log(JSON.parse(val[0].STATS));
+      })
   }
   onInput(event:any) {
   }

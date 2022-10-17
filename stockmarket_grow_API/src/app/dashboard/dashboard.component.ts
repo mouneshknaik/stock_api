@@ -39,11 +39,11 @@ uniquDates:any=[];
 
     let timeInverval=60*60*6;
     if(new Date().getHours()>=8 && new Date().getHours()<=15){
-      timeInverval=5
+      timeInverval=15
     }
-    // setInterval(()=>{
-    //   this.loadData();
-    // },1000*timeInverval)
+    setInterval(()=>{
+      this.loadData();
+    },1000*timeInverval)
   }
   fetchreportData(list:any){
     return new Promise((resolve,reject)=>{
