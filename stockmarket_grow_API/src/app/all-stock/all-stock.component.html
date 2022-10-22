@@ -1,7 +1,7 @@
 
 <div class="fixwidth">
    
-    <button mat-fab color="primary" (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
+    <button mat-fab color="primary" (click)="loadData('')" [ngClass]="loading?'inactivebg':'activebg'" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
 </div>
 
 <!-- <div *ngFor="let tmp of myData">
@@ -18,15 +18,26 @@
   </mat-form-field>    -->
 <!-- <h2>{{myData[0]['DATE1']}}</h2> -->
     <input [(ngModel)]="dateSelected">
-<button mat-raised-button color="accent" (click)="loadData()">Load By Date</button>
-
-
-
-<input [(ngModel)]="selectedSymbol">
-<button mat-raised-button color="primary" (click)="loadDataBySymbol()">loadDataBySymbol</button>
+<button mat-raised-button color="accent" (click)="loadData('')">Load By Date</button>
+<input list="browsers" name="browser" id="browser"  [(ngModel)]="selectedSymbol">
+    <datalist id="browsers">
+      <option value="{{list.NSESYMBOL}}" *ngFor="let list of symbols">
+    </datalist>
+<button (click)="loadDataBySymbol()" mat-raised-button color="primary"> loadDataBySymbol</button>
 <br>
 <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>
 <button mat-raised-button color="primary" (click)="toggle()">{{order}}</button>
+<br>Daily Average:<span [ngClass]="dailyAv>=0?'active' : 'inactive'">{{dailyAv |number:'1.2-2'}}%</span>
+<br>Total Average:<span [ngClass]="avarage>=0?'active' : 'inactive'">{{avarage |number:'1.2-2'}}%</span>
+<button mat-raised-button color="primary" (click)="martoggle()">Market Sort {{market}}</button>
+    <select name="languages" id="lang" [(ngModel)]="dropdown">
+        <option>All</option>
+        <option *ngFor="let list of industry">
+            {{list?.INDUSTRY}}
+        </option>
+    </select>
+    <button (click)="filterIndustry()" mat-raised-button> Filter</button>
+
 <table style="border: 1px gray;">
     <thead>
         <tr>
@@ -36,6 +47,7 @@
             <th>Loss/Gain</th>
             <th>Percentage</th>
             <th>Date</th>
+            <th>Industry</th>
             <th>Market Cap</th>
             </tr>
 
@@ -48,6 +60,7 @@
         <td class="border"  *ngIf="list" [ngClass]="list['CLOSE_PRICE']-list['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{list['CLOSE_PRICE']-list['PREV_CLOSE'] |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">Rs</span></td>
         <td class="border"  *ngIf="list" [ngClass]="list['CLOSE_PRICE']-list['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{((list['CLOSE_PRICE']-list['PREV_CLOSE'])/list['PREV_CLOSE'])*100 |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">%</span></td>
         <td>{{list['DATE1']}}</td>
+        <td>{{list['INDUSTRY']}}</td>
         <td>{{list['MARKETCAP']}}</td>
     </tr>
 </table>

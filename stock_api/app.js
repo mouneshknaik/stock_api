@@ -42,69 +42,31 @@ con.connect(function(err) {
 });
 app.post('/getData',async(req,res)=>{
 	console.log(req.body);
-	// let result=[
-	// 	{
-	// 		"SYMBOL": "AWL",
-	// 		"SERIES": "EQ",
-	// 		"DATE1": "12-Oct-2022",
-	// 		"PREV_CLOSE": 718.9,
-	// 		"OPEN_PRICE": 726,
-	// 		"HIGH_PRICE": 727.8,
-	// 		"LOW_PRICE": 692,
-	// 		"LAST_PRICE": 707.85,
-	// 		"CLOSE_PRICE": 708.35,
-	// 		"AVG_PRICE": 707.54,
-	// 		"TTL_TRD_QNTY": 3425160,
-	// 		"TURNOVER_LACS": 24234.6,
-	// 		"NO_OF_TRADES": 74295,
-	// 		"NAME": "",
-	// 		"DELIV_QTY": 1115030,
-	// 		"DELIV_PER": 32.55
-	// 	},
-	// 	{
-	// 		"SYMBOL": "CIPLA",
-	// 		"SERIES": "EQ",
-	// 		"DATE1": "12-Oct-2022",
-	// 		"PREV_CLOSE": 1110.1,
-	// 		"OPEN_PRICE": 1111.6,
-	// 		"HIGH_PRICE": 1118.05,
-	// 		"LOW_PRICE": 1099.2,
-	// 		"LAST_PRICE": 1108,
-	// 		"CLOSE_PRICE": 1108.45,
-	// 		"AVG_PRICE": 1107.57,
-	// 		"TTL_TRD_QNTY": 1231140,
-	// 		"TURNOVER_LACS": 13635.8,
-	// 		"NO_OF_TRADES": 66007,
-	// 		"NAME": "",
-	// 		"DELIV_QTY": 539236,
-	// 		"DELIV_PER": 43.8
-	// 	},
-	// 	{
-	// 		"SYMBOL": "CIPLA",
-	// 		"SERIES": "EQ",
-	// 		"DATE1": "13-Oct-2022",
-	// 		"PREV_CLOSE": 1110.1,
-	// 		"OPEN_PRICE": 1111.6,
-	// 		"HIGH_PRICE": 1118.05,
-	// 		"LOW_PRICE": 1099.2,
-	// 		"LAST_PRICE": 1108,
-	// 		"CLOSE_PRICE": 1108.45,
-	// 		"AVG_PRICE": 1107.57,
-	// 		"TTL_TRD_QNTY": 1231140,
-	// 		"TURNOVER_LACS": 13635.8,
-	// 		"NO_OF_TRADES": 66007,
-	// 		"NAME": "",
-	// 		"DELIV_QTY": 539236,
-	// 		"DELIV_PER": 43.8
-	// 	}
-	// ]
+	
 	//   let tempnew=Object.values(req.body.list);
-	  let sql=`SELECT * FROM reportdata WHERE SYMBOL IN (?) ORDER BY DATE1 DESC limit 5`
+	let sql=`SELECT * FROM (select DISTINCT(TIMESTAMP) FROM reportdata ORDER by TIMESTAMP DESC LIMIT 5) as time JOIN reportdata as re on time.TIMESTAMP=re.TIMESTAMP where SYMBOL IN(?) ORDER by time.TIMESTAMP DESC`
+	//   let sql=`SELECT * FROM reportdata WHERE SYMBOL IN (?) and TIMESTAMP IN(1666031400000,1665945000000,166568580000) ORDER BY TIMESTAMP DESC `
 	  con.query(sql,[req.body.list], function (err, result) {
 		if (err) throw err;
 		// console.log(result);
 		let FinalObjResult=UISupportobject(result,req.body.list);
 		res.send(FinalObjResult);
+	  });
+  });
+  app.get('/getInudtriList',async(req,res)=>{
+	let sql=`SELECT DISTINCT(INDUSTRY) FROM companyinfo WHERE INDUSTRY!='' and INDUSTRY!="undefined"`
+	//   let sql=`SELECT * FROM reportdata WHERE SYMBOL IN (?) and TIMESTAMP IN(1666031400000,1665945000000,166568580000) ORDER BY TIMESTAMP DESC `
+	  con.query(sql, function (err, result) {
+		if (err) throw err;
+		res.send(result);
+	  });
+  });
+  app.get('/getallsymbol',async(req,res)=>{
+	let sql=`SELECT DISTINCT(NSESYMBOL) FROM companyinfo WHERE NSESYMBOL!='' and NSESYMBOL!="undefined"`
+	//   let sql=`SELECT * FROM reportdata WHERE SYMBOL IN (?) and TIMESTAMP IN(1666031400000,1665945000000,166568580000) ORDER BY TIMESTAMP DESC `
+	  con.query(sql, function (err, result) {
+		if (err) throw err;
+		res.send(result);
 	  });
   });
   function UISupportobject(data,list){
@@ -150,7 +112,14 @@ app.get('/getAll',async(req,res)=>{
 });
 app.get('/getAllStocks',async(req,res)=>{
 	console.log(req.query);
-	let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE r.DATE1="${req.query.date}"`
+	let insustry='';
+	if(req.query.industry){
+		insustry="and c.INDUSTRY='"+req.query.industry+"'"
+	}
+	// let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE r.DATE1="${req.query.date}" `
+//and INDUSTRY="Banks"
+	let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE r.DATE1="${req.query.date}" ${insustry} order by MARKETCAP DESC`
+	// console.log(sql);
 	con.query(sql, function (err, result) {
 	  if (err) throw err;
 	  res.send(result);

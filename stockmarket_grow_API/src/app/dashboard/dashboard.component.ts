@@ -39,7 +39,7 @@ uniquDates:any=[];
 
     let timeInverval=60*60*6;
     if(new Date().getHours()>=8 && new Date().getHours()<=15){
-      timeInverval=15
+      timeInverval=10
     }
     setInterval(()=>{
       this.loadData();
@@ -49,16 +49,21 @@ uniquDates:any=[];
     return new Promise((resolve,reject)=>{
       this.http.post('http://localhost:3000/getData',{"list":list}).subscribe((reportData:any)=>{
         console.log(reportData);
-        this.reportData=reportData
+        this.reportData=reportData;
+        let listDates=[];
         Object.values(reportData).forEach((ele:any)=>{
-          this.uniquDates=Object.keys(ele).toString();
+          Object.keys(ele).forEach(e=>{
+            if(!listDates.includes(e)){
+              listDates.push(e);
+            }
+          })
+          // this.uniquDates=Object.keys(ele).toString();
           // if(!this.uniquDates.includes(date)){
           //   this.uniquDates.push(date);
           // }
         });
-        this.uniquDates=this.uniquDates.split(',');
         // console.log(this.uniquDates);
-        this.uniquDates=this.uniquDates.filter((ele:any)=>ele!='');
+        this.uniquDates=listDates;
         // console.log(this.uniquDates);
         resolve(this.uniquDates);
       });

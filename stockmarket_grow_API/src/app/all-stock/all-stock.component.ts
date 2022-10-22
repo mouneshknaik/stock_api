@@ -28,23 +28,36 @@ export class AllStockComponent implements OnInit {
   fileUploadnew: any;
   uploadLoader: boolean=false;
   message:any;
+  avarage: any;
+  industry: any;
+  dailyAv: number;
+  symbols: any;
   constructor(private sanitizer: DomSanitizer,private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
 
-
+  dropdown
   ngOnInit(): void {
     this.dateSelected=this.dateFormat(new Date());
-    this.selectedSymbol='CIPLA';
-    this.loadData();
+    this.loadData('');
     this.loadFundamentals();
+    this.industryList();
+    this.symbolList();
   }
   dateForm(date:any){
     let tmp=new Date(date);
     let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return tmp.getDate()+"-"+monthList[tmp.getMonth()]+"-"+tmp.getFullYear();
   }
-  loadData(){
+  filterIndustry(){
+    console.log(this.dropdown);
+    this.loadData(this.dropdown)
+  }
+  loadData(industry){
     this.loading=true;
-    this.http.get('http://localhost:3000/getAllStocks?date='+this.dateSelected).subscribe(async (val:any)=>{
+    let industryList=''
+    if(industry){
+      industryList="&industry="+industry;
+    }
+    this.http.get('http://localhost:3000/getAllStocks?date='+this.dateSelected+industryList).subscribe(async (val:any)=>{
 
       val.forEach((element:any) => {
         element['dayChangePerc']=((element['CLOSE_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
@@ -59,6 +72,43 @@ export class AllStockComponent implements OnInit {
       // console.log(JSON.parse(val[0]));
     })
   }
+  industryList(){
+    this.http.get('http://localhost:3000/getInudtriList').subscribe(async (val:any)=>{
+      this.industry=val;
+    });
+  }
+  symbolList(){
+    this.http.get('http://localhost:3000/getallsymbol').subscribe(async (val:any)=>{
+      this.symbols=val;
+    });
+  }
+  market='desc';
+  martoggle(){
+    this.myData=this.myData.map(ele=>{
+      ele.MARKETCAP=parseInt(ele.MARKETCAP);
+      return ele;
+    });
+    if(this.market=="asc"){
+      this.market='desc';
+      this.marketAsc();
+    }else{
+      this.market='asc';
+      this.marketDesc();
+
+    }
+  }
+  dropdownList
+  symbolSel(){
+    console.log(this.dropdownList);
+  }
+  marketDesc(){
+    let key="MARKETCAP";
+    this.myData.sort((a:any,b:any)=> (parseInt(a[key]) < parseInt(b[key]) ? 1 : -1))
+  }
+  marketAsc(){
+    let key="MARKETCAP";
+    this.myData.sort((a:any,b:any)=> (parseInt(a[key]) > parseInt(b[key]) ? 1 : -1))
+  }
 loadDataBySymbol(){
   this.loading=true;
   this.http.get('http://localhost:3000/getBySymbol?symbol='+this.selectedSymbol).subscribe(async (val:any)=>{
@@ -70,12 +120,19 @@ loadDataBySymbol(){
     this.rawData=val;
     this.loading=false;
     // this.assendingOrder();
+
+
+
     this.myData.forEach((element:any) => {
-      element['timestamp']=new Date(element['DATE1']).getTime()
+      element['timestamp']=new Date(element['DATE1']).getTime();
     });
-    
+
     console.log( this.myData);
     this.descOrder('timestamp');
+    if(this.myData){
+      this.avarage=((this.myData[0]['CLOSE_PRICE']-this.myData[this.myData.length-1]['CLOSE_PRICE'])/this.myData[this.myData.length-1]['CLOSE_PRICE'])*100;
+      this.dailyAv=this.avarage/this.myData.length;
+    }
     // this.assendingOrder('timestamp');
     // console.log(JSON.parse(val[0]));
   })

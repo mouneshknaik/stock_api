@@ -144,10 +144,14 @@ app.get('/fetchList',async(req,res)=>{
 
 });
 app.get('/updateDate',async(req,res)=>{
-  let sql=`SELECT DATE1 FROM reportdata limit 3`;
+  let sql=`SELECT DATE1,SYMBOL FROM reportdata`;
   con.query(sql, async function (err, result) {
       for (const val of result){
-          console.log(val);
+          let timConvert=dateEpochConvert(val.DATE1);
+          let sqln=`UPDATE reportdata SET TIMESTAMP=${timConvert} WHERE DATE1="${val.DATE1}" and SYMBOL="${val.SYMBOL}"`;
+          console.log(val.SYMBOL)
+          con.query(sqln, async function (err, resu) {
+            });
       }
     });
 });
@@ -162,13 +166,16 @@ function inter(i){
     },2000)
   })
 }
+function dateEpochConvert(date){
+  return new Date(date).getTime();
+}
 function updateField(tmp,searchId){
   return new Promise((resolve,reject)=>{
       let tempnew=Object.values(tmp);
       let keys=Object.keys(tmp);
       console.log(searchId+"-"+tmp['MARKETCAP']);
       // let sql="UPDATE companyinfo SET `STATS`='"+tmp['STATS']+"',`FUNDAMENTALS`='"+tmp['FUNDAMENTALS']+"',      `SHAREHOLDINGPATTERN`='"+tmp['SHAREHOLDINGPATTERN']+"',      `FUNDSINVESTED`='"+tmp['FUNDSINVESTED']+"',`PRICEDATA`='"+tmp['PRICEDATA']+"',      `FINANCIALSTATEMENT`='"+tmp['FINANCIALSTATEMENT']+"',      `EXPERTRATING`='"+tmp['EXPERTRATING']+"',      `LOGO`='"+tmp['LOGO']+"',      `INDUSTRY`='"+tmp['INDUSTRY']+"' where SEARCHID='"+searchId+"'";
-      let sql="UPDATE companyinfo SET STATS='"+tmp['STATS']+"',MARKETCAP='"+tmp['MARKETCAP']+"', LOGO='"+tmp['LOGO']+"' where SEARCHID='"+searchId+"'";
+      let sql="UPDATE companyinfo SET  RETAILS='"+tmp['RETAILS']+"',FOREIGNIN='"+tmp['FOREIGNIN']+"',	DOMASTIC='"+tmp['DOMASTIC']+"',MUTUALFUND='"+tmp['MUTUALFUND']+"',PROMOTOR='"+tmp['PROMOTOR']+"',INDUSTRY='"+tmp['INDUSTRY']+"',MARKETCAP='"+tmp['MARKETCAP']+"' where SEARCHID='"+searchId+"'";
       con.query(sql, function (err, result) {
         if (err) throw err;
         resolve(result);
@@ -182,23 +189,28 @@ function callAPI(url){
         if (!error && response.statusCode === 200) {
           let tmp={}
           let data=JSON.parse(body);
-          tmp['STATS']=(JSON.stringify(data.stats));
-          tmp['FUNDAMENTALS']=encodeURI(JSON.stringify(data.fundamentals));
-          tmp['SHAREHOLDINGPATTERN']=encodeURI(JSON.stringify(data.shareHoldingPattern));
-          tmp['FUNDSINVESTED']=encodeURI(JSON.stringify(data.fundsInvested));
-          tmp['PRICEDATA']=encodeURI(JSON.stringify(data.priceData));
-          tmp['FINANCIALSTATEMENT']=encodeURI(JSON.stringify(data.financialStatement));
-          tmp['EXPERTRATING']=encodeURI(JSON.stringify(data.expertRating));
-          tmp['LOGO']=data.header?.logoUrl;
-          tmp['INDUSTRY']=encodeURI(JSON.stringify(data.header));
-          tmp['MARKETCAP']=data?.fundamentals?.[0]?.value;
+          // tmp['STATS']=(JSON.stringify(data.stats));
+          // tmp['FUNDAMENTALS']=encodeURI(JSON.stringify(data.fundamentals));
+          // tmp['SHAREHOLDINGPATTERN']=;
+          // tmp['FUNDSINVESTED']=encodeURI(JSON.stringify(data.fundsInvested));
+          // tmp['PRICEDATA']=encodeURI(JSON.stringify(data.priceData));
+          // tmp['FINANCIALSTATEMENT']=encodeURI(JSON.stringify(data.financialStatement));
+          // tmp['EXPERTRATING']=encodeURI(JSON.stringify(data.expertRating));
+          // tmp['LOGO']=data.header?.logoUrl;
+          tmp['INDUSTRY']=data?.header?.industryName
+          tmp['MARKETCAP']=data?.stats?.marketCap;
+          tmp['PROMOTOR']=data?.shareHoldingPattern?.[`Jun '21`]?.promoters?.individual?.percent
+          tmp['MUTUALFUND']=data?.shareHoldingPattern?.[`Jun '21`]?.mutualFunds?.percent
+          tmp['DOMASTIC']=data?.shareHoldingPattern?.[`Jun '21`]?.otherDomesticInstitutions?.insurance?.percent
+          tmp['FOREIGNIN']=data?.shareHoldingPattern?.[`Jun '21`]?.foreignInstitutions?.percent
+          tmp['RETAILS']=data?.shareHoldingPattern?.[`Jun '21`]?.retailAndOthers?.percent
             res(tmp);
          }else{
          	console.log(error);
          	res({});
          }
       })
-    // },10);
+    // },2510);
 
 	})
 
@@ -211,6 +223,7 @@ function replaceSpace(stringObj){
   let str= string.replace(new RegExp(' ', 'g'), '');
   let finalObj=JSON.parse(str);
   finalObj['DATE1']=dateFormat(finalObj['DATE1']);
+  finalObj['TIMESTAMP']=dateEpochConvert(finalObj['DATE1']);
   return finalObj;
 }
 function dateFormat(date){
