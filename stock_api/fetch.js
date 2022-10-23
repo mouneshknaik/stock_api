@@ -67,6 +67,87 @@ app.post('/upload',async(req,res, next)=>{
   // let tmp=replaceKey(xlData[0])
   // console.log(tmp.DATE1);
 });
+app.get('/apibsedata',async(req,res, next)=>{
+  // for (const val of result){
+    dateList=['21-Oct-2022','17-Oct-2022']
+    let result=await validateDate(new Date(dateList[1]));
+    console.log(result);
+    // await daybaseAPI(`https://api.bseindia.com/BseIndiaAPI/api/StockpricesearchData/w?MonthDate=21%2F10%2F2022&Scode=500087&YearDate=21%2F10%2F2022&pageType=0&rbType=D`);
+  // }
+		// console.log(result);
+		res.send({message:'finieshed'});
+});
+function validateDate(date){
+  return new Promise(async (resolve,reject)=>{
+    console.log((date));
+    let url=urlFOrm(date);
+    console.log(url);
+
+    let result=await daybaseAPI(url);
+    console.log(result);
+    let flag=false;
+    if(result?.StockData!=null){
+      let oneday=1000*60*60*24; 
+      let previoustDate=(new Date(date).getTime());
+      console.log(date);
+      console.log(new Date(previoustDate));
+      let noDays=[];
+      noDays.length=10
+      for (const val of noDays){
+        // previoustDate=previoustDate-oneday;
+        let result=await daybaseAPI(urlFOrm(previoustDate));
+        console.log(new Date(previoustDate));
+
+        if(result.StockData!=null){
+          flag= true;
+          resolve(flag)
+          break;
+        }
+      }
+      resolve(flag)
+    }else{
+      resolve(flag)
+    }
+  })
+}
+function urlFOrm(date){
+    let dateValue=replaceURI(dateFormatFull(new Date(date)));
+    let url=`https://api.bseindia.com/BseIndiaAPI/api/StockpricesearchData/w?MonthDate=${dateValue}&Scode=500087&YearDate=${dateValue}&pageType=0&rbType=D`;
+    return url;
+  }
+function replaceURI(string)
+{
+  const search = '-';
+  const searchRegExp = new RegExp(search, 'g'); 
+  const replaceWith = '%2F';
+  return string.replace(searchRegExp, replaceWith);
+}
+function daybaseAPI(url){
+	return new Promise((res,rej)=>{
+    // setTimeout(()=>{
+      request(url, function (error, response, body) {
+        // console.log(error);
+       if (!error && response.statusCode === 200) {
+         
+         // console.log(label);
+         // console.log(body);
+         let tmp=JSON.parse(body);
+         // if(label){
+         // 	tmp['Tittle']=label['label'];
+         // }
+        //  console.log(tmp);
+           res(tmp);
+ 
+        }else{
+          console.log(error);
+          res({});
+        }
+     })
+    // },3000);
+
+	})
+
+}
 function checkexistanceData(data){
   //SELECT count(SYMBOL) FROM `reportdata` WHERE `SYMBOL`="RAMRAT" and `DATE1`="14-Oct-22";
   return new Promise((resolve,reject)=>{
@@ -230,6 +311,11 @@ function dateFormat(date){
   let tmp=new Date(date);
   let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   return tmp.getDate()+"-"+monthList[tmp.getMonth()]+"-"+(tmp.getFullYear()).toString().substring(2, 4);
+}
+function dateFormatFull(date){
+  let tmp=new Date(date);
+  let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return tmp.getDate()+"-"+(tmp.getMonth()+1)+"-"+(tmp.getFullYear());
 }
 function replaceKey(string){
   let originList=[`"Symbol"`,`"Series"`,`"Date"`,`"Prev Close"`,`"Open Price"`,`"High Price"`,`"Low Price"`,`"Last Price"`,`"Close Price"`,`"Average Price"`,`"Total Traded Quantity"`,`"Turnover"`,`"No"`,`"Deliverable Qty"`,`"% Dly Qt to Traded Qty"`];

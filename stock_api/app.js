@@ -103,10 +103,11 @@ app.get('/live',async(req,res)=>{
 	// serialCall(listOfCompanies,res);
 });
 app.get('/getAll',async(req,res)=>{
-	let getlist="["+await readFile()+"]";
-	let listOfCompanies=JSON.parse(getlist);
-	let arrayList=listOfCompanies.map(ele=>ele.field);
-	let data=await postCall('https://groww.in/v1/api/stocks_data/v1/tr_live/segment/CASH/latest_aggregated',arrayList,listOfCompanies);
+	// let getlist="["+await readFile()+"]";
+	let listOfCompanies=await getWatchList();
+	let arrayList=listOfCompanies.filter(ele=>ele.SYMBOL).map(ele=>ele.SYMBOL);
+	let bselist=listOfCompanies.filter(ele=>!ele.SYMBOL).map(ele=>ele.CODE);
+	let data=await postCall('https://groww.in/v1/api/stocks_data/v1/tr_live/segment/CASH/latest_aggregated',arrayList,listOfCompanies,bselist);
 	let result=Object.values(data).map(ele=>ele);
 	res.send(result);
 });
@@ -178,28 +179,69 @@ app.get('/fetchList',async(req,res)=>{
 });
 app.post('/addtoList',async(req,res)=>{
 	console.log(req.body);
-	fs.appendFile("list_of_company.json", ','+JSON.stringify(req.body), (err) => {
-		res.json({message:"Success Added"});
-	  if (err) {
-	    console.log(err);
-		res.json({message:"Failed Added"});
-	  }
-	})
+	// fs.appendFile("list_of_company.json", ','+JSON.stringify(req.body), (err) => {
+	// 	res.json({message:"Success Added"});
+	//   if (err) {
+	//     console.log(err);
+	// 	res.json({message:"Failed Added"});
+	//   }
+	// })
+	let tempnew=Object.values(req.body);
+	let keys=Object.keys(req.body);
+	let noexistance=await checkexistanceData(req.body);
+	if(noexistance){
+		let sql="INSERT INTO watchlist  ("+keys+") VALUES (?)";
+		con.query(sql,[tempnew], function (err, result) {
+		  if (err) throw err;
+		  res.send({message:"Added to Watch List"});
+		});
+	}else{
+		res.send({message:"Already in Watch List"});
+	}
+
 });
 app.listen(3000,()=>{
 	console.log('server stared 3000')
 })
-function postCall(url,arrayList,listOfCompanies){
+function checkexistanceData(data){
+	return new Promise((resolve,reject)=>{
+		let sql=`SELECT count(SYMBOL) as count FROM watchlist WHERE SYMBOL='${data.SYMBOL}'`;
+		con.query(sql, function (err, result) {
+		  if (err) throw err;
+		  if(result[0].count==0){
+			resolve(true);
+		  }else{
+			resolve(false);
+		  }
+		});
+	})
+  }
+  function getWatchList(){
+	return new Promise((resolve,reject)=>{
+		let sql=`SELECT * FROM watchlist`;
+		con.query(sql, function (err, result) {
+		  if (err) throw err;
+			resolve(result);
+		});
+	})
+  }
+function postCall(url,arrayList,listOfCompanies,bselist){
 	return new Promise((res,rej)=>{
-		let jsonDataObj={"exchangeAggReqMap":{"NSE":{"priceSymbolList":arrayList,"indexSymbolList":[]},"BSE":{"priceSymbolList":[],"indexSymbolList":[]}}}
+		let jsonDataObj={"exchangeAggReqMap":{"NSE":{"priceSymbolList":arrayList,"indexSymbolList":[]},"BSE":{"priceSymbolList":bselist,"indexSymbolList":[]}}}
 		request.post({
 			url: url,
 			body: jsonDataObj,
 			json: true
 		  }, function(error, response, body){
 			let tmpbody=body?.exchangeAggRespMap?.NSE?.priceLivePointsMap;
+			let bsebody=body?.exchangeAggRespMap?.BSE?.priceLivePointsMap;
 			listOfCompanies.forEach(ele => {
-				tmpbody[ele['field']]?tmpbody[ele['field']]['Tittle']=ele['label']:'';
+				if(ele['SYMBOL']){
+					tmpbody[ele['SYMBOL']]['Tittle']=ele['TITLE'];
+				}else{
+					tmpbody[ele['CODE']]=bsebody[ele['CODE']];
+					tmpbody[ele['CODE']]['Tittle']=ele['TITLE'];
+					}
 			});
 		  res(tmpbody);
 		});

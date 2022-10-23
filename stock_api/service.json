@@ -1,0 +1,25 @@
+{
+    "apps" : [
+        {
+        "name"        : "core-server",
+        "script"      : "./fetch.js ",
+        "watch"       : true,
+        "env": {
+            "NODE_ENV": "development"
+        },
+        "env_production" : {
+            "NODE_ENV": "production"
+        }
+        },{
+            "name"        : "api-server",
+            "script"      : "./app.js",
+            "watch"       : true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production" : {
+                "NODE_ENV": "production"
+            }
+            }
+    ]
+}

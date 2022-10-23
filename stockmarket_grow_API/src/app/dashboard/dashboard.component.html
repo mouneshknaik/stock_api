@@ -15,8 +15,9 @@
 
     <tr *ngFor="let list of listEnterprises">
         <td>{{list?.title}}</td>
+        <td>{{list?.bse_scrip_code}}</td>
         <td>{{list?.nse_scrip_code}}</td>
-        <td *ngIf="list?.nse_scrip_code"><button (click)="selectedOption(list)" >Add</button></td>
+        <td ><button (click)="selectedOption(list)" >Add</button></td>
     </tr>
 </table>
 <!-- <button (click)="linkPage('/all-stock')">See ALL</button> -->
@@ -24,7 +25,7 @@
 [routerLink]="['/all-stock']">
 Link All Page
 </a>
-{{finalSelected|json}}
+<h2 class="message">{{finalSelected}}</h2>
 <br>
 <div class="fixwidth">
     <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>

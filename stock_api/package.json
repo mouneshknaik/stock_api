@@ -9,6 +9,7 @@
     "express-fileupload": "^1.4.0",
     "formidable": "^2.0.1",
     "mysql": "^2.18.1",
+    "pm2": "^5.2.2",
     "xlsx": "^0.18.5"
   }
 }

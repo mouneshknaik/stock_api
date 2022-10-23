@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   order:string='asc';
   listSelected:any;
   listEnterprises: any;
-  finalSelected: any=[];
+  finalSelected: any;
   loading: boolean=false;
   fetScope: any;
   filterTable:any;
@@ -115,16 +115,14 @@ uniquDates:any=[];
   selectedOption(list:any){
     console.log(list);
     let options = {
-      // headers: {
-      //   'Content-Type':'application/json'
-      // },
-      body:{'label':list?.title,field:list?.nse_scrip_code}
+      body:{TITLE:list?.title,SYMBOL:list?.nse_scrip_code,CODE:list?.bse_scrip_code}
     };
     // let options={'label':list?.title,field:list?.nse_scrip_code}
-    this.finalSelected.push(options.body);
+
     this.http.post('http://localhost:3000/addtoList',options.body).subscribe((val:any)=>{
       console.log(val);
       this.listEnterprises=val?.content;
+      this.finalSelected=val?.message;
       this.loadData();
     // this.myData = val.map((ele:any)=>JSON.parse(ele));
 
