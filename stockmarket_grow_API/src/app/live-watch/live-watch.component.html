@@ -1,0 +1,43 @@
+<table style="border: 1px gray;">
+    <thead>
+        <tr>
+            <th>SYMBOL<small *ngIf="loading" ngClass="inactive">(Loading...)</small></th>
+            <th  (click)="sort('gain')">Slow Gain/Loss</th>
+            <th  (click)="sort('todayDiff')">Today Diff(%)</th>
+            <th (click)="sort('min3')">3Min</th>
+            <th (click)="sort('min5')">5Min</th>
+            <th (click)="sort('min8')">8Min</th>
+            <th (click)="sort('min10')">10Min</th>
+            <th (click)="sort('min15')">15Min</th>
+            <th (click)="sort('min25')">25Min</th>
+            <th (click)="sort('min45')">45Min</th>
+            <th (click)="sort('min60')">60Min</th>
+            <th (click)="sort('min90')">90Min</th>
+            <th (click)="sort('min120')">120Min</th>
+            <th (click)="sort('min180')">180Min</th>
+            <th (click)="sort('min240')">240Min</th>
+            <th (click)="sort('min300')">300Min</th>
+            <th (click)="sort('min360')">360Min</th>
+        </tr>
+    </thead>
+
+    <tr *ngFor="let list of liveData">
+        <td>{{list?.title}}(<small>{{list?.symbol}}</small>)</td>
+        <td><span  ngClass="active">{{list?.gain?.diff}}</span>/<span  ngClass="inactive">{{list?.loss?.diff}}</span></td>
+        <td><span  [ngClass]="(list?.todayDiff?.diff)>0 ?  'active' : 'inactive'">{{list?.todayDiff?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min3?.diff)>0 ?  'active' : 'inactive'">{{list?.min3?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min5?.diff)>0 ?  'active' : 'inactive'">{{list?.min5?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min8?.diff)>0 ?  'active' : 'inactive'">{{list?.min8?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min10?.diff)>0 ?  'active' : 'inactive'">{{list?.min10?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min15?.diff)>0 ?  'active' : 'inactive'">{{list?.min15?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min25?.diff)>0 ?  'active' : 'inactive'">{{list?.min25?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min45?.diff)>0 ?  'active' : 'inactive'">{{list?.min45?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min60?.diff)>0 ?  'active' : 'inactive'">{{list?.min60?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min90?.diff)>0 ?  'active' : 'inactive'">{{list?.min90?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min120?.diff)>0 ?  'active' : 'inactive'">{{list?.min120?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min180?.diff)>0 ?  'active' : 'inactive'">{{list?.min180?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min240?.diff)>0 ?  'active' : 'inactive'">{{list?.min240?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min300?.diff)>0 ?  'active' : 'inactive'">{{list?.min300?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.min360?.diff)>0 ?  'active' : 'inactive'">{{list?.min360?.diff |number:'1.2-2'}}</span></td>
+    </tr>
+</table>

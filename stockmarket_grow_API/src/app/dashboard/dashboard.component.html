@@ -3,6 +3,10 @@
 <button (click)="postData()">post click</button>
 <button (click)="cacheDelete()">refresh data</button>
 <button (click)="navigateByUrl()">link</button> -->
+<div class="stoplosscal">
+    <input [(ngModel)]="stlssValue" (ngModelChange)="stoplosscal()" placeholder="enter price"/>
+    <p>Stoploass <span ngClass="inactive">{{stlss|number:'1.2-2'}}</span>- Gain <span ngClass="active">{{stgn|number:'1.2-2'}}</span></p>
+</div>
 <input [(ngModel)]="listSelected" (ngModelChange)="changedDropdown()" placeholder="search and to list"/>
 <table style="border: 1px gray;">
     <thead>
@@ -23,16 +27,23 @@
 <!-- <button (click)="linkPage('/all-stock')">See ALL</button> -->
 <a
 [routerLink]="['/all-stock']">
-Link All Page
+all stock report
+</a>  <a
+[routerLink]="['/live-watch']">
+Live Watch
 </a>
 <h2 class="message">{{finalSelected}}</h2>
+<button  mat-raised-button color="primary" (click)="openToggle()">open {{openOrder}}</button>
+
 <br>
 <div class="fixwidth">
     <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>
     <button  mat-raised-button color="primary" (click)="toggle()">{{order}}</button>
+
     <button  mat-fab color="primary" (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
 </div>
-
+<input [(ngModel)]="stopLossValue" (ngModelChange)="stoploss()" placeholder="Stoploss value in %"/>
+<input [(ngModel)]="exitValue" (ngModelChange)="stoploss()" placeholder="exit value in %"/>
 <!-- <div *ngFor="let tmp of myData">
     <p>{{tmp?.dat?.name}}</p>
 </div> -->
@@ -44,6 +55,9 @@ Link All Page
             <th>Percentage</th>
             <th>open Price</th>
             <th>last Price</th>
+            <th>starting Price Diff(<span ngClass="active">{{gainLoss?.gain}}</span>/<span ngClass="inactive">{{gainLoss?.loss}}</span>)</th>
+            <th>Stoploss</th>
+            <th>Exit</th>
             <!-- <th>Today Low</th> -->
             <!-- <th>Today High</th> -->
             <th *ngFor="let list of uniquDates" rowspan="3" class="dateCell">{{list}}
@@ -63,7 +77,9 @@ Link All Page
         <td><span  [ngClass]="list?.dayChangePerc>0 ?  'active' : 'inactive'">{{list?.dayChangePerc | number : '1.2-2' }}</span></td>
         <td>{{list?.open}}</td>
         <td>{{list?.close}}</td>
-        <!-- <td>{{list?.low}}</td> -->
+        <td><span  [ngClass]="(list?.openChange)>0 ?  'active' : 'inactive'">{{list?.openChange | number : '1.2-2' }}</span></td>
+        <td ><span ngClass="inactive stoploss">{{list?.stoploss |number:'1.2-2'}}</span></td>
+        <td ><span ngClass="active stoploss">{{list?.exit |number:'1.2-2'}}</span></td>
         <!-- <td>{{list?.high}}</td> -->
         <td *ngFor="let uniDate of uniquDates" class="dateCell">
             <tr class="border">

@@ -10,6 +10,9 @@ const routes: Routes = [{
 },{
   path: 'all-stock',
   loadChildren: () => import('./all-stock/all-stock.module').then(m => m.AllStockModule)
+},{
+  path: 'live-watch',
+  loadChildren: () => import('./live-watch/live-watch.module').then(m => m.LiveWatchModule)
 }];
 
 @NgModule({

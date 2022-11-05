@@ -32,6 +32,8 @@ export class AllStockComponent implements OnInit {
   industry: any;
   dailyAv: number;
   symbols: any;
+  selectedDate: number;
+  result: any;
   constructor(private sanitizer: DomSanitizer,private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
 
   dropdown
@@ -219,5 +221,14 @@ dateFormat(date:any){
       this.uploadLoader=true;
     });
     }
-
+    addEvent(pickDate){
+      this.selectedDate=(new Date(pickDate.value).getTime())/1000;
+    }
+    fetchData(){
+      console.log(this.selectedDate);
+      this.result={message:"fetching"};
+      this.http.get('http://localhost:3100/api-inject?date='+this.selectedDate).subscribe((val:any)=>{
+        this.result=val
+    })
+    }
 }

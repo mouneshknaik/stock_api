@@ -1,2 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+table { border-collapse: collapse; }
+tr,td { border: solid thin;min-width: 100px; }
+.active{
+    color: green;
+    font-weight: bold;
+    span{
+        color: gray;
+        font-size: 6px;
+    }
+}
+.inactive{
+    color: red;
+    font-weight: bold;
+    span{
+        color: gray;
+        font-size: 10px;
+    }
+}
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.fixwidth{
+    width: 800px;
+}
+.border{
+    border: 0;
+}
+.dateCell{
+    font-size: 12px;
+}
+.message{
+    font-weight: bold;
+}
+.stoploss{
+    // font-size: 10px;
+}
+table { border-collapse: collapse; }
+tr,td { border: solid thin;min-width: 100px; }
+.active{
+    color: green;
+    font-weight: bold;
+    span{
+        color: gray;
+        font-size: 10px;
+    }
+}
+.activebg{
+    background-color: green;
+}
+.inactivebg{
+    background-color: red;
+}
+.inactive{
+    color: red;
+    font-weight: bold;
+    span{
+        color: gray;
+        font-size: 10px;
+    }
+}
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.fixwidth{
+    width: 800px;
+}
+.border{
+    border: 0;
+}
+.dateCell{
+    font-size: 12px;
+}
+.input_fileupload--hidden{
+    display:none;
+  }
+.upload.layout {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.red{
+    color: red;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

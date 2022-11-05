@@ -22,6 +22,13 @@ export class DashboardComponent implements OnInit {
   filterTable:any;
   rawData: any;
   reportData: any;
+  openOrder: string='asc';
+  stopLossValue=6;
+  exitValue: number=10;
+  stgn=0;
+  stlss=0;
+  stlssValue: any;
+  gainLoss: {gain,loss};
   constructor(private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
   
 uniquDates:any=[];
@@ -43,7 +50,44 @@ uniquDates:any=[];
     }
     setInterval(()=>{
       this.loadData();
+      // this.rawData?this.updateIntervalData():'';
     },1000*timeInverval)
+  }
+  getTimeHourBasic(){
+    let splitted=new Date().toLocaleTimeString().split(' ');
+    let currentTime=parseInt((new Date().toLocaleTimeString()).split(' ')[0].split(':').join(''));
+    console.log(splitted);
+    if(splitted[1]=='PM'){
+      currentTime+=120000;
+    }
+    return currentTime;
+  }
+  updateIntervalData(){
+    let time=this.getTimeHourBasic();
+    console.log(time);
+      // if(this.rawData && time>=90000 && time<=153000){
+        let priceList=this.rawData.map(ele=>{
+          let tmp={};
+          tmp['SYMBOL']=ele['symbol'];
+          tmp['TIMESTAMP']=time;
+          tmp['PRICE']=ele['ltp'];
+          return tmp;
+        });
+        this.http.post('http://localhost:3000/watchdata',priceList).subscribe((reportData:any)=>{
+          console.log(reportData);
+        });
+      // }else{
+      //   console.log('market data not updated');
+      // }
+
+  }
+  stoploss(){
+    this.loadData();
+  }
+  stoplosscal(){
+    let gain=this.stlssValue;
+    this.stlss=((this.stlssValue-((this.stlssValue/100)*6)));
+    this.stgn=(((parseFloat(gain)+(parseFloat(gain)/100)*10)));
   }
   fetchreportData(list:any){
     return new Promise((resolve,reject)=>{
@@ -82,9 +126,27 @@ uniquDates:any=[];
       // this.myData = val.map((ele:any)=>JSON.parse(ele));
       this.replaceReportData(this.myData);
       this.loading=false;
-      this.assendingOrder();
+      // this.assendingOrder();
       console.log( this.myData);
-      // this.descOrder();
+      let loss=0;
+      let gain=0;
+      this.myData.map(list=>{
+        list['openChange']=((list?.open-list?.close)/list?.close)*100;
+        list['stoploss']=list?.ltp-((list?.ltp/100)*this.stopLossValue);
+        list['exit']=list?.ltp+((list?.ltp/100)*this.exitValue);
+        if(list['openChange']>0){
+          gain++;
+        }else{
+          loss++;
+        }
+        return list;
+      });
+      // this.myData.push({gain:gain});
+      // this.myData.push({loss:loss});
+      this.gainLoss={gain:0,loss:0};
+      this.gainLoss['gain']=gain
+      this.gainLoss['loss']=loss;
+      this.descOrder();
       // this.assendingOrder();
       // console.log(JSON.parse(val[0]));
     })
@@ -134,6 +196,9 @@ uniquDates:any=[];
   assendingOrder(){
     this.myData.sort((a:any,b:any)=> (a.dayChangePerc > b.dayChangePerc ? 1 : -1))
   }
+  openassendingOrder(){
+    this.myData.sort((a:any,b:any)=> (a.openChange > b.openChange ? 1 : -1))
+  }
   toggle(){
     if(this.order=="asc"){
       this.order='desc';
@@ -144,8 +209,21 @@ uniquDates:any=[];
 
     }
   }
+  openToggle(){
+    if(this.openOrder=="asc"){
+      this.openOrder='desc';
+      this.openassendingOrder();
+    }else{
+      this.openOrder='asc';
+      this.opendescOrder();
+
+    }
+  }
   descOrder(){
     this.myData.sort((a:any,b:any)=> (a.dayChangePerc < b.dayChangePerc ? 1 : -1))
+  }
+  opendescOrder(){
+    this.myData.sort((a:any,b:any)=> (a.openChange < b.openChange ? 1 : -1))
 
   }
   getData() {

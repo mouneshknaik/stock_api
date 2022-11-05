@@ -64,7 +64,7 @@
         <td>{{list['MARKETCAP']}}</td>
     </tr>
 </table>
-<h2 *ngIf="myData.length==0" class="red alert">No Data for the day</h2>
+<h2 *ngIf="myData?.length==0" class="red alert">No Data for the day</h2>
 <div class="upload layout">
     <input #fileUpload mat-raised-button color="primary"
        type="file"
@@ -81,4 +81,14 @@
         <br>
         {{fileUploadnew?.name}}
         <div *ngIf="uploadLoader">status:{{message.message}}</div>
+        <mat-form-field appearance="fill">
+            <mat-label>Input & change events</mat-label>
+            <input matInput [matDatepicker]="picker"
+                   (dateChange)="addEvent($event)">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="fetchData()" > FetchData </button>
+        <div>{{result?.message}}</div>
 </div>

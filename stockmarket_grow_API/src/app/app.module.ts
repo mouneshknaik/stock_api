@@ -11,6 +11,11 @@ import { CacheResolverService } from './intercepter/cacheMap/cache-resolver.serv
 import { PageComponent } from './page/page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AllStockComponent } from './all-stock/all-stock.component';
+import { LiveWatchComponent } from './live-watch/live-watch.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,11 @@ import { AllStockComponent } from './all-stock/all-stock.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatNativeDateModule,
+    MatFormFieldModule,MatInputModule,
+    BrowserAnimationsModule,
+
   ],
   providers: [CacheInterceptor,NewCacheInterceptor,CacheResolverService,
     // { provide: HTTP_INTERCEPTORS, useClass: NewCacheInterceptor, multi: true },
