@@ -38,7 +38,7 @@ export class AllStockComponent implements OnInit {
 
   dropdown
   ngOnInit(): void {
-    this.dateSelected=this.dateFormat(new Date());
+    this.dateSelected=(new Date().getTime());
     this.loadData('');
     this.loadFundamentals();
     this.industryList();
@@ -53,10 +53,19 @@ export class AllStockComponent implements OnInit {
     console.log(this.dropdown);
     this.loadData(this.dropdown)
   }
+  loadbyDate(ev){
+    console.log(ev);
+    this.dateSelected=(new Date(ev.value).getTime());
+    this.loadData('');
+  }
+  tset(){
+    console.log('chnaged');
+    console.log(this.dropdown);
+  }
   loadData(industry){
     this.loading=true;
     let industryList=''
-    if(industry){
+    if(industry && industry!='All'){
       industryList="&industry="+industry;
     }
     this.http.get('http://localhost:3000/getAllStocks?date='+this.dateSelected+industryList).subscribe(async (val:any)=>{

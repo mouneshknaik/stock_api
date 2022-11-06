@@ -47,7 +47,7 @@ Live Watch
 <!-- <div *ngFor="let tmp of myData">
     <p>{{tmp?.dat?.name}}</p>
 </div> -->
-<table style="border: 1px gray;">
+<table style="border: 1px gray;" class="table">
     <thead>
         <tr>
             <th>Company</th>
@@ -56,8 +56,8 @@ Live Watch
             <th>open Price</th>
             <th>last Price</th>
             <th>starting Price Diff(<span ngClass="active">{{gainLoss?.gain}}</span>/<span ngClass="inactive">{{gainLoss?.loss}}</span>)</th>
-            <th>Stoploss</th>
-            <th>Exit</th>
+            <!-- <th>Stoploss</th> -->
+            <!-- <th>Exit</th> -->
             <!-- <th>Today Low</th> -->
             <!-- <th>Today High</th> -->
             <th *ngFor="let list of uniquDates" rowspan="3" class="dateCell">{{list}}
@@ -78,8 +78,8 @@ Live Watch
         <td>{{list?.open}}</td>
         <td>{{list?.close}}</td>
         <td><span  [ngClass]="(list?.openChange)>0 ?  'active' : 'inactive'">{{list?.openChange | number : '1.2-2' }}</span></td>
-        <td ><span ngClass="inactive stoploss">{{list?.stoploss |number:'1.2-2'}}</span></td>
-        <td ><span ngClass="active stoploss">{{list?.exit |number:'1.2-2'}}</span></td>
+        <!-- <td ><span ngClass="inactive stoploss">{{list?.stoploss |number:'1.2-2'}}</span></td> -->
+        <!-- <td ><span ngClass="active stoploss">{{list?.exit |number:'1.2-2'}}</span></td> -->
         <!-- <td>{{list?.high}}</td> -->
         <td *ngFor="let uniDate of uniquDates" class="dateCell">
             <tr class="border">

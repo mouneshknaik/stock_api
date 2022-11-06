@@ -1,23 +1,30 @@
-<table style="border: 1px gray;">
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [(ngModel)]="basisSelected" (ngModelChange)="changedbasis()">
+    <mat-button-toggle value="daily">daily</mat-button-toggle>
+    <mat-button-toggle value="weekly">weekly</mat-button-toggle>
+    <mat-button-toggle value="monthly">monthly</mat-button-toggle>
+    <mat-button-toggle value="1y">1y</mat-button-toggle>
+  </mat-button-toggle-group>
+
+<table style="border: 1px gray;" class="table">
     <thead>
         <tr>
             <th>SYMBOL<small *ngIf="loading" ngClass="inactive">(Loading...)</small></th>
-            <th  (click)="sort('gain')">Slow Gain/Loss</th>
-            <th  (click)="sort('todayDiff')">Today Diff(%)</th>
-            <th (click)="sort('min3')">3Min</th>
-            <th (click)="sort('min5')">5Min</th>
-            <th (click)="sort('min8')">8Min</th>
-            <th (click)="sort('min10')">10Min</th>
-            <th (click)="sort('min15')">15Min</th>
-            <th (click)="sort('min25')">25Min</th>
-            <th (click)="sort('min45')">45Min</th>
-            <th (click)="sort('min60')">60Min</th>
-            <th (click)="sort('min90')">90Min</th>
-            <th (click)="sort('min120')">120Min</th>
-            <th (click)="sort('min180')">180Min</th>
-            <th (click)="sort('min240')">240Min</th>
-            <th (click)="sort('min300')">300Min</th>
-            <th (click)="sort('min360')">360Min</th>
+            <th  (click)="sort('gain','')">Slow Gain/Loss</th>
+            <th  (click)="sort('todayDiff','')">Diff(%)</th>
+            <th (click)="sort('min3','')">3Min</th>
+            <th (click)="sort('min5','')">5Min</th>
+            <th (click)="sort('min8','')">8Min</th>
+            <th (click)="sort('min10','')">10Min</th>
+            <th (click)="sort('min15','')">15Min</th>
+            <th (click)="sort('min25','')">25Min</th>
+            <th (click)="sort('min45','')">45Min</th>
+            <th (click)="sort('min60','')">60Min</th>
+            <th (click)="sort('min90','')">90Min</th>
+            <th (click)="sort('min120','')">120Min</th>
+            <th (click)="sort('min180','')">180Min</th>
+            <th (click)="sort('min240','')">240Min</th>
+            <th (click)="sort('min300','')">300Min</th>
+            <th (click)="sort('min360','')">360Min</th>
         </tr>
     </thead>
 

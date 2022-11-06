@@ -22,9 +22,14 @@ export class LiveWatchComponent implements OnInit {
       this.getLiveWatch();
     },1000*timeInverval)
   }
+  basisSelected='daily'
+  changedbasis(){
+    console.log(this.basisSelected);
+    this.getLiveWatch();
+  }
   getLiveWatch(){
     this.loading=true;
-    this.http.get('http://localhost:3000/watchtimefram').subscribe((reportData:any)=>{
+    this.http.get('http://localhost:3000/watchtimefram?basis='+this.basisSelected).subscribe((reportData:any)=>{
       this.liveData=reportData;
       this.liveData.map(ele=>{
         let slgain=0;
@@ -47,17 +52,28 @@ export class LiveWatchComponent implements OnInit {
         return ele;
       })
       this.loading=false;
-      this.sort('todayDiff');
+      this.sort('todayDiff','desc');
       console.log(reportData);
     });
   }
-  sort(id){
-    if(this.openOrder=="asc"){
-      this.openOrder='desc';
+  sort(id,type){
+    if(!type){
+      this.toggle();
+      type=this.openOrder;
+    }
+    if(type=="asc"){
+      // this.openOrder='desc';
       this.assendingOrder(id);
     }else{
-      this.openOrder='asc';
+      // this.openOrder='asc';
       this.descOrder(id)
+    }
+  }
+  toggle(){
+    if(this.openOrder=='desc'){
+      this.openOrder= 'asc';
+    }else{
+      this.openOrder='desc';
     }
   }
   assendingOrder(id){

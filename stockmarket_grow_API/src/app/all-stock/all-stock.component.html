@@ -17,8 +17,15 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>    -->
 <!-- <h2>{{myData[0]['DATE1']}}</h2> -->
-    <input [(ngModel)]="dateSelected">
-<button mat-raised-button color="accent" (click)="loadData('')">Load By Date</button>
+    <!-- <input [(ngModel)]="dateSelected"> -->
+<!-- <button mat-raised-button color="accent" (click)="loadData('')">Load By Date</button> -->
+<mat-form-field appearance="fill">
+    <mat-label>Select Date</mat-label>
+    <input matInput [matDatepicker]="pickerDate"
+           (dateChange)="loadbyDate($event)">
+    <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+    <mat-datepicker #pickerDate></mat-datepicker>
+</mat-form-field>
 <input list="browsers" name="browser" id="browser"  [(ngModel)]="selectedSymbol">
     <datalist id="browsers">
       <option value="{{list.NSESYMBOL}}" *ngFor="let list of symbols">
@@ -30,15 +37,15 @@
 <br>Daily Average:<span [ngClass]="dailyAv>=0?'active' : 'inactive'">{{dailyAv |number:'1.2-2'}}%</span>
 <br>Total Average:<span [ngClass]="avarage>=0?'active' : 'inactive'">{{avarage |number:'1.2-2'}}%</span>
 <button mat-raised-button color="primary" (click)="martoggle()">Market Sort {{market}}</button>
-    <select name="languages" id="lang" [(ngModel)]="dropdown">
+    <select name="languages" id="lang" [(ngModel)]="dropdown" (ngModelChange)="filterIndustry()">
         <option>All</option>
         <option *ngFor="let list of industry">
             {{list?.INDUSTRY}}
         </option>
     </select>
-    <button (click)="filterIndustry()" mat-raised-button> Filter</button>
+    <!-- <button (click)="filterIndustry()" mat-raised-button> Filter</button> -->
 
-<table style="border: 1px gray;">
+<table style="border: 1px gray;" class="table">
     <thead>
         <tr>
             <th>Company</th>
@@ -82,10 +89,9 @@
         {{fileUploadnew?.name}}
         <div *ngIf="uploadLoader">status:{{message.message}}</div>
         <mat-form-field appearance="fill">
-            <mat-label>Input & change events</mat-label>
+            <mat-label>Select Date</mat-label>
             <input matInput [matDatepicker]="picker"
                    (dateChange)="addEvent($event)">
-            <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

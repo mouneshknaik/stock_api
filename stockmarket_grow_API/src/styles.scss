@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-table { border-collapse: collapse; }
-tr,td { border: solid thin;min-width: 100px; }
+.table { border-collapse: collapse; 
+    tr,td { border: solid thin;min-width: 100px; }
+}
+
 .active{
     color: green;
     font-weight: bold;
@@ -25,7 +27,8 @@ tr,td { border: solid thin;min-width: 100px; }
     width: 800px;
 }
 .border{
-    border: 0;
+    border: 0 !important;
+    min-width: 52px !important;
 }
 .dateCell{
     font-size: 12px;
@@ -36,8 +39,7 @@ tr,td { border: solid thin;min-width: 100px; }
 .stoploss{
     // font-size: 10px;
 }
-table { border-collapse: collapse; }
-tr,td { border: solid thin;min-width: 100px; }
+
 .active{
     color: green;
     font-weight: bold;

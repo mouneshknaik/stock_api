@@ -46,7 +46,7 @@ uniquDates:any=[];
 
     let timeInverval=60*60*6;
     if(new Date().getHours()>=8 && new Date().getHours()<=15){
-      timeInverval=10
+      // timeInverval=60
     }
     setInterval(()=>{
       this.loadData();
