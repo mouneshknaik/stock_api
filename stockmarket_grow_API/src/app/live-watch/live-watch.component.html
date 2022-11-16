@@ -4,8 +4,33 @@
     <mat-button-toggle value="monthly">monthly</mat-button-toggle>
     <mat-button-toggle value="1y">1y</mat-button-toggle>
   </mat-button-toggle-group>
+  <mat-slide-toggle [(ngModel)]="toggle_isChecked" (ngModelChange)="changedtoggle()">Average/Live Changes</mat-slide-toggle>
+  <button (click)="changedtoggle()">Reload<span *ngIf="loading">ing..!</span></button>
+  <table style="border: 1px gray;" class="table" *ngIf="toggle_isChecked">
+    <thead>
+        <tr>
+            <th>SYMBOL<small *ngIf="loading" ngClass="inactive">(Loading...)</small></th>
+            <th (click)="sort('last_price','')">last price</th>
+            <th  (click)="sort('moving_diff20','')">moving 20</th>
+            <th (click)="sort('moving_diff50','')">moving 50</th>
+            <th (click)="sort('diff_amount','')">Diff Amount</th>
+            <th (click)="sort('stocastic14','')">Stocastic 14</th>
+            <th (click)="sort('stocastic50','')">Stocastic 50</th>
+        </tr>
+    </thead>
 
-<table style="border: 1px gray;" class="table">
+    <tr *ngFor="let list of liveData">
+        <td>{{list?.title}}(<small>{{list?.symbol}}</small>)</td>
+        <td>{{list?.last_price}}</td>
+        <!-- <td><span  ngClass="active">{{list?.moving_avarage_20}}</span>/<span  ngClass="inactive">{{list?.loss?.diff}}</span></td> -->
+        <td><span  [ngClass]="(list?.moving_diff20?.diff)>0 ?  'active' : 'inactive'">{{list?.moving_diff20?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.moving_diff50)?.diff>0 ?  'active' : 'inactive'">{{list?.moving_diff50?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.diff_amount)?.diff>0 ?  'active' : 'inactive'">{{list?.diff_amount?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.stocastic14)?.diff>50 ?  'active' : 'inactive'">{{list?.stocastic14?.diff |number:'1.2-2'}}</span></td>
+        <td><span  [ngClass]="(list?.stocastic50)?.diff>50 ?  'active' : 'inactive'">{{list?.stocastic50?.diff |number:'1.2-2'}}</span></td>
+    </tr>
+</table>
+<table style="border: 1px gray;" class="table" *ngIf="!toggle_isChecked">
     <thead>
         <tr>
             <th>SYMBOL<small *ngIf="loading" ngClass="inactive">(Loading...)</small></th>

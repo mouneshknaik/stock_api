@@ -1,0 +1,12 @@
+<div class="width:100%">
+    <h1 style="text-align:center">{{seriesData?.title}}<span [ngClass]="seriesData?.startDiff>0?'active':'inactive'">({{seriesData?.startDiff |number:'1.2-2'}})</span><span [ngClass]="seriesData?.open_diff>0?'active':'inactive'" class="openprice">({{seriesData?.open_diff |number:'1.2-2'}})</span></h1>
+    <div id="chart" style="width: calc(100%);height:auto">
+      <apx-chart *ngIf="chartVisible"
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+        [title]="chartOptions.title"
+      ></apx-chart>
+    </div>
+</div>

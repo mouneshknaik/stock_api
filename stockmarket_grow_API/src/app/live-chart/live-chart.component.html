@@ -1,0 +1,23 @@
+<div class="container">
+    <mat-button-toggle-group  [(ngModel)]="interval" (ngModelChange)="changedbasis()">
+        <mat-button-toggle value="1">1 Minutes</mat-button-toggle>
+        <mat-button-toggle value="2">3 Minutes</mat-button-toggle>
+        <mat-button-toggle value="3">5 Minutes</mat-button-toggle>
+    </mat-button-toggle-group>
+    <button mat-raised-button color="primary" (click)="sort()">Sort</button>
+    <button  (click)="chartAPI()" [ngClass]="loader?'inactive':'active'">Reload<span *ngIf="loader" [ngClass]="loader?'inactive':'active'">ing</span></button>
+    <div class="pagination">
+        <button mat-raised-button  (click)="leftPagination()">
+            <b><</b>
+        </button>
+        <button mat-raised-button  (click)="rightPagination()">
+            <b>></b>
+        </button>
+        <mat-slide-toggle [(ngModel)]="toggle_isChecked" (ngModelChange)="changedtoggle()">Chart Visible</mat-slide-toggle>
+    </div>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let list of chartData">
+            <app-candlestick [seriesData]="list"  *ngIf="list" [chartVisible]="toggle_isChecked"></app-candlestick>
+        </div>
+    </div>
+</div>

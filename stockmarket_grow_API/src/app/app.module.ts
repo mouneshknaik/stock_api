@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { LiveChartComponent } from './live-chart/live-chart.component';
+import { CandlestickComponent } from './shared/candlestick/candlestick.component';
 
 @NgModule({
   declarations: [

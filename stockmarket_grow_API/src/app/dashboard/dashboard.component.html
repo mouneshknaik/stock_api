@@ -32,6 +32,11 @@ all stock report
 [routerLink]="['/live-watch']">
 Live Watch
 </a>
+<br>
+<a
+[routerLink]="['/live-chart']">
+Live Chart
+</a>
 <h2 class="message">{{finalSelected}}</h2>
 <button  mat-raised-button color="primary" (click)="openToggle()">open {{openOrder}}</button>
 
@@ -47,6 +52,12 @@ Live Watch
 <!-- <div *ngFor="let tmp of myData">
     <p>{{tmp?.dat?.name}}</p>
 </div> -->
+<select name="languages" id="lang" [(ngModel)]="dropdown" (ngModelChange)="filterIndustry()">
+    <option>All</option>
+    <option *ngFor="let list of industry">
+        {{list?.INDUSTRY}}
+    </option>
+</select>
 <table style="border: 1px gray;" class="table">
     <thead>
         <tr>
@@ -63,7 +74,7 @@ Live Watch
             <th *ngFor="let list of uniquDates" rowspan="3" class="dateCell">{{list}}
                 <tr style="border: 0;">
                     <th>Close Price </th>
-                    <th>Gain/Loss </th>
+                    <th>open change </th>
                     <th>Percentage </th>
                   </tr>
             </th>
@@ -84,8 +95,8 @@ Live Watch
         <td *ngFor="let uniDate of uniquDates" class="dateCell">
             <tr class="border">
                 <td class="border" *ngIf="list[uniDate]"> {{list[uniDate]['CLOSE_PRICE']}}</td>
-                <td class="border"  *ngIf="list[uniDate]" [ngClass]="list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE'] |number:'1.2-2'}}<span *ngIf="list[uniDate]['CLOSE_PRICE']">Rs</span></td>
-                <td class="border"  *ngIf="list[uniDate]" [ngClass]="list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE']>0 ?  'active' : 'inactive'"> {{((list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE'])/list[uniDate]['PREV_CLOSE'])*100 |number:'1.2-2'}}<span *ngIf="list[uniDate]['CLOSE_PRICE']">%</span></td>
+                <td class="border"  *ngIf="list[uniDate]" [ngClass]="((list[uniDate]['OPEN_PRICE']-(list[uniDate]['PREV_CLOSE']))/(list[uniDate]['PREV_CLOSE']))*100>0 ?  'active' : 'inactive'"> {{((list[uniDate]['OPEN_PRICE']-(list[uniDate]['PREV_CLOSE']))/(list[uniDate]['PREV_CLOSE']))*100|number:'1.2-2'}}</td>
+                <td class="border"  *ngIf="list[uniDate]" [ngClass]="((list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE'])/list[uniDate]['PREV_CLOSE'])*100>0 ?  'active' : 'inactive'"> {{((list[uniDate]['CLOSE_PRICE']-list[uniDate]['PREV_CLOSE'])/list[uniDate]['PREV_CLOSE'])*100 |number:'1.2-2'}}<span *ngIf="list[uniDate]['CLOSE_PRICE']">%</span></td>
             </tr>
         </td>
     </tr>

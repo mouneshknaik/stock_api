@@ -13,6 +13,9 @@ const routes: Routes = [{
 },{
   path: 'live-watch',
   loadChildren: () => import('./live-watch/live-watch.module').then(m => m.LiveWatchModule)
+},{
+  path: 'live-chart',
+  loadChildren: () => import('./live-chart/live-chart.module').then(m => m.LiveChartModule)
 }];
 
 @NgModule({

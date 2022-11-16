@@ -29,6 +29,8 @@ export class DashboardComponent implements OnInit {
   stlss=0;
   stlssValue: any;
   gainLoss: {gain,loss};
+  dropdown: any;
+  industry: any;
   constructor(private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
   
 uniquDates:any=[];
@@ -43,10 +45,10 @@ uniquDates:any=[];
       // this.data$.subscribe((data:any) => this.myData = data?.data);
 
     this.loadData();
-
+    this.industryList();
     let timeInverval=60*60*6;
     if(new Date().getHours()>=8 && new Date().getHours()<=15){
-      // timeInverval=60
+      // timeInverval=30
     }
     setInterval(()=>{
       this.loadData();
@@ -150,6 +152,35 @@ uniquDates:any=[];
       // this.assendingOrder();
       // console.log(JSON.parse(val[0]));
     })
+  }
+  filterIndustry(){
+    console.log(this.dropdown);
+    let loss=0;
+    let gain=0;
+    let dp=''
+    if(this.dropdown!='All'){
+      dp=this.dropdown;
+    }else{
+      dp='';
+    }
+    this.myData=this.rawData.filter(list=>{return dp?list.INDUSTRY==dp:true}).map(ele=>{
+      if(ele['openChange']>0){
+        gain++;
+      }else{
+        loss++;
+      }
+      return ele;
+    });
+    this.gainLoss={gain:0,loss:0};
+    this.gainLoss['gain']=gain
+    this.gainLoss['loss']=loss;
+    this.descOrder();
+  }
+  industryList(){
+      this.http.get('http://localhost:3000/getInudtriList').subscribe((val:any)=>{
+          console.log(val);
+          this.industry=val;
+      })
   }
   replaceReportData(data:any){
     data.forEach((ele:any)=>{

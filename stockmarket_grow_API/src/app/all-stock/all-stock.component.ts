@@ -34,6 +34,11 @@ export class AllStockComponent implements OnInit {
   symbols: any;
   selectedDate: number;
   result: any;
+  countList: any;
+  orderOpen:string='desc';
+  selectedSymbol1: any;
+  sorOrder: string='desc';
+  optionListData: any;
   constructor(private sanitizer: DomSanitizer,private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
 
   dropdown
@@ -43,12 +48,18 @@ export class AllStockComponent implements OnInit {
     this.loadFundamentals();
     this.industryList();
     this.symbolList();
+    this.selectedSymbol='NIFTY';
+    this.loadDataBySymbol('');
   }
   dateForm(date:any){
     let tmp=new Date(date);
     let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return tmp.getDate()+"-"+monthList[tmp.getMonth()]+"-"+tmp.getFullYear();
   }
+  getWeekDay(date){
+    let weekList=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return weekList[new Date(parseInt(date)).getDay()]
+ }
   filterIndustry(){
     console.log(this.dropdown);
     this.loadData(this.dropdown)
@@ -69,14 +80,28 @@ export class AllStockComponent implements OnInit {
       industryList="&industry="+industry;
     }
     this.http.get('http://localhost:3000/getAllStocks?date='+this.dateSelected+industryList).subscribe(async (val:any)=>{
-
+      let openposcount=0;
+      let opennegcount=0;
+      let totalcount=0;
       val.forEach((element:any) => {
         element['dayChangePerc']=((element['CLOSE_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
+        element['openPricePer']=((element['OPEN_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
+        element['loss_gain']=element['CLOSE_PRICE']-element['PREV_CLOSE'];
+        element['open_per']= ((element['OPEN_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
+        element['weekDay']=this.getWeekDay(element['TIMESTAMP'])
+        if(element['OPEN_PRICE']-element['PREV_CLOSE']>0){
+          openposcount++;
+        }else{
+          opennegcount++;
+        }
+        totalcount++;
       });
+      this.countList={'open':openposcount,'close':opennegcount,'total':totalcount}
       this.myData=val;
       this.rawData=val;
       this.loading=false;
-      this.assendingOrder('');
+      // this.sorOrder='desc';
+      this.toggleSort('MARKETCAP')
       console.log( this.myData);
       // this.descOrder();
       // this.assendingOrder();
@@ -94,38 +119,57 @@ export class AllStockComponent implements OnInit {
     });
   }
   market='desc';
-  martoggle(){
-    this.myData=this.myData.map(ele=>{
-      ele.MARKETCAP=parseInt(ele.MARKETCAP);
-      return ele;
-    });
-    if(this.market=="asc"){
-      this.market='desc';
-      this.marketAsc();
-    }else{
-      this.market='asc';
-      this.marketDesc();
 
-    }
-  }
-  dropdownList
+  dropdownList;
+  optioTypeValue='Call'
   symbolSel(){
     console.log(this.dropdownList);
   }
-  marketDesc(){
-    let key="MARKETCAP";
-    this.myData.sort((a:any,b:any)=> (parseInt(a[key]) < parseInt(b[key]) ? 1 : -1))
+  toggle_isChecked:false;
+  changedtoggle(){
+    if(this.toggle_isChecked){
+      this.http.get('http://localhost:3000/option-trading-analysis?date=1668160800').subscribe(async (val:any)=>{
+        this.myData=val;
+        this.rawData=val;
+      })
+    }
+
   }
-  marketAsc(){
-    let key="MARKETCAP";
-    this.myData.sort((a:any,b:any)=> (parseInt(a[key]) > parseInt(b[key]) ? 1 : -1))
+  listoptionType=['Call','Put']
+  optionType(){
+    console.log(this.optioTypeValue);
+    this.myData=this.rawData.filter(ele=>ele?.optionType==this.optioTypeValue);
   }
-loadDataBySymbol(){
+  toggleSort(key){
+    console.log(key);
+    if(this.sorOrder=='asc'){
+      this.sorOrder='desc';
+      this.descGen(key);
+    }else{
+      this.sorOrder='asc';
+      this.ascGen(key);
+    }
+  }
+  ascGen(key){
+    this.myData.sort((a:any,b:any)=> ((a[key]) > (b[key]) ? 1 : -1))
+  }
+  descGen(key){
+    this.myData.sort((a:any,b:any)=> ((a[key]) < (b[key]) ? 1 : -1))
+  }
+loadDataBySymbol(auto){
   this.loading=true;
-  this.http.get('http://localhost:3000/getBySymbol?symbol='+this.selectedSymbol).subscribe(async (val:any)=>{
+  let symbol=this.selectedSymbol
+  if(auto){
+    symbol=this.selectedSymbol1;
+  }
+  this.http.get('http://localhost:3000/getBySymbol?symbol='+symbol).subscribe(async (val:any)=>{
 
     val.forEach((element:any) => {
       element['dayChangePerc']=((element['CLOSE_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
+      element['loss_gain']=element['CLOSE_PRICE']-element['PREV_CLOSE'];
+      element['open_per']= ((element['OPEN_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
+      element['weekDay']=this.getWeekDay(element['TIMESTAMP'])
+      ;
     });
     this.myData=val;
     this.rawData=val;
@@ -133,15 +177,24 @@ loadDataBySymbol(){
     // this.assendingOrder();
 
 
-
+    let openposcount=0;
+    let opennegcount=0;
+    let totalcount=0;
     this.myData.forEach((element:any) => {
       element['timestamp']=new Date(element['DATE1']).getTime();
+      if(element['OPEN_PRICE']-element['PREV_CLOSE']>0){
+        openposcount++;
+      }else{
+        opennegcount++;
+      }
+      totalcount++;
     });
-
+    this.countList={'open':openposcount,'close':opennegcount,'total':totalcount}
     console.log( this.myData);
     this.descOrder('timestamp');
     if(this.myData){
       this.avarage=((this.myData[0]['CLOSE_PRICE']-this.myData[this.myData.length-1]['CLOSE_PRICE'])/this.myData[this.myData.length-1]['CLOSE_PRICE'])*100;
+      
       this.dailyAv=this.avarage/this.myData.length;
     }
     // this.assendingOrder('timestamp');

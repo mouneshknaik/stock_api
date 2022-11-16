@@ -13,6 +13,8 @@ import {MatDatepickerInput, MatDatepickerModule} from '@angular/material/datepic
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [AllStockComponent],
@@ -28,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule, 
     MatNativeDateModule,
     MatDatepickerModule,
-  
+    MatButtonToggleModule,
+    MatSlideToggleModule
   ],
  })
 export class AllStockModule { }

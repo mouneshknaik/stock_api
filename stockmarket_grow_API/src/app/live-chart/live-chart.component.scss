@@ -1,0 +1,19 @@
+.row{
+    width: 100%;
+    .col-md-6{
+        width: 50%;
+        display: inline-block;
+    }
+    .col-md-4{
+        width: 33%;
+        display: inline-block;
+    }
+    .col-md-3{
+        width: 25%;
+        display: inline-block;
+    }
+    .col-md-2{
+        width: 16%;
+        display: inline-block;
+    }
+}

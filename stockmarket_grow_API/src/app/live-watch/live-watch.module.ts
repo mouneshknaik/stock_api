@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [LiveWatchComponent],
   imports: [
@@ -19,7 +19,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSlideToggleModule
   ]
 })
 export class LiveWatchModule { }
