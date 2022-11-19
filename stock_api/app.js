@@ -115,7 +115,9 @@ app.get('/chart-view',async(req,res)=>{
 	}
 	console.log('progressing...!');
 	// let dbData=await commonService.dbquery('SELECT SYMBOL,CLOSE_PRICE,TITLE,INDUSTRY FROM companyinfo LEFT JOIN (select SYMBOL,CLOSE_PRICE FROM reportdata CROSS JOIN (SELECT TIMESTAMP FROM `reportdata` ORDER by TIMESTAMP DESC LIMIT 1) as t WHERE t.TIMESTAMP=reportdata.TIMESTAMP) as timbased on companyinfo.NSESYMBOL=timbased.SYMBOL WHERE OPTIONTRADE=1 ORDER by MARKETCAP DESC');
-	let dbData=await commonService.dbquery('SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC');
+	// let dbData=await commonService.dbquery('SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC');
+	let tmp=JSON.parse(await readFile());
+	let dbData=tmp['list'];
 	console.log('DB Data Got...');
 	let apiList=[];
 	dbData.forEach(ele=>{
@@ -126,14 +128,13 @@ app.get('/chart-view',async(req,res)=>{
 		keyValue[ele['SYMBOL']]=ele['CLOSE_PRICE'];
 	});
 	console.log('previous Data fetched...');
-	let result=await commonService.limitParrallCall(apiList,60);
+	let result=await commonService.limitParrallCall(apiList,50);
 	console.log('API Data fetched...');
 	let finalObj=result.map(ele=>{
 		let key=Object.keys(ele)?.[0];
 		return chartObjForm(ele[key]?.candles,key,keyValue[key]);
 	});
 	console.log('completed');
-	// let chartData=chartObjForm(responseData?.candles,'ADANIENT')
 	res.send(finalObj);
 });
 function chartObjForm(data,title,close_price){
@@ -630,7 +631,7 @@ function parsemovinAvarage(data,num){
 }
 function readFile(){
 	return new Promise((res,rej)=>{
-		return fs.readFile('./list_of_company.json', 'utf8', function(err, data){
+		return fs.readFile('./company_list.json', 'utf8', function(err, data){
 		    res(data);
 		});
 	});
