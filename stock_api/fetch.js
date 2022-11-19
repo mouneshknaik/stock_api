@@ -9,7 +9,7 @@ var mysql = require('mysql');
 var XLSX = require('xlsx')
 var csv = require("csvtojson");
 let formidable = require('formidable');
-
+const commonService=require("./service");
 app.use(express.json()) 
 app.use(cors());
 var con = mysql.createConnection({
@@ -18,11 +18,15 @@ var con = mysql.createConnection({
   password: "",
   database:'stock'
 });
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
+setInterval(function () {
+  con.query('SELECT 1',function (v){
+  // console.log(v,'val');
+})
+}, 5000);
 app.post('/upload',async(req,res, next)=>{
   let form = new formidable.IncomingForm();
   form.parse(req, function (error, fields, file) {
@@ -148,10 +152,15 @@ function daybaseAPI(url){
 	})
 
 }
-function checkexistanceData(data){
+function checkexistanceData(data,dateonly){
   //SELECT count(SYMBOL) FROM `reportdata` WHERE `SYMBOL`="RAMRAT" and `DATE1`="14-Oct-22";
   return new Promise((resolve,reject)=>{
-      let sql=`SELECT count(SYMBOL) as count FROM reportdata WHERE SYMBOL='${data.SYMBOL}' and DATE1='${data.DATE1}'`;
+    let sql='';
+    if(dateonly){
+        sql=`SELECT count(SYMBOL) as count FROM reportdata WHERE TIMESTAMP='${data.TIMESTAMP}'`;
+      }else{
+        sql=`SELECT count(SYMBOL) as count FROM reportdata WHERE SYMBOL='${data.SYMBOL}' and DATE1='${data.DATE1}'`;
+      }
       con.query(sql, function (err, result) {
         if (err) throw err;
         if(result[0].count==0){
@@ -214,12 +223,18 @@ app.get('/fetchList',async(req,res)=>{
   //           updateField(data);
   //         }
   //     });
-  let sql=`SELECT SEARCHID FROM companyinfo`;
+  // let sql=`SELECT SEARCHID FROM companyinfo`;
+  let sql=`SELECT SEARCHID FROM companyinfo WHERE SEARCHID is NOT null;`;
       con.query(sql, async function (err, result) {
           for (const val of result){
-            let data=await callAPI(`https://groww.in/v1/api/stocks_data/v1/company/search_id/${val.SEARCHID}?page=0&size=10`);
-            // console.log(data);
-            updateField(data,val.SEARCHID);
+            // let data=await callAPI(`https://groww.in/v1/api/stocks_data/v1/company/search_id/${val.SEARCHID}?page=0&size=10`);
+            let url=`https://groww.in/v1/api/stocks_fo_data/v1/contracts/${val.SEARCHID}/top`;
+            let data=await callAPI(url);
+            console.log(url);
+            if(data?.derivatives){
+              console.log(data?.derivatives?.contract?.contractDisplayName);
+              updateField(data,val.SEARCHID);
+            }
           }
       });
 
@@ -236,6 +251,14 @@ app.get('/updateDate',async(req,res)=>{
       }
     });
 });
+function updatePrevClose(obj){
+  return new Promise((res,rej)=>{
+    let sql=`UPDATE reportdata SET PREV_CLOSE=${obj.PREV_CLOSE} WHERE TIMESTAMP=${obj.TIMESTAMP} and SYMBOL="${obj.SYMBOL}"`;
+    con.query(sql, async function (err, result) {
+      res(result)
+    });
+  })
+}
 app.listen(3100,()=>{
 	console.log('server stared 3100')
 })
@@ -250,49 +273,47 @@ function inter(i){
 function dateEpochConvert(date){
   return new Date(date).getTime();
 }
+async function checkDataAvailablity(time){
+  return new Promise(async (resolve,reject)=>{
+    let adaniSample=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/ADANIENT/1y?intervalInDays=1&minimal=false`;
+    let responseData=await callAPI(adaniSample);
+    let lastIndex=responseData?.candles[responseData?.candles.length-1];
+    let result=responseData?.candles.some(ele=> ele[0]==time);
+    resolve(result);
+  });
+
+}
 function updateField(tmp,searchId){
   return new Promise((resolve,reject)=>{
       let tempnew=Object.values(tmp);
       let keys=Object.keys(tmp);
-      console.log(searchId+"-"+tmp['MARKETCAP']);
+      console.log(searchId);
       // let sql="UPDATE companyinfo SET `STATS`='"+tmp['STATS']+"',`FUNDAMENTALS`='"+tmp['FUNDAMENTALS']+"',      `SHAREHOLDINGPATTERN`='"+tmp['SHAREHOLDINGPATTERN']+"',      `FUNDSINVESTED`='"+tmp['FUNDSINVESTED']+"',`PRICEDATA`='"+tmp['PRICEDATA']+"',      `FINANCIALSTATEMENT`='"+tmp['FINANCIALSTATEMENT']+"',      `EXPERTRATING`='"+tmp['EXPERTRATING']+"',      `LOGO`='"+tmp['LOGO']+"',      `INDUSTRY`='"+tmp['INDUSTRY']+"' where SEARCHID='"+searchId+"'";
-      let sql="UPDATE companyinfo SET  RETAILS='"+tmp['RETAILS']+"',FOREIGNIN='"+tmp['FOREIGNIN']+"',	DOMASTIC='"+tmp['DOMASTIC']+"',MUTUALFUND='"+tmp['MUTUALFUND']+"',PROMOTOR='"+tmp['PROMOTOR']+"',INDUSTRY='"+tmp['INDUSTRY']+"',MARKETCAP='"+tmp['MARKETCAP']+"' where SEARCHID='"+searchId+"'";
+      // let sql="UPDATE companyinfo SET  RETAILS='"+tmp['RETAILS']+"',FOREIGNIN='"+tmp['FOREIGNIN']+"',	DOMASTIC='"+tmp['DOMASTIC']+"',MUTUALFUND='"+tmp['MUTUALFUND']+"',PROMOTOR='"+tmp['PROMOTOR']+"',INDUSTRY='"+tmp['INDUSTRY']+"',MARKETCAP='"+tmp['MARKETCAP']+"' where SEARCHID='"+searchId+"'";
+      let sql="UPDATE companyinfo SET OPTIONTRADE=1 where SEARCHID='"+searchId+"'";
       con.query(sql, function (err, result) {
         if (err) throw err;
         resolve(result);
       });
   })
 }
-function callAPI(url){
-	return new Promise((res,rej)=>{
-    // setTimeout(()=>{
-       request(url, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-          let tmp={}
-          let data=JSON.parse(body);
-          // tmp['STATS']=(JSON.stringify(data.stats));
-          // tmp['FUNDAMENTALS']=encodeURI(JSON.stringify(data.fundamentals));
-          // tmp['SHAREHOLDINGPATTERN']=;
-          // tmp['FUNDSINVESTED']=encodeURI(JSON.stringify(data.fundsInvested));
-          // tmp['PRICEDATA']=encodeURI(JSON.stringify(data.priceData));
-          // tmp['FINANCIALSTATEMENT']=encodeURI(JSON.stringify(data.financialStatement));
-          // tmp['EXPERTRATING']=encodeURI(JSON.stringify(data.expertRating));
-          // tmp['LOGO']=data.header?.logoUrl;
-          tmp['INDUSTRY']=data?.header?.industryName
-          tmp['MARKETCAP']=data?.stats?.marketCap;
-          tmp['PROMOTOR']=data?.shareHoldingPattern?.[`Jun '21`]?.promoters?.individual?.percent
-          tmp['MUTUALFUND']=data?.shareHoldingPattern?.[`Jun '21`]?.mutualFunds?.percent
-          tmp['DOMASTIC']=data?.shareHoldingPattern?.[`Jun '21`]?.otherDomesticInstitutions?.insurance?.percent
-          tmp['FOREIGNIN']=data?.shareHoldingPattern?.[`Jun '21`]?.foreignInstitutions?.percent
-          tmp['RETAILS']=data?.shareHoldingPattern?.[`Jun '21`]?.retailAndOthers?.percent
-            res(tmp);
-         }else{
-         	console.log(error);
-         	res({});
-         }
-      })
-    // },2510);
-
+function callAPI(url,label){
+return new Promise((res,rej)=>{
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode === 200) {
+        let tmp={}
+        let data=JSON.parse(body);
+        if(label){
+              tmp[label]=data;
+              res(tmp);
+            }else{
+              res(data);
+            }  
+        }else{
+          console.error("error"+label);
+          res({});
+        }
+    })
 	})
 
 }
@@ -307,7 +328,177 @@ function replaceSpace(stringObj){
   finalObj['TIMESTAMP']=dateEpochConvert(finalObj['DATE1']);
   return finalObj;
 }
-function dateFormat(date){
+app.get('/inject-option',async(req,res, next)=>{
+  let dbData=await commonService.dbquery('SELECT SEARCHID,NSESYMBOL FROM companyinfo WHERE OPTIONTRADE=1 and NSESYMBOL is NOT null order by MARKETCAP desc');
+  let apiList=[]
+  dbData.forEach(ele=>{
+    apiList.push({url:"https://groww.in/v1/api/stocks_fo_data/v1/contracts/"+ele?.SEARCHID+"/top",keysymbol:ele?.NSESYMBOL})
+  });
+  let result=await commonService.limitParrallCall(apiList,100);
+  for(val of result){
+    let symbol=Object.keys(val)?.[0];
+     let dbappend=optionTradingDatForm(val[symbol]);
+     for(e of dbappend){
+      // await commonService.dbInsert(e,'optiontradlist');
+     }
+  }
+
+  res.send({message:'injected Data'});
+
+});
+function optionTradingDatForm(data){
+	return data?.derivatives?.map(ele=>{
+		console.log(ele);
+		let obj={}
+		obj['contractDisplayName']=ele?.contract?.contractDisplayName;
+		obj['symbol']=ele?.contract?.symbol;
+		obj['target_price']=ele?.contract?.price;
+		obj['optionType']=ele?.contract?.optionType;
+		obj['expiry']=ele?.contract?.expiry;
+		obj['lotSize']=ele?.contract?.lotSize;
+		obj['timstamp']=ele?.livePrice?.tsInMillis;
+		obj['low_price']=ele?.livePrice?.low;
+		obj['high_price']=ele?.livePrice?.high;
+		obj['open_price']=ele?.livePrice?.open;
+		obj['price']=ele?.livePrice?.ltp;
+		obj['dayChange']=ele?.livePrice?.dayChange;
+		obj['volume']=ele?.livePrice?.volume;
+		obj['min_price_buy']=(ele?.contract?.lotSize)*(ele?.livePrice?.ltp);
+		return obj;
+	});
+}
+app.get('/api-inject',async(req,res, next)=>{
+  console.log(req.query.date);
+  let start=new Date().getTime();
+  let checkDataAv= await checkDataAvailablity(req.query.date);
+  if(checkDataAv){
+    let noexistance= await checkexistanceData({TIMESTAMP:(req.query.date)*1000},true);
+    if(req.query.date && noexistance){
+      console.warn('process started...!');
+      let dbData=await dbquery('SELECT NSESYMBOL as SYMBOL FROM companyinfo WHERE NSESYMBOL is NOT null order by MARKETCAP desc');
+      // let dbData=await dbquery('SELECT NSESYMBOL as SYMBOL FROM `companyinfo` WHERE NSESYMBOL="NIFTY" OR NSESYMBOL="BANKNIFTY"');
+      i=0;
+      apiset=100;
+      console.warn('got All SYMBOL...!');
+
+      for(let val of dbData){
+        let startIndex=i;
+
+        if(i>=dbData.length){
+          i=dbData.length-1;
+        }
+        i+=apiset;
+        console.log(i);
+        let listdbDataChunk=dbData.slice(startIndex,i);
+        console.log(listdbDataChunk);
+        let result=await parralCall(listdbDataChunk);
+        console.warn('all Keys from API ...!');
+        let timelist=[req.query.date];
+
+          console.log('inprogress...');
+          // console.log(result);
+          console.log(i);
+          await dbappend(result,timelist);
+        if(i==dbData.length-1){
+          console.log('loop closed');
+          break;
+        }
+  
+      }
+      let end=new Date().getTime();
+      console.log('start:'+start,"end:"+end);
+      console.log('completed');
+      res.send({message:'completed'})
+    }else{
+      console.log('data exits');
+      res.send({message:'data exits'});
+    }
+  }else{
+    res.send({message:'Data not Available yet wait till tomorrow'});
+  }
+
+
+});
+function dbappend(result,timelist){
+  return new Promise((resolve,reject)=>{
+    result.forEach(async ele=>{
+      if(Object.keys(ele).length>0){
+        let formatData=priceFormatmaker(ele?.[Object.keys(ele)?.[0]]?.candles,timelist,Object.keys(ele)[0]);
+        // for(let chunk of formatData){
+          console.log(formatData);
+        formatData.forEach(async chunk=>{
+          // if(noexistance){
+         
+          // console.log(chunk.SYMBOL+'-added Data-'+chunk.DATE1);
+          // }else{
+          // console.log(chunk.SYMBOL+'-data already exits-'+chunk.DATE1);
+          // }
+          console.log(chunk.SYMBOL+'-added Data-'+chunk.DATE1);
+          await insertData(chunk);
+          // await updatePrevClose(chunk);
+        });
+      }
+    });
+    resolve(true);
+  });
+}
+async function parralCall(listOfCompanies){
+  return new Promise((resolve,reject)=>{
+    let promiseData=[];
+    let finalResult=[];
+    for (var i = 0; i<listOfCompanies.length; i++) {
+      let temp=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${listOfCompanies[i].SYMBOL}/1y?intervalInDays=1&minimal=false`;
+      // console.log(temp);
+      promiseData.push(callAPI(temp,listOfCompanies[i]?.SYMBOL))
+    }
+    Promise.all(promiseData).then((values) => {
+      finalResult=values;
+      resolve(finalResult);
+    })
+  });
+}
+function dbquery(sql){
+	return new Promise((resolve,reject)=>{
+		con.query(sql, function (err, result) {
+		  if (err) throw err;
+			resolve(result);
+		});
+	})
+  }
+function priceFormatmaker(data,timelist,symbol){
+	allRecords=[];
+	timelist.forEach(time=>{
+		let objSelect=data?selectExtractPrice(data,time,symbol):'';
+    if(objSelect){
+      allRecords.push(objSelect);
+    }
+	});
+	return(allRecords);
+}
+function selectExtractPrice(data,time,symbol){
+	let dataObj={};
+	data.forEach((ele,i)=>{
+		if(ele[0]==time){
+			dataObj['SYMBOL']=symbol;
+			dataObj['TIMESTAMP']=ele[0]*1000;
+			dataObj['DATE1']=dateFormat(ele[0],true);
+			dataObj['OPEN_PRICE']=ele[1];
+			dataObj['HIGH_PRICE']=ele[2];
+			dataObj['LOW_PRICE']=ele[3];
+			dataObj['CLOSE_PRICE']=ele[4];
+			dataObj['PREV_CLOSE']=(i>=0)?(data[i-1]?.[4]):(data[i]?.[4]);
+			dataObj['id']='';
+		}
+	});
+	if(Object.keys(dataObj).length === 0){
+		return null;
+	}
+	return dataObj;
+}
+function dateFormat(date,small){
+  if(small){
+		date=date*1000;
+	}
   let tmp=new Date(date);
   let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   return tmp.getDate()+"-"+monthList[tmp.getMonth()]+"-"+(tmp.getFullYear()).toString().substring(2, 4);
@@ -341,17 +532,37 @@ function replaceKey(string){
 }
 function insertData(temp){
   return new Promise((resolve,reject)=>{
-    // con.connect(function(err) {
-
+      // if(Object.keys(temp).length>0){
+      //   temp['PREV_CLOSE']=parseFloat(temp['PREV_CLOSE']);
+      //   temp['OPEN_PRICE']=parseFloat(temp['OPEN_PRICE']);
+      //   temp['HIGH_PRICE']=parseFloat(temp['HIGH_PRICE']);
+      //   temp['LOW_PRICE']=parseFloat(temp['LOW_PRICE']);
+      //   temp['LAST_PRICE']=parseFloat(temp['LAST_PRICE']);
+      //   temp['CLOSE_PRICE']=parseFloat(temp['CLOSE_PRICE']);
+      //   temp['AVG_PRICE']=parseFloat(temp['AVG_PRICE']);
+      //   temp['TTL_TRD_QNTY']=parseFloat(temp['TTL_TRD_QNTY']);
+      //   temp['TURNOVER_LACS']=parseFloat(temp['TURNOVER_LACS']);
+      //   temp['DELIV_PER']=parseFloat(temp['DELIV_PER']);
+      //   temp['DELIV_QTY']=parseFloat(temp['DELIV_QTY']);
+      //   temp['NO_OF_TRADES']=parseFloat(temp['NO_OF_TRADES']);
+      // }
       let tempnew=Object.values(temp);
       let keys=Object.keys(temp);
       let sql="INSERT INTO `reportdata` ("+keys+") VALUES (?)";
+      console.log(sql);
+      console.log(tempnew);
       con.query(sql,[tempnew], function (err, result) {
-        if (err) throw err;
+        console.log(err);
+        if (err) console.error(err);
+        console.log(temp['SYMBOL']+'-added');
         resolve(result);
         // res.send(result);
       });
     // });
   })
-
+}
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
