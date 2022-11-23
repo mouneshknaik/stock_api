@@ -310,7 +310,7 @@ return new Promise((res,rej)=>{
               res(data);
             }  
         }else{
-          console.error("error"+label);
+          console.error("error"+label,error);
           res({});
         }
     })
@@ -552,7 +552,6 @@ function insertData(temp){
       console.log(sql);
       console.log(tempnew);
       con.query(sql,[tempnew], function (err, result) {
-        console.log(err);
         if (err) console.error(err);
         console.log(temp['SYMBOL']+'-added');
         resolve(result);

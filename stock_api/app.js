@@ -115,9 +115,9 @@ app.get('/chart-view',async(req,res)=>{
 	}
 	console.log('progressing...!');
 	// let dbData=await commonService.dbquery('SELECT SYMBOL,CLOSE_PRICE,TITLE,INDUSTRY FROM companyinfo LEFT JOIN (select SYMBOL,CLOSE_PRICE FROM reportdata CROSS JOIN (SELECT TIMESTAMP FROM `reportdata` ORDER by TIMESTAMP DESC LIMIT 1) as t WHERE t.TIMESTAMP=reportdata.TIMESTAMP) as timbased on companyinfo.NSESYMBOL=timbased.SYMBOL WHERE OPTIONTRADE=1 ORDER by MARKETCAP DESC');
-	// let dbData=await commonService.dbquery('SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC');
-	let tmp=JSON.parse(await readFile());
-	let dbData=tmp['list'];
+	let dbData=await commonService.dbquery('SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC');
+	// let tmp=JSON.parse(await readFile());
+	// let dbData=tmp['list'];
 	console.log('DB Data Got...');
 	let apiList=[];
 	dbData.forEach(ele=>{
