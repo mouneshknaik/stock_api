@@ -395,22 +395,22 @@ app.get('/api-inject',async(req,res, next)=>{
         console.warn('all Keys from API ...!');
         let timelist=[req.query.date];
 
-          console.log('inprogress...');
+          console.warn('inprogress...');
           // console.log(result);
           console.log(i);
           await dbappend(result,timelist);
         if(i==dbData.length-1){
-          console.log('loop closed');
+          console.warn('loop closed');
           break;
         }
   
       }
       let end=new Date().getTime();
-      console.log('start:'+start,"end:"+end);
-      console.log('completed');
+      console.warn('start:'+start,"end:"+end);
+      console.warn('completed');
       res.send({message:'completed'})
     }else{
-      console.log('data exits');
+      console.warn('data exits');
       res.send({message:'data exits'});
     }
   }else{
@@ -423,6 +423,7 @@ function dbappend(result,timelist){
   return new Promise((resolve,reject)=>{
     result.forEach(async ele=>{
       if(Object.keys(ele).length>0){
+
         let formatData=priceFormatmaker(ele?.[Object.keys(ele)?.[0]]?.candles,timelist,Object.keys(ele)[0]);
         // for(let chunk of formatData){
           console.log(formatData);

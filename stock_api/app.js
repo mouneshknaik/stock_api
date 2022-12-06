@@ -30,16 +30,11 @@ handleDisconnect();
 
 // let listOfCompanies=[ { "label": "Adani Green Energy Ltd.", "field": "ADANIGREEN" }, { "label": "Adani Power Ltd.", "field": "ADANIPOWER" }, { "label": "Adani Transmission Ltd.", "field": "ADANITRANS" }, { "label": "Adani Ports and Special Economic Zone Ltd.", "field": "ADANIPORTS" }, { "label": "Adani Wilmar Ltd.", "field": "AWL" }, { "label": "Adani Enterprises Ltd.", "field": "ADANIENT" }, { "label": "Adani Total Gas Ltd.", "field": "ATGL" }, { "label": "Reliance Industries Ltd.", "field": "RELIANCE" }, { "label": "Cipla Ltd.", "field": "CIPLA" }, { "label": "Ram Ratna Wires Ltd.", "field": "RAMRAT" }, { "label": "Ambuja Cements Ltd.", "field": "AMBUJACEM" }, { "label": "ITC Ltd.", "field": "ITC" }, { "label": "Golkunda Diamonds & Jewellery Ltd.", "field": "" }, { "label": "Infosys Ltd.", "field": "INFY" }, { "label": "Suzlon Energy Ltd.", "field": "SUZLON" }, { "label": "Tata Steel Ltd.", "field": "TATASTEEL" }, { "label": "Tata Consultancy Services Ltd.", "field": "TCS" }, { "label": "Tata Power Company Ltd.", "field": "TATAPOWER" }, { "label": "Tata Chemicals Ltd.", "field": "TATACHEM" }, { "label": "Hindustan Construction Company Ltd.", "field": "HCC" } ]
 // let listOfCompanies=[ { "label": "Adani Green Energy Ltd.", "field": "ADANIGREEN" }, { "label": "Adani Power Ltd.", "field": "ADANIPOWER" }, { "label": "Adani Transmission Ltd.", "field": "ADANITRANS" }, { "label": "Adani Ports and Special Economic Zone Ltd.", "field": "ADANIPORTS" },]
+app.use(express.static(__dirname + '/basicApp'));
 app.get('/',async(req,res)=>{
 	console.log('call')
-  // callAPI('https://www.nseindia.com/api/search/autocomplete?q=ada');
-	// var options = {
-	// host: 'www.nseindia.com',
-	// path: '/api/search/autocomplete?q=ada'
-	// };
-	// http.get(options, function(res) {
-	// 	console.log(res)
-	// });
+
+	res.sendFile('/basicApp/index.html', { root: __dirname });
 });
 // con.connect(function(err) {
 // 	if (err) throw err;
@@ -89,6 +84,57 @@ app.post('/getData',async(req,res)=>{
 	});
 	return tmp;
   }
+  app.get('/api-inject',async(req,res, next)=>{
+	console.log(req.query.date);
+	let start=new Date().getTime();
+	let checkDataAv= await checkDataAvailablity(req.query.date);
+	if(checkDataAv){
+	  let noexistance= await checkexistanceData({TIMESTAMP:(req.query.date)*1000},true);
+	  if(req.query.date && noexistance){
+		console.warn('process started...!');
+		let dbData=await commonService.dbquery('SELECT NSESYMBOL as SYMBOL FROM companyinfo WHERE NSESYMBOL is NOT null order by MARKETCAP desc');
+		// let dbData=await dbquery('SELECT NSESYMBOL as SYMBOL FROM `companyinfo` WHERE NSESYMBOL="NIFTY" OR NSESYMBOL="BANKNIFTY"');
+		i=0;
+		apiset=100;
+		console.warn('got All SYMBOL...!');
+  
+		for(let val of dbData){
+		  let startIndex=i;
+  
+		  if(i>=dbData.length){
+			i=dbData.length-1;
+		  }
+		  i+=apiset;
+		  console.log(i);
+		  let listdbDataChunk=dbData.slice(startIndex,i);
+		  console.log(listdbDataChunk);
+		  let result=await nparralCall(listdbDataChunk);
+		  console.warn('all Keys from API ...!');
+		  let timelist=[req.query.date];
+  
+			console.log('inprogress...');
+			// console.log(result);
+			console.log(i);
+			await dbappend(result,timelist);
+		  if(i==dbData.length-1){
+			console.log('loop closed');
+			break;
+		  }
+	
+		}
+		let end=new Date().getTime();
+		console.log('start:'+start,"end:"+end);
+		console.log('completed');
+		res.send({message:'completed'})
+	  }else{
+		console.log('data exits');
+		res.send({message:'data exits'});
+	  }
+	}else{
+	  res.send({message:'Data not Available yet wait till tomorrow'});
+	}
+  });
+
 app.get('/live',async(req,res)=>{
 	let getlist="["+await readFile()+"]";
 	let listOfCompanies=JSON.parse(getlist);
@@ -115,13 +161,27 @@ app.get('/chart-view',async(req,res)=>{
 	}
 	console.log('progressing...!');
 	// let dbData=await commonService.dbquery('SELECT SYMBOL,CLOSE_PRICE,TITLE,INDUSTRY FROM companyinfo LEFT JOIN (select SYMBOL,CLOSE_PRICE FROM reportdata CROSS JOIN (SELECT TIMESTAMP FROM `reportdata` ORDER by TIMESTAMP DESC LIMIT 1) as t WHERE t.TIMESTAMP=reportdata.TIMESTAMP) as timbased on companyinfo.NSESYMBOL=timbased.SYMBOL WHERE OPTIONTRADE=1 ORDER by MARKETCAP DESC');
-	let dbData=await commonService.dbquery('SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC');
+	let options="OPTIONTRADE=1"
+	if(req.query.nonOption=='true'){
+		options="MARKETCAP>=15000"
+	}
+	let dbData=await commonService.dbquery(`SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE ${options} order BY MARKETCAP DESC`);
 	// let tmp=JSON.parse(await readFile());
 	// let dbData=tmp['list'];
 	console.log('DB Data Got...');
 	let apiList=[];
+
 	dbData.forEach(ele=>{
-		apiList.push({url:`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/daily?intervalInMinutes=${interval}&minimal=false`,keysymbol:ele?.SYMBOL});
+		let urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/daily?intervalInMinutes=${interval}&minimal=false`;
+		if(req.query.inter=="week"){
+			urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/weekly?intervalInMinutes=5&minimal=false`;
+		}else if(req.query.inter=="month"){
+			urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/monthly?intervalInMinutes=30&minimal=false`;
+		}else if(req.query.inter=="year"){
+			urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/1y?intervalInDays=1&minimal=false`;
+		}
+		apiList.push({url:urlDefault,keysymbol:ele?.SYMBOL});
+		// apiList.push({url:`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}?endTimeInMillis=1669483523351&intervalInMinutes=1440&startTimeInMillis=1641061800000`,keysymbol:ele?.SYMBOL});
 	  });
 	let keyValue={};
 	dbData.forEach(ele=>{
@@ -137,6 +197,130 @@ app.get('/chart-view',async(req,res)=>{
 	console.log('completed');
 	res.send(finalObj);
 });
+function dbappend(result,timelist){
+	return new Promise((resolve,reject)=>{
+		result?result.forEach(async ele=>{
+		if(Object.keys(ele).length>0){
+			let formatData=priceFormatmaker(ele?.[Object.keys(ele)?.[0]]?.candles,timelist,Object.keys(ele)[0]);
+		  // for(let chunk of formatData){
+		  formatData.forEach(async chunk=>{
+			// if(noexistance){
+		   
+			// console.log(chunk.SYMBOL+'-added Data-'+chunk.DATE1);
+			// }else{
+			// console.log(chunk.SYMBOL+'-data already exits-'+chunk.DATE1);
+			// }
+			console.warn(chunk.SYMBOL+'-added Data-'+chunk.DATE1);
+			await insertData(chunk);
+			// await updatePrevClose(chunk);
+		  });
+		}
+	  }):'';
+	  resolve(true);
+	});
+  }
+  function insertData(temp){
+	return new Promise((resolve,reject)=>{
+		// if(Object.keys(temp).length>0){
+		//   temp['PREV_CLOSE']=parseFloat(temp['PREV_CLOSE']);
+		//   temp['OPEN_PRICE']=parseFloat(temp['OPEN_PRICE']);
+		//   temp['HIGH_PRICE']=parseFloat(temp['HIGH_PRICE']);
+		//   temp['LOW_PRICE']=parseFloat(temp['LOW_PRICE']);
+		//   temp['LAST_PRICE']=parseFloat(temp['LAST_PRICE']);
+		//   temp['CLOSE_PRICE']=parseFloat(temp['CLOSE_PRICE']);
+		//   temp['AVG_PRICE']=parseFloat(temp['AVG_PRICE']);
+		//   temp['TTL_TRD_QNTY']=parseFloat(temp['TTL_TRD_QNTY']);
+		//   temp['TURNOVER_LACS']=parseFloat(temp['TURNOVER_LACS']);
+		//   temp['DELIV_PER']=parseFloat(temp['DELIV_PER']);
+		//   temp['DELIV_QTY']=parseFloat(temp['DELIV_QTY']);
+		//   temp['NO_OF_TRADES']=parseFloat(temp['NO_OF_TRADES']);
+		// }
+		let tempnew=Object.values(temp);
+		let keys=Object.keys(temp);
+		let sql="INSERT INTO `reportdata` ("+keys+") VALUES (?)";
+		console.log(sql);
+		console.log(tempnew);
+		con.query(sql,[tempnew], function (err, result) {
+		  if (err) console.error(err);
+		  console.warn(temp['SYMBOL']+'-added');
+		  resolve(result);
+		  // res.send(result);
+		});
+	  // });
+	})
+  }
+  function priceFormatmaker(data,timelist,symbol){
+	allRecords=[];
+	timelist.forEach(time=>{
+		let objSelect=data?selectExtractPrice(data,time,symbol):'';
+    if(objSelect){
+      allRecords.push(objSelect);
+    }
+	});
+	return(allRecords);
+}
+function selectExtractPrice(data,time,symbol){
+	let dataObj={};
+	data.forEach((ele,i)=>{
+		if(ele[0]==time){
+			dataObj['SYMBOL']=symbol;
+			dataObj['TIMESTAMP']=ele[0]*1000;
+			dataObj['DATE1']=dateFormat(ele[0],true);
+			dataObj['OPEN_PRICE']=ele[1];
+			dataObj['HIGH_PRICE']=ele[2];
+			dataObj['LOW_PRICE']=ele[3];
+			dataObj['CLOSE_PRICE']=ele[4];
+			dataObj['PREV_CLOSE']=(i>=0)?(data[i-1]?.[4]):(data[i]?.[4]);
+			dataObj['id']='';
+		}
+	});
+	if(Object.keys(dataObj).length === 0){
+		return null;
+	}
+	return dataObj;
+}
+function dateFormat(date,small){
+	if(small){
+		  date=date*1000;
+	  }
+	let tmp=new Date(date);
+	let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	return tmp.getDate()+"-"+monthList[tmp.getMonth()]+"-"+(tmp.getFullYear()).toString().substring(2, 4);
+  }
+  function dateFormatFull(date){
+	let tmp=new Date(date);
+	let monthList= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	return tmp.getDate()+"-"+(tmp.getMonth()+1)+"-"+(tmp.getFullYear());
+  }
+function checkexistanceData(data,dateonly){
+	//SELECT count(SYMBOL) FROM `reportdata` WHERE `SYMBOL`="RAMRAT" and `DATE1`="14-Oct-22";
+	return new Promise((resolve,reject)=>{
+	  let sql='';
+	  if(dateonly){
+		  sql=`SELECT count(SYMBOL) as count FROM reportdata WHERE TIMESTAMP='${data.TIMESTAMP}'`;
+		}else{
+		  sql=`SELECT count(SYMBOL) as count FROM reportdata WHERE SYMBOL='${data.SYMBOL}' and DATE1='${data.DATE1}'`;
+		}
+		con.query(sql, function (err, result) {
+		  if (err) throw err;
+		  if(result[0].count==0){
+			resolve(true);
+		  }else{
+			resolve(false);
+		  }
+		});
+	})
+  }
+async function checkDataAvailablity(time){
+	return new Promise(async (resolve,reject)=>{
+	  let adaniSample=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/ADANIENT/1y?intervalInDays=1&minimal=false`;
+	  let responseData=await callAPI(adaniSample);
+	  let lastIndex=responseData?responseData.candles[responseData.candles.length-1]:'';
+	  let result=responseData.candles.some(ele=> ele[0]==time);
+	  resolve(result);
+	});
+  
+  }
 function chartObjForm(data,title,close_price){
 	let startPrice=data?.[0]?.[1];
 	let currentPrice=data?.[data.length-1]?.[4];
@@ -389,6 +573,21 @@ async function parralCall(listOfCompanies,url){
 		res.send(finalResult);
 	});
 }
+async function nparralCall(listOfCompanies){
+	return new Promise((resolve,reject)=>{
+	  let promiseData=[];
+	  let finalResult=[];
+	  for (var i = 0; i<listOfCompanies.length; i++) {
+		let temp=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${listOfCompanies[i].SYMBOL}/1y?intervalInDays=1&minimal=false`;
+		// console.log(temp);
+		promiseData.push(fetchCallAPI(temp,listOfCompanies[i]?.SYMBOL))
+	  }
+	  Promise.all(promiseData).then((values) => {
+		finalResult=values;
+		resolve(finalResult);
+	  })
+	});
+  }
 app.get('/fetchList',async(req,res)=>{
 	console.log(req.query.q);
 	callAPI(`https://groww.in/v1/api/search/v1/entity?app=false&entity_type=stocks&page=0&q=${req.query.q}&size=10`).then(result=>{
@@ -540,6 +739,26 @@ function postCall(url,arrayList,listOfCompanies,bselist){
 	});
 
 }
+function fetchCallAPI(url,label){
+	return new Promise((res,rej)=>{
+		request(url, function (error, response, body) {
+		  if (!error && response.statusCode === 200) {
+			let tmp={}
+			let data=JSON.parse(body);
+			if(label){
+				  tmp[label]=data;
+				  res(tmp);
+				}else{
+				  res(data);
+				}  
+			}else{
+			  console.error("error"+label,error);
+			  res({});
+			}
+		})
+		})
+	
+	}
 function callAPI(url,label,typeData){
 	return new Promise((res,rej)=>{
 		 request(url, function (error, response, body) {
