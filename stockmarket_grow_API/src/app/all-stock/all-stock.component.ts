@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CacheInterceptor } from '../intercepter/cacheInterceptor.service';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-all-stock',
@@ -79,7 +81,7 @@ export class AllStockComponent implements OnInit {
     if(industry && industry!='All'){
       industryList="&industry="+industry;
     }
-    this.http.get('http://localhost:3000/getAllStocks?date='+this.dateSelected+industryList).subscribe(async (val:any)=>{
+    this.http.get(environment.domain+'/getAllStocks?date='+this.dateSelected+industryList).subscribe(async (val:any)=>{
       let openposcount=0;
       let opennegcount=0;
       let totalcount=0;
@@ -109,12 +111,12 @@ export class AllStockComponent implements OnInit {
     })
   }
   industryList(){
-    this.http.get('http://localhost:3000/getInudtriList').subscribe(async (val:any)=>{
+    this.http.get(environment.domain+'/getInudtriList').subscribe(async (val:any)=>{
       this.industry=val;
     });
   }
   symbolList(){
-    this.http.get('http://localhost:3000/getallsymbol').subscribe(async (val:any)=>{
+    this.http.get(environment.domain+'/getallsymbol').subscribe(async (val:any)=>{
       this.symbols=val;
     });
   }
@@ -128,7 +130,7 @@ export class AllStockComponent implements OnInit {
   toggle_isChecked:false;
   changedtoggle(){
     if(this.toggle_isChecked){
-      this.http.get('http://localhost:3000/option-trading-analysis?date=1668160800').subscribe(async (val:any)=>{
+      this.http.get(environment.domain+'/option-trading-analysis?date=1668160800').subscribe(async (val:any)=>{
         this.myData=val;
         this.rawData=val;
       })
@@ -162,7 +164,7 @@ loadDataBySymbol(auto){
   if(auto){
     symbol=this.selectedSymbol1;
   }
-  this.http.get('http://localhost:3000/getBySymbol?symbol='+symbol).subscribe(async (val:any)=>{
+  this.http.get(environment.domain+'/getBySymbol?symbol='+symbol).subscribe(async (val:any)=>{
 
     val.forEach((element:any) => {
       element['dayChangePerc']=((element['CLOSE_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
@@ -230,7 +232,7 @@ dateFormat(date:any){
   changedDropdown(){
     this.fetScope?this.fetScope.unsubscribe():'';
     if(this.listSelected){
-      this.fetScope=this.http.get('http://localhost:3000/fetchList?q='+this.listSelected).subscribe((val:any)=>{
+      this.fetScope=this.http.get(environment.domain+'/fetchList?q='+this.listSelected).subscribe((val:any)=>{
           console.log(val);
           this.listEnterprises=val?.content;
         // this.myData = val.map((ele:any)=>JSON.parse(ele));
@@ -239,7 +241,7 @@ dateFormat(date:any){
     }
   }
   loadFundamentals(){
-    this.http.get('http://localhost:3000/getFundamentals').subscribe((val:any)=>{
+    this.http.get(environment.domain+'/getFundamentals').subscribe((val:any)=>{
           console.log(JSON.parse(val[0].STATS));
       })
   }
@@ -289,7 +291,7 @@ dateFormat(date:any){
     fetchData(){
       console.log(this.selectedDate);
       this.result={message:"fetching"};
-      this.http.get('http://localhost:3100/api-inject?date='+this.selectedDate).subscribe((val:any)=>{
+      this.http.get(environment.domain+'/api-inject?date='+this.selectedDate).subscribe((val:any)=>{
         this.result=val
     })
     }

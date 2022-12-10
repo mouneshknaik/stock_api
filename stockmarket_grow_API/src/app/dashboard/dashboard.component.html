@@ -25,25 +25,22 @@
     </tr>
 </table>
 <!-- <button (click)="linkPage('/all-stock')">See ALL</button> -->
-<a
+<!-- <a
 [routerLink]="['/all-stock']">
 all stock report
-</a>  <a
+</a>   -->
+<!-- <a
 [routerLink]="['/live-watch']">
 Live Watch
-</a>
-<br>
-<a
-[routerLink]="['/live-chart']">
-Live Chart
-</a>
+</a> -->
+<button  mat-raised-button color="primary" [routerLink]="['/all-stock']" >all stock </button>
+<span style="margin-right: 10px;"></span><button  mat-raised-button color="primary" [routerLink]="['/live-chart']" >Live Chart</button>
 <h2 class="message">{{finalSelected}}</h2>
-<button  mat-raised-button color="primary" (click)="openToggle()">open {{openOrder}}</button>
-
 <br>
 <div class="fixwidth">
     <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>
-    <button  mat-raised-button color="primary" (click)="toggle()">{{order}}</button>
+    <button  mat-raised-button color="primary" (click)="toggle()">{{order}}</button><span style="margin-right: 10px;"></span>
+    <button  mat-raised-button color="primary" (click)="openToggle()">open {{openOrder}}</button>
 
     <button  mat-fab color="primary" (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
 </div>

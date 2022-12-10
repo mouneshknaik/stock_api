@@ -1,4 +1,4 @@
-import { Component, VERSION ,ViewChild,OnInit, Input } from '@angular/core';
+import { Component, VERSION ,ViewChild,OnInit, Input, SimpleChanges } from '@angular/core';
 
 import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexYAxis,ApexXAxis,ApexTitleSubtitle} from "ng-apexcharts";
 
@@ -23,28 +23,32 @@ export class CandlestickComponent implements OnInit {
   constructor() { 
 
   }
-
-  ngOnInit(): void {
-    this.chartOptions = {
-      series: [{
-        data:this.seriesData?.data
-      }],
-      chart: {
-        type: "candlestick",
-      },
-      xaxis: {
-        type: "datetime",
-        labels: {
-          format: 'HH:mm:ss',
-         datetimeUTC: false
-        }
-      },
-      tooltip: {
-        x: {
-          format: "HH:mm:ss",
-        }
-      }
-    };
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)  ;  
   }
-
+  ngOnInit(): void {
+    this.populateChart();
+  }
+populateChart(){
+  this.chartOptions = {
+    series: [{
+      data:this.seriesData?.data
+    }],
+    chart: {
+      type: "candlestick",
+    },
+    xaxis: {
+      type: "datetime",
+      labels: {
+        format: 'HH:mm:ss',
+       datetimeUTC: false
+      }
+    },
+    tooltip: {
+      x: {
+        format: "HH:mm:ss",
+      }
+    }
+  };
+}
 }

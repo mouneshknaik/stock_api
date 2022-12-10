@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-live-watch',
@@ -39,7 +40,7 @@ export class LiveWatchComponent implements OnInit {
   getLiveWatch(){
     this.loading=true;
     this.liveData=[];
-    this.http.get('http://localhost:3000/watchtimefram?basis='+this.basisSelected).subscribe((reportData:any)=>{
+    this.http.get(environment.domain+'/watchtimefram?basis='+this.basisSelected).subscribe((reportData:any)=>{
       this.liveData=reportData;
       this.liveData.map(ele=>{
         let slgain=0;
@@ -70,7 +71,7 @@ export class LiveWatchComponent implements OnInit {
   liveAverage(){
     this.loading=true;
     this.liveData=[];
-    this.http.get('http://localhost:3000/moving-average').subscribe((reportData:any)=>{
+    this.http.get(environment.domain+'/moving-average').subscribe((reportData:any)=>{
       this.liveData=reportData;
       this.liveData.map(ele=>{
         let tmp={};

@@ -4,6 +4,20 @@
         <mat-button-toggle value="2">3 Minutes</mat-button-toggle>
         <mat-button-toggle value="3">5 Minutes</mat-button-toggle>
     </mat-button-toggle-group>
+    <mat-slide-toggle [(ngModel)]="nonOption" (ngModelChange)="nonOption_hightoggle()">Non Option</mat-slide-toggle>
+    
+    <br>
+    <mat-button-toggle-group  [(ngModel)]="inter" (ngModelChange)="changedyear()">
+        <mat-button-toggle value="day">day</mat-button-toggle>
+        <mat-button-toggle value="week">week</mat-button-toggle>
+        <mat-button-toggle value="month">month</mat-button-toggle>
+        <mat-button-toggle value="year">year</mat-button-toggle>
+    </mat-button-toggle-group>
+    <span style="margin-right: 20px;"></span>
+    <button  mat-raised-button color="primary" [routerLink]="['/']" >Home </button>
+    <span style="margin-right: 20px;"></span>
+    <mat-slide-toggle [(ngModel)]="current_high" (ngModelChange)="current_hightoggle()">Current High</mat-slide-toggle>
+
     <button mat-raised-button color="primary" (click)="sort()">Sort</button>
     <button  (click)="chartAPI()" [ngClass]="loader?'inactive':'active'">Reload<span *ngIf="loader" [ngClass]="loader?'inactive':'active'">ing</span></button>
     <div class="pagination">
@@ -13,6 +27,7 @@
         <button mat-raised-button  (click)="rightPagination()">
             <b>></b>
         </button>
+        <span style="margin-right: 20px;"></span>
         <mat-slide-toggle [(ngModel)]="toggle_isChecked" (ngModelChange)="changedtoggle()">Chart Visible</mat-slide-toggle>
     </div>
     <div class="row">

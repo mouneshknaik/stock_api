@@ -48,38 +48,8 @@
             {{list?.NSESYMBOL}}
         </option>
     </select>
+    <button  mat-raised-button color="primary" [routerLink]="['/']" >Home </button>    <span style="margin-right: 20px;"></span>
 <mat-slide-toggle [(ngModel)]="toggle_isChecked" (ngModelChange)="changedtoggle()">Option Trade Analysis</mat-slide-toggle>
-<table style="border: 1px gray;" class="table" *ngIf="!toggle_isChecked">
-    <thead>
-        <tr>
-            <th (click)="toggleSort('SYMBOL')">Company</th>
-            <th (click)="toggleSort('CLOSE_PRICE')">Price</th>
-            <th (click)="toggleSort('OPEN_PRICE')">Open Price</th>
-            <th (click)="toggleSort('PREV_CLOSE')">Last Price</th>
-            <th (click)="toggleSort('loss_gain')">Loss/Gain</th>
-            <th (click)="toggleSort('open_per')">Open Per(<span class="active">{{countList?.open}}</span>/<span class="inactive">{{countList?.close}}</span>-{{countList?.total}})</th>
-            <th (click)="toggleSort('dayChangePerc')">Percentage</th>
-            <th ><span (click)="toggleSort('TIMESTAMP')">Date</span><span (click)="toggleSort('weekDay')">(WeekDay)</span></th>
-            <th (click)="toggleSort('INDUSTRY')">Industry</th>
-            <th (click)="toggleSort('MARKETCAP')">Market Cap</th>
-        </tr>
-
-    </thead>
-
-    <tr *ngFor="let list of myData">
-        <td>{{list?.SYMBOL}}</td>
-        <td class="border" *ngIf="list"> {{list['CLOSE_PRICE']}}</td>
-        <td class="border" *ngIf="list"> {{list['OPEN_PRICE']}}</td>
-        <td class="border" *ngIf="list"> {{list['PREV_CLOSE']}}</td>
-        <td class="border"  *ngIf="list" [ngClass]="list?.loss_gain>0 ?  'active' : 'inactive'"> {{list?.loss_gain |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">Rs</span></td>
-        <td class="border"  *ngIf="list" [ngClass]="list?.open_per>0 ?  'active' : 'inactive'"> {{list?.open_per |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">%</span></td>
-        <td class="border"  *ngIf="list" [ngClass]="list?.dayChangePerc>0 ?  'active' : 'inactive'"> {{list?.dayChangePerc |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">%</span></td>
-        <td>{{list['DATE1']}}({{list['weekDay']}})</td>
-        <td>{{list['INDUSTRY']}}</td>
-        <td>{{list['MARKETCAP']}}</td>
-    </tr>
-</table>
-<h2 *ngIf="myData?.length==0" class="red alert">No Data for the day</h2>
 <div class="upload layout">
     <input #fileUpload mat-raised-button color="primary"
        type="file"
@@ -111,6 +81,38 @@
         {{type}}
     </option>
 </select>
+<table style="border: 1px gray;" class="table" *ngIf="!toggle_isChecked">
+    <thead>
+        <tr>
+            <th (click)="toggleSort('SYMBOL')">Company</th>
+            <th (click)="toggleSort('CLOSE_PRICE')">Price</th>
+            <th (click)="toggleSort('OPEN_PRICE')">Open Price</th>
+            <th (click)="toggleSort('PREV_CLOSE')">Last Price</th>
+            <th (click)="toggleSort('loss_gain')">Loss/Gain</th>
+            <th (click)="toggleSort('open_per')">Open Per(<span class="active">{{countList?.open}}</span>/<span class="inactive">{{countList?.close}}</span>-{{countList?.total}})</th>
+            <th (click)="toggleSort('dayChangePerc')">Percentage</th>
+            <th ><span (click)="toggleSort('TIMESTAMP')">Date</span><span (click)="toggleSort('weekDay')">(WeekDay)</span></th>
+            <th (click)="toggleSort('INDUSTRY')">Industry</th>
+            <th (click)="toggleSort('MARKETCAP')">Market Cap</th>
+        </tr>
+
+    </thead>
+
+    <tr *ngFor="let list of myData">
+        <td><img [src]="list?.LOGO" width="25px" height="25px" *ngIf="list?.LOGO"/>{{list?.SYMBOL}}</td>
+        <td class="border" *ngIf="list"> {{list['CLOSE_PRICE']}}</td>
+        <td class="border" *ngIf="list"> {{list['OPEN_PRICE']}}</td>
+        <td class="border" *ngIf="list"> {{list['PREV_CLOSE']}}</td>
+        <td class="border"  *ngIf="list" [ngClass]="list?.loss_gain>0 ?  'active' : 'inactive'"> {{list?.loss_gain |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">Rs</span></td>
+        <td class="border"  *ngIf="list" [ngClass]="list?.open_per>0 ?  'active' : 'inactive'"> {{list?.open_per |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">%</span></td>
+        <td class="border"  *ngIf="list" [ngClass]="list?.dayChangePerc>0 ?  'active' : 'inactive'"> {{list?.dayChangePerc |number:'1.2-2'}}<span *ngIf="list['CLOSE_PRICE']">%</span></td>
+        <td>{{list['DATE1']}}({{list['weekDay']}})</td>
+        <td>{{list['INDUSTRY']}}</td>
+        <td>{{list['MARKETCAP']}}</td>
+    </tr>
+</table>
+<h2 *ngIf="myData?.length==0" class="red alert">No Data for the day</h2>
+
 <table style="border: 1px gray;" class="table" *ngIf="toggle_isChecked">
     <thead>
         <tr>
@@ -134,14 +136,15 @@
         <td>{{list?.symbol}}</td>
         <td class="border" *ngIf="list"> {{list['contractDisplayName']}}</td>
         <td class="border" class="border" [ngClass]="list['dayChange']>0?'active':'inactive'"> {{list['dayChange']}}</td>
-        <td class="border" *ngIf="list"> {{list['expiry']}}</td>
+        <td class="border"  *ngIf="list">{{list['lotSize']}} </td>
         <td>{{list['min_price_buy']}}</td>
         <td>{{list['open_price']}}</td>
         <td class="border" [ngClass]="list['optionType']=='Call'?'active':'orange'">{{list['optionType']}}</td>
         <td>{{list['price']}}</td>
         <td>{{list['volume']}}</td>
         <td>{{list['timstamp']}}</td>
-        <td class="border"  *ngIf="list">{{list['lotSize']}} </td>
+        <td class="border" *ngIf="list"> {{list['expiry']}}</td>
+
 
     </tr>
 </table>

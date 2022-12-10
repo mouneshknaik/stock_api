@@ -17,3 +17,10 @@
         display: inline-block;
     }
 }
+@media screen and (max-width:900px){
+    .row{
+        .col-md-4{
+            width: 90%; 
+        } 
+    }
+}

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, VERSION ,ViewChild,OnInit } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-live-chart',
@@ -17,6 +17,10 @@ export class LiveChartComponent implements OnInit {
   interval: number=1;
   intervalMinute: any='Minute1';
   toggle_isChecked: any;
+  current_high:any;
+  rawObj: any;
+  inter: string='day';
+  nonOption:boolean=false;
   constructor(private http:HttpClient) {
 
    }
@@ -30,14 +34,55 @@ export class LiveChartComponent implements OnInit {
     console.log(this.interval);
     this.chartAPI()
   }
-
+  changedyear(){
+    this.chartAPI();
+  }
   chartAPI(){
     this.loader=true;
-    this.http.get('http://localhost:3000/chart-view?interval='+this.interval).subscribe(async (val:any)=>{
+    this.http.get(environment.domain+'/chart-view?interval='+this.interval+'&nonOption='+this.nonOption+'&inter='+this.inter).subscribe(async (val:any)=>{
       this.loader=false;
-      this.candleList=val;
-      this.sort();
-      this.chartData=this.candleList.slice(this.skip, this.paginationLimit);
+      this.rawObj=val;
+      this.current_hightoggle();
+      // this.chartData=this.candleList.slice(this.skip, this.paginationLimit);
+    });
+  }
+  filterCurrentTime(data,time){
+    return data.map(ele=>{
+      ele['data']=this.sliceindex(ele?.data,time);
+      return ele;
+    })
+  }
+  currentTimeinMinutes(date){
+    let formDate=new Date(new Date(date).getTime()-(60*4*1000)).toString().split(":");
+    let splittd=formDate[0]+":"+formDate[1];
+    return (new Date(splittd).getTime()); 
+  }
+  sliceindex(data,time){
+    let index=data.findIndex(x => x.x ==time);
+    return data.slice(index,data.length)
+  }
+  current_hightoggle(){
+    console.log(this.current_high)
+    let tmp;
+    let raw=[...(this.rawObj)];
+    console.log(this.rawObj)
+    if(this.current_high){
+      let tmp=this.filterCurrentTime(raw,this.currentTimeinMinutes(new Date()));
+      this.candleList=this.updateLatest(tmp);
+    }else{
+      this.candleList=raw;
+    }
+    this.order='asc';
+    this.sort();
+    this.chartData=this.candleList.slice(this.skip, this.paginationLimit);
+  }
+  updateLatest(data){
+    return data.map(ele=>{
+      let startPrice=ele?.data?.[0]?.y?.[1];
+      let currentPrice=ele?.data?.[ele?.data.length-1]?.y?.[3];
+      let diff=((currentPrice-startPrice)/startPrice)*100;
+      ele['startDiff']=diff;
+      return ele;
     });
   }
   leftPagination(){
@@ -55,6 +100,9 @@ export class LiveChartComponent implements OnInit {
     }
     console.log(this.skip, this.paginationLimit);
     this.chartData=this.candleList.slice(this.skip, this.paginationLimit);
+  }
+  nonOption_hightoggle(){
+
   }
   sort(){
     if(this.order=='asc'){

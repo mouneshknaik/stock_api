@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { shareReplay, tap } from 'rxjs/operators';
 import { CacheInterceptor } from '../intercepter/cacheInterceptor.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,7 +37,7 @@ export class DashboardComponent implements OnInit {
 uniquDates:any=[];
   ngOnInit(): void {
 
-    // this.data$ = this.http.get('http://localhost:3000/').pipe(
+    // this.data$ = this.http.get(environment.domain+'/').pipe(
     //   tap(console.log),
     //   shareReplay(1),
     //   tap(() => console.log('after sharing'))
@@ -75,7 +76,7 @@ uniquDates:any=[];
           tmp['PRICE']=ele['ltp'];
           return tmp;
         });
-        this.http.post('http://localhost:3000/watchdata',priceList).subscribe((reportData:any)=>{
+        this.http.post(environment.domain+'/watchdata',priceList).subscribe((reportData:any)=>{
           console.log(reportData);
         });
       // }else{
@@ -93,7 +94,7 @@ uniquDates:any=[];
   }
   fetchreportData(list:any){
     return new Promise((resolve,reject)=>{
-      this.http.post('http://localhost:3000/getData',{"list":list}).subscribe((reportData:any)=>{
+      this.http.post(environment.domain+'/getData',{"list":list}).subscribe((reportData:any)=>{
         console.log(reportData);
         this.reportData=reportData;
         let listDates=[];
@@ -118,7 +119,7 @@ uniquDates:any=[];
   }
   loadData(){
     this.loading=true;
-    this.http.get('http://localhost:3000/getAll').subscribe(async (val:any)=>{
+    this.http.get(environment.domain+'/getAll').subscribe(async (val:any)=>{
       this.myData=val;
       this.rawData=val;
       if(this.uniquDates.length==0){
@@ -177,7 +178,7 @@ uniquDates:any=[];
     this.descOrder();
   }
   industryList(){
-      this.http.get('http://localhost:3000/getInudtriList').subscribe((val:any)=>{
+      this.http.get(environment.domain+'/getInudtriList').subscribe((val:any)=>{
           console.log(val);
           this.industry=val;
       })
@@ -197,7 +198,7 @@ uniquDates:any=[];
   changedDropdown(){
     this.fetScope?this.fetScope.unsubscribe():'';
     if(this.listSelected){
-      this.fetScope=this.http.get('http://localhost:3000/fetchList?q='+this.listSelected).subscribe((val:any)=>{
+      this.fetScope=this.http.get(environment.domain+'/fetchList?q='+this.listSelected).subscribe((val:any)=>{
           console.log(val);
           this.listEnterprises=val?.content;
         // this.myData = val.map((ele:any)=>JSON.parse(ele));
@@ -212,7 +213,7 @@ uniquDates:any=[];
     };
     // let options={'label':list?.title,field:list?.nse_scrip_code}
 
-    this.http.post('http://localhost:3000/addtoList',options.body).subscribe((val:any)=>{
+    this.http.post(environment.domain+'/addtoList',options.body).subscribe((val:any)=>{
       console.log(val);
       this.listEnterprises=val?.content;
       this.finalSelected=val?.message;
@@ -258,11 +259,11 @@ uniquDates:any=[];
 
   }
   getData() {
-    this.http.get('http://localhost:3000/1').subscribe((val:any)=>{
+    this.http.get(environment.domain+'/1').subscribe((val:any)=>{
       this.myData = val?.data
     })
     // this.data$.subscribe((data:any) => this.myData = data?.data);
-    this.http.get('http://localhost:3000/').subscribe((val:any)=>{
+    this.http.get(environment.domain+'/').subscribe((val:any)=>{
       this.myData = val?.data
     });
 
@@ -271,10 +272,10 @@ uniquDates:any=[];
     let param={
       name:"hai"
     }
-    this.http.post('http://localhost:3000/1',param).subscribe((val:any)=>{
+    this.http.post(environment.domain+'/1',param).subscribe((val:any)=>{
       this.myData = val?.data
     })
-    this.http.post('http://localhost:3000/5',param).subscribe((val:any)=>{
+    this.http.post(environment.domain+'/5',param).subscribe((val:any)=>{
       this.myData = val?.data
     })
   }
