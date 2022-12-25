@@ -49,6 +49,7 @@ export class LiveChartComponent implements OnInit {
   }
   chartAPI(){
     this.loader=true;
+    this.chartscope?this.chartscope.unsubscribe():'';
     this.chartscope=this.http.get(environment.domain+'/chart-view?interval='+this.interval+'&nonOption='+this.nonOption+'&inter='+this.inter).subscribe(async (val:any)=>{
       this.loader=false;
       this.rawObj=val;
