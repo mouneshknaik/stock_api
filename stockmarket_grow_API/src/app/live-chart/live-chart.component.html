@@ -2,7 +2,9 @@
     <mat-button-toggle-group  [(ngModel)]="interval" (ngModelChange)="changedbasis()">
         <mat-button-toggle value="1">1 Minutes</mat-button-toggle>
         <mat-button-toggle value="2">3 Minutes</mat-button-toggle>
-        <mat-button-toggle value="3">5 Minutes</mat-button-toggle>
+        <mat-button-toggle value="5">5 Minutes</mat-button-toggle>
+        <mat-button-toggle value="10">10 Minutes</mat-button-toggle>
+        <mat-button-toggle value="15">15 Minutes</mat-button-toggle>
     </mat-button-toggle-group>
     <mat-slide-toggle [(ngModel)]="nonOption" (ngModelChange)="nonOption_hightoggle()">Non Option</mat-slide-toggle>
     
@@ -35,4 +37,23 @@
             <app-candlestick [seriesData]="list"  *ngIf="list" [chartVisible]="toggle_isChecked"></app-candlestick>
         </div>
     </div>
+    <!-- <table style="border: 1px gray;" class="table" >
+        <thead>
+            <tr>
+                <th (click)="stepperSort('title','')">SYMBOL</th>
+                <th  (click)="stepperSort('count','')">Count</th>
+                <th *ngFor="let ls of tableStepper?.[0]['data'];let i = index">
+                    {{i | number : '1.0-0'}}min
+                </th>
+            </tr>
+        </thead>
+    
+        <tr *ngFor="let ls of tableStepper;let i = index">
+            <td>{{ls?.title}}</td>
+            <td><span  [ngClass]="(ls?.count)>=0 ?  'active' : 'inactive'">{{ls?.count}}</span>/<small>{{tableStepper?.[0]?.data?.length}}-{{ls?.count/tableStepper?.[0]?.data?.length*100  | number : '1.0-1'}}</small></td>
+            <td *ngFor="let ll of ls?.data;let n = index">
+                <span [ngClass]="(ll)>=0 ?  'active' : 'inactive'"> {{ll  | number : '1.2-3'}}</span>
+            </td>
+        </tr>
+        </table> -->
 </div>

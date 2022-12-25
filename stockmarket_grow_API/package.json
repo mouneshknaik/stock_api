@@ -23,6 +23,7 @@
     "apexcharts": "^3.36.3",
     "bootstrap": "^5.2.2",
     "font-awesome": "^4.7.0",
+    "moment": "^2.29.4",
     "ng-apexcharts": "1.6",
     "ngx-bootstrap": "^7.1.2",
     "ngx-echarts": "^14.0.0",

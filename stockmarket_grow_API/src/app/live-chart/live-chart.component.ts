@@ -16,11 +16,13 @@ export class LiveChartComponent implements OnInit {
   defaultLimit: any;
   interval: number=1;
   intervalMinute: any='Minute1';
-  toggle_isChecked: any;
+  toggle_isChecked: boolean=false;
   current_high:any;
   rawObj: any;
   inter: string='day';
   nonOption:boolean=false;
+  tableStepper: any;
+  sopenOrder: string;
   constructor(private http:HttpClient) {
 
    }
@@ -42,6 +44,8 @@ export class LiveChartComponent implements OnInit {
     this.http.get(environment.domain+'/chart-view?interval='+this.interval+'&nonOption='+this.nonOption+'&inter='+this.inter).subscribe(async (val:any)=>{
       this.loader=false;
       this.rawObj=val;
+      // this.tableStepper=this.chartStepperData(val);
+      // console.log(this.tableStepper,'tableStepper')
       this.current_hightoggle();
       // this.chartData=this.candleList.slice(this.skip, this.paginationLimit);
     });
@@ -51,6 +55,48 @@ export class LiveChartComponent implements OnInit {
       ele['data']=this.sliceindex(ele?.data,time);
       return ele;
     })
+  }
+  chartStepperData(objData){
+    return objData.map(ele=>{
+      let tmp={};
+      tmp['data']=this.chartStepperChart(ele?.data);
+      tmp['count']= tmp['data'].filter(ele=>ele>0).length;
+      tmp['title']=(ele?.title);
+      return tmp;
+    });
+  }
+  chartStepperChart(obj){
+    let difList=[];
+    for(let i=0;i<obj.length;i++){
+      let prev=obj[i-1]?.y?.[3]||obj[i]?.y?.[3];
+      let cur=obj[i]?.y?.[3];
+      difList.push(((cur-prev)/prev)*100);
+    }
+    return difList;
+  }
+  stepperSort(key,type){
+    if(!type){
+      this.toggle();
+      type=this.sopenOrder;
+    }
+    if(type=='asc'){
+      this.steppeDesc(key);
+    }else{
+      this.stepperAsc(key)
+    }
+  }
+  toggle(){
+    if(this.sopenOrder=='desc'){
+      this.sopenOrder= 'asc';
+    }else{
+      this.sopenOrder='desc';
+    }
+  }
+  steppeDesc(key){
+    this.tableStepper.sort((a:any,b:any)=> ((a[key]) < (b[key]) ? 1 : -1));
+  }
+  stepperAsc(key){
+    this.tableStepper.sort((a:any,b:any)=> ((a[key]) > (b[key]) ? 1 : -1));
   }
   currentTimeinMinutes(date){
     let formDate=new Date(new Date(date).getTime()-(60*4*1000)).toString().split(":");

@@ -13,9 +13,10 @@ export class LiveWatchComponent implements OnInit {
 
   constructor(private http:HttpClient) { }
   liveData;
-  toggle_isChecked:boolean=true;
+  toggle_isChecked:boolean=false;
   ngOnInit(): void {
-    this.liveAverage()
+    // this.liveAverage();
+    this.getLiveWatch();
     let timeInverval=60*60*6;
     if(new Date().getHours()>=8 && new Date().getHours()<=15){
       timeInverval=60

@@ -29,10 +29,10 @@
 [routerLink]="['/all-stock']">
 all stock report
 </a>   -->
-<!-- <a
+<a
 [routerLink]="['/live-watch']">
 Live Watch
-</a> -->
+</a>
 <button  mat-raised-button color="primary" [routerLink]="['/all-stock']" >all stock </button>
 <span style="margin-right: 10px;"></span><button  mat-raised-button color="primary" [routerLink]="['/live-chart']" >Live Chart</button>
 <h2 class="message">{{finalSelected}}</h2>
@@ -41,6 +41,7 @@ Live Watch
     <input [(ngModel)]="filterTable" (ngModelChange)="filterTableData()" placeholder="table filter"/>
     <button  mat-raised-button color="primary" (click)="toggle()">{{order}}</button><span style="margin-right: 10px;"></span>
     <button  mat-raised-button color="primary" (click)="openToggle()">open {{openOrder}}</button>
+    <button  mat-raised-button color="primary" (click)="volumToggle()">volum {{volumOrder}}</button>
 
     <button  mat-fab color="primary" (click)="loadData()" style="float: right;">Reload<span *ngIf="loading">ing!</span></button>
 </div>
@@ -63,6 +64,7 @@ Live Watch
             <th>Percentage</th>
             <th>open Price</th>
             <th>last Price</th>
+            <th>Volume</th>
             <th>starting Price Diff(<span ngClass="active">{{gainLoss?.gain}}</span>/<span ngClass="inactive">{{gainLoss?.loss}}</span>)</th>
             <!-- <th>Stoploss</th> -->
             <!-- <th>Exit</th> -->
@@ -85,6 +87,7 @@ Live Watch
         <td><span  [ngClass]="list?.dayChangePerc>0 ?  'active' : 'inactive'">{{list?.dayChangePerc | number : '1.2-2' }}</span></td>
         <td>{{list?.open}}</td>
         <td>{{list?.close}}</td>
+        <td>{{list?.volume}}</td>
         <td><span  [ngClass]="(list?.openChange)>0 ?  'active' : 'inactive'">{{list?.openChange | number : '1.2-2' }}</span></td>
         <!-- <td ><span ngClass="inactive stoploss">{{list?.stoploss |number:'1.2-2'}}</span></td> -->
         <!-- <td ><span ngClass="active stoploss">{{list?.exit |number:'1.2-2'}}</span></td> -->

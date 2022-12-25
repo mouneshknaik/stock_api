@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   gainLoss: {gain,loss};
   dropdown: any;
   industry: any;
+  volumOrder: string;
   constructor(private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
   
 uniquDates:any=[];
@@ -251,12 +252,27 @@ uniquDates:any=[];
 
     }
   }
+  volumToggle(){
+    if(this.volumOrder=="asc"){
+      this.volumOrder='desc';
+      this.volumassendingOrder();
+    }else{
+      this.volumOrder='asc';
+      this.volumdescOrder();
+
+    }
+  }
   descOrder(){
     this.myData.sort((a:any,b:any)=> (a.dayChangePerc < b.dayChangePerc ? 1 : -1))
   }
   opendescOrder(){
     this.myData.sort((a:any,b:any)=> (a.openChange < b.openChange ? 1 : -1))
-
+  }
+  volumassendingOrder(){
+    this.myData.sort((a:any,b:any)=> (a.volume > b.volume ? 1 : -1))
+  }
+  volumdescOrder(){
+    this.myData.sort((a:any,b:any)=> (a.volume < b.volume ? 1 : -1))
   }
   getData() {
     this.http.get(environment.domain+'/1').subscribe((val:any)=>{

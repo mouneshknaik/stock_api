@@ -1,7 +1,7 @@
 import { Component, VERSION ,ViewChild,OnInit, Input, SimpleChanges } from '@angular/core';
 
 import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexYAxis,ApexXAxis,ApexTitleSubtitle} from "ng-apexcharts";
-
+import * as moment from 'moment';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -28,20 +28,26 @@ export class CandlestickComponent implements OnInit {
   }
   ngOnInit(): void {
     this.populateChart();
+    console.log(this.seriesData?.data);
   }
 populateChart(){
   this.chartOptions = {
     series: [{
-      data:this.seriesData?.data
+      data:this.filterTime(this.seriesData?.data)
     }],
+    stroke: {
+      width: 1
+    },
     chart: {
       type: "candlestick",
     },
     xaxis: {
-      type: "datetime",
+      type: "category",
+
       labels: {
-        format: 'HH:mm:ss',
-       datetimeUTC: false
+        formatter: function(val) {
+          return moment(val).format("MMM DD HH:mm");
+        },
       }
     },
     tooltip: {
@@ -51,4 +57,12 @@ populateChart(){
     }
   };
 }
+filterTime(data){
+  let tmp=data?.[0]['x'];
+  return data.map(ele=>{
+    ele['x']=tmp;
+    tmp=tmp+(60*1000);
+    return ele;
+  });
+  }
 }
