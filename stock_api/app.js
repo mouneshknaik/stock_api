@@ -10,12 +10,8 @@ app.use(express.json())
 app.use(cors());
 var axios = require('axios');
 const commonService=require("./service");
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database:'stock'
-  });
+const db=require("./db");
+var con = mysql.createConnection(db.db);
   
 var config = {
     /* Your settings here like Accept / Headers etc. */
