@@ -17,11 +17,6 @@ var config = {
     /* Your settings here like Accept / Headers etc. */
 }
 
-setInterval(function () {
-    con.query('SELECT 1',function (v){
-		// console.log(v,'val');
-	})
-}, 5000);
 handleDisconnect();
 setTimeout(async function () {
 	let time=new Date();
