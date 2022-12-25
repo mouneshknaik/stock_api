@@ -23,6 +23,14 @@ export class LiveChartComponent implements OnInit {
   nonOption:boolean=false;
   tableStepper: any;
   sopenOrder: string;
+  chartscope: any;
+  getallscope: any;
+  fundamentalscope: any;
+  fetScope: any;
+  getsymbolscope: any;
+  optiontradinganascope: any;
+  allsymbol: any;
+  industryscope: any;
   constructor(private http:HttpClient) {
 
    }
@@ -41,7 +49,7 @@ export class LiveChartComponent implements OnInit {
   }
   chartAPI(){
     this.loader=true;
-    this.http.get(environment.domain+'/chart-view?interval='+this.interval+'&nonOption='+this.nonOption+'&inter='+this.inter).subscribe(async (val:any)=>{
+    this.chartscope=this.http.get(environment.domain+'/chart-view?interval='+this.interval+'&nonOption='+this.nonOption+'&inter='+this.inter).subscribe(async (val:any)=>{
       this.loader=false;
       this.rawObj=val;
       // this.tableStepper=this.chartStepperData(val);
@@ -170,5 +178,16 @@ export class LiveChartComponent implements OnInit {
   }
   ascOrder(key){
     this.candleList.sort((a:any,b:any)=> ((a[key]) > (b[key]) ? 1 : -1));
+  }
+  ngOnDestroy(): void {
+    console.log('closed watch chart compo')
+    this.chartscope?this.chartscope.unsubscribe():'';
+    this.getallscope?this.getallscope.unsubscribe():'';
+  this.fundamentalscope?this.fundamentalscope.unsubscribe():'';
+  this.fetScope?this.fetScope.unsubscribe():'';
+  this.getsymbolscope?this.getsymbolscope.unsubscribe():'';
+  this.optiontradinganascope?this.optiontradinganascope.unsubscribe():'';
+  this.allsymbol?this.allsymbol.unsubscribe():'';
+  this.industryscope?this.industryscope.unsubscribe():'';
   }
 }

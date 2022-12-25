@@ -33,6 +33,11 @@ export class DashboardComponent implements OnInit {
   dropdown: any;
   industry: any;
   volumOrder: string;
+  addtolist: any;
+  industryscope: any;
+  getallscope: any;
+  getDatascope: any;
+  watchdatascope: any;
   constructor(private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
   
 uniquDates:any=[];
@@ -77,7 +82,7 @@ uniquDates:any=[];
           tmp['PRICE']=ele['ltp'];
           return tmp;
         });
-        this.http.post(environment.domain+'/watchdata',priceList).subscribe((reportData:any)=>{
+        this.watchdatascope=this.http.post(environment.domain+'/watchdata',priceList).subscribe((reportData:any)=>{
           console.log(reportData);
         });
       // }else{
@@ -95,7 +100,7 @@ uniquDates:any=[];
   }
   fetchreportData(list:any){
     return new Promise((resolve,reject)=>{
-      this.http.post(environment.domain+'/getData',{"list":list}).subscribe((reportData:any)=>{
+      this.getDatascope=this.http.post(environment.domain+'/getData',{"list":list}).subscribe((reportData:any)=>{
         console.log(reportData);
         this.reportData=reportData;
         let listDates=[];
@@ -120,7 +125,7 @@ uniquDates:any=[];
   }
   loadData(){
     this.loading=true;
-    this.http.get(environment.domain+'/getAll').subscribe(async (val:any)=>{
+    this.getallscope=this.http.get(environment.domain+'/getAll').subscribe(async (val:any)=>{
       this.myData=val;
       this.rawData=val;
       if(this.uniquDates.length==0){
@@ -179,7 +184,7 @@ uniquDates:any=[];
     this.descOrder();
   }
   industryList(){
-      this.http.get(environment.domain+'/getInudtriList').subscribe((val:any)=>{
+      this.industryscope=this.http.get(environment.domain+'/getInudtriList').subscribe((val:any)=>{
           console.log(val);
           this.industry=val;
       })
@@ -214,7 +219,7 @@ uniquDates:any=[];
     };
     // let options={'label':list?.title,field:list?.nse_scrip_code}
 
-    this.http.post(environment.domain+'/addtoList',options.body).subscribe((val:any)=>{
+    this.addtolist=this.http.post(environment.domain+'/addtoList',options.body).subscribe((val:any)=>{
       console.log(val);
       this.listEnterprises=val?.content;
       this.finalSelected=val?.message;
@@ -275,25 +280,25 @@ uniquDates:any=[];
     this.myData.sort((a:any,b:any)=> (a.volume < b.volume ? 1 : -1))
   }
   getData() {
-    this.http.get(environment.domain+'/1').subscribe((val:any)=>{
-      this.myData = val?.data
-    })
-    // this.data$.subscribe((data:any) => this.myData = data?.data);
-    this.http.get(environment.domain+'/').subscribe((val:any)=>{
-      this.myData = val?.data
-    });
+    // this.http.get(environment.domain+'/1').subscribe((val:any)=>{
+    //   this.myData = val?.data
+    // })
+    // // this.data$.subscribe((data:any) => this.myData = data?.data);
+    // this.http.get(environment.domain+'/').subscribe((val:any)=>{
+    //   this.myData = val?.data
+    // });
 
   }
   postData(){
     let param={
       name:"hai"
     }
-    this.http.post(environment.domain+'/1',param).subscribe((val:any)=>{
-      this.myData = val?.data
-    })
-    this.http.post(environment.domain+'/5',param).subscribe((val:any)=>{
-      this.myData = val?.data
-    })
+    // this.http.post(environment.domain+'/1',param).subscribe((val:any)=>{
+    //   this.myData = val?.data
+    // })
+    // this.http.post(environment.domain+'/5',param).subscribe((val:any)=>{
+    //   this.myData = val?.data
+    // })
   }
   cacheDelete(){
     this.cacheInterceptor.clearCache();
@@ -303,5 +308,13 @@ uniquDates:any=[];
   }
   linkPage(link:string){
     // this.router.navigate('link')
+  }
+  ngOnDestroy(): void {
+    console.log('closed dashboard compo')
+    this.fetScope?this.fetScope.unsubscribe():'';
+    this.industryscope?this.industryscope.unsubscribe():'';
+    this.getallscope?this.getallscope.unsubscribe():'';
+    this.getDatascope?this.getDatascope.unsubscribe():'';
+    this.watchdatascope?this.watchdatascope.unsubscribe():'';
   }
 }
