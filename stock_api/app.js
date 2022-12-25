@@ -16,8 +16,18 @@ var con = mysql.createConnection(db.db);
 var config = {
     /* Your settings here like Accept / Headers etc. */
 }
+// load()
+// async function load(){
+// 	console.log('loading');
+// 	// await handleDisconnect();
+// 	console.log('loaded');
 
-handleDisconnect();
+// }
+setInterval(function () {
+    con.query('SELECT 1',function (v){
+		// console.log(v,'val');
+	})
+}, 5000);
 setTimeout(async function () {
 	let time=new Date();
 	if(time.getHours()==2){
@@ -866,24 +876,27 @@ function readFile(){
 	});
 }
 function handleDisconnect() {
-	connection = mysql.createConnection(con); // Recreate the connection, since
-													// the old one cannot be reused.
-  
-	connection.connect(function(err) {              // The server is either down
-	  if(err) {                                     // or restarting (takes a while sometimes).
-		console.log('error when connecting to db:', err);
-		setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-	  }                                     // to avoid a hot loop, and to allow our node script to
-	});                                     // process asynchronous requests in the meantime.
-											// If you're also serving http, display a 503 error.
-	connection.on('error', function(err) {
-	  console.log('db error', err);
-	  if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-		handleDisconnect();                         // lost due to either server restart, or a
-	  } else {                                      // connnection idle timeout (the wait_timeout
-		throw err;                                  // server variable configures this)
-	  }
+	return new Promise ((res,rej)=>{
+		connection = mysql.createConnection(con); 
+		connection.connect(function(err) {              
+		  if(err) {                                    
+			console.log('error when connecting to db:', err);
+			setTimeout(handleDisconnect, 2000); 
+		  } 
+		  console.log('connected...') ;
+		  res(true);                               
+		});                                     
+												
+		connection.on('error', function(err) {
+		  console.log('db error', err);
+		  if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+			handleDisconnect();                         
+		  } else {                                     
+			throw err;                                
+		  }
 	});
+	})
+
   }
 
   
