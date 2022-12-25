@@ -6,7 +6,7 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-
+db.js
 # dependencies
 /stockmarket_grow_API/node_modules
 /stock_api/node_modules
