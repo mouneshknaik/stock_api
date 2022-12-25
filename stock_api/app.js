@@ -27,7 +27,16 @@ setInterval(function () {
 	})
 }, 5000);
 handleDisconnect();
-
+setTimeout(async function () {
+	let time=new Date();
+	if(time.getHours()==2){
+		console.warn(time.getHours(),'crone called');
+		let res=await injectMethod(new Date(time.toLocaleDateString()).getTime()/1000);
+		console.log(res);
+	}
+	// console.log(new Date(new Date().toISOString().slice(0, 10)).getTime()/1000);
+	// injectMethod(req.query.date);
+}, 1*60*60*1000);
 // let listOfCompanies=[ { "label": "Adani Green Energy Ltd.", "field": "ADANIGREEN" }, { "label": "Adani Power Ltd.", "field": "ADANIPOWER" }, { "label": "Adani Transmission Ltd.", "field": "ADANITRANS" }, { "label": "Adani Ports and Special Economic Zone Ltd.", "field": "ADANIPORTS" }, { "label": "Adani Wilmar Ltd.", "field": "AWL" }, { "label": "Adani Enterprises Ltd.", "field": "ADANIENT" }, { "label": "Adani Total Gas Ltd.", "field": "ATGL" }, { "label": "Reliance Industries Ltd.", "field": "RELIANCE" }, { "label": "Cipla Ltd.", "field": "CIPLA" }, { "label": "Ram Ratna Wires Ltd.", "field": "RAMRAT" }, { "label": "Ambuja Cements Ltd.", "field": "AMBUJACEM" }, { "label": "ITC Ltd.", "field": "ITC" }, { "label": "Golkunda Diamonds & Jewellery Ltd.", "field": "" }, { "label": "Infosys Ltd.", "field": "INFY" }, { "label": "Suzlon Energy Ltd.", "field": "SUZLON" }, { "label": "Tata Steel Ltd.", "field": "TATASTEEL" }, { "label": "Tata Consultancy Services Ltd.", "field": "TCS" }, { "label": "Tata Power Company Ltd.", "field": "TATAPOWER" }, { "label": "Tata Chemicals Ltd.", "field": "TATACHEM" }, { "label": "Hindustan Construction Company Ltd.", "field": "HCC" } ]
 // let listOfCompanies=[ { "label": "Adani Green Energy Ltd.", "field": "ADANIGREEN" }, { "label": "Adani Power Ltd.", "field": "ADANIPOWER" }, { "label": "Adani Transmission Ltd.", "field": "ADANITRANS" }, { "label": "Adani Ports and Special Economic Zone Ltd.", "field": "ADANIPORTS" },]
 app.use(express.static(__dirname + '/basicApp'));
@@ -86,55 +95,63 @@ app.post('/getData',async(req,res)=>{
   }
   app.get('/api-inject',async(req,res, next)=>{
 	console.log(req.query.date);
-	let start=new Date().getTime();
-	let checkDataAv= await checkDataAvailablity(req.query.date);
-	if(checkDataAv){
-	  let noexistance= await checkexistanceData({TIMESTAMP:(req.query.date)*1000},true);
-	  if(req.query.date && noexistance){
-		console.warn('process started...!');
-		let dbData=await commonService.dbquery('SELECT NSESYMBOL as SYMBOL FROM companyinfo WHERE NSESYMBOL is NOT null order by MARKETCAP desc');
-		// let dbData=await dbquery('SELECT NSESYMBOL as SYMBOL FROM `companyinfo` WHERE NSESYMBOL="NIFTY" OR NSESYMBOL="BANKNIFTY"');
-		i=0;
-		apiset=100;
-		console.warn('got All SYMBOL...!');
-  
-		for(let val of dbData){
-		  let startIndex=i;
-  
-		  if(i>=dbData.length){
-			i=dbData.length-1;
-		  }
-		  i+=apiset;
-		  console.log(i);
-		  let listdbDataChunk=dbData.slice(startIndex,i);
-		  console.log(listdbDataChunk);
-		  let result=await nparralCall(listdbDataChunk);
-		  console.warn('all Keys from API ...!');
-		  let timelist=[req.query.date];
-  
-			console.log('inprogress...');
-			// console.log(result);
-			console.log(i);
-			await dbappend(result,timelist);
-		  if(i==dbData.length-1){
-			console.log('loop closed');
-			break;
-		  }
-	
-		}
-		let end=new Date().getTime();
-		console.log('start:'+start,"end:"+end);
-		console.log('completed');
-		res.send({message:'completed'})
-	  }else{
-		console.log('data exits');
-		res.send({message:'data exits'});
-	  }
-	}else{
-	  res.send({message:'Data not Available yet wait till tomorrow'});
-	}
+	let rs=await injectMethod(req.query.date);
+	res.send(rs);
   });
+function injectMethod(date){
+	console.log('called metho injection',date);
+	return new Promise(async (res,rej)=>{
+		let start=new Date().getTime();
+		let checkDataAv= await checkDataAvailablity(date);
+		if(checkDataAv){
+		  let noexistance= await checkexistanceData({TIMESTAMP:(date*1000)},true);
+		  if(date && noexistance){
+			console.warn('process started...!');
+			let dbData=await commonService.dbquery('SELECT NSESYMBOL as SYMBOL FROM companyinfo WHERE NSESYMBOL is NOT null order by MARKETCAP desc');
+			// let dbData=await dbquery('SELECT NSESYMBOL as SYMBOL FROM `companyinfo` WHERE NSESYMBOL="NIFTY" OR NSESYMBOL="BANKNIFTY"');
+			i=0;
+			apiset=100;
+			console.warn('got All SYMBOL...!');
+	  
+			for(let val of dbData){
+			  let startIndex=i;
+	  
+			  if(i>=dbData.length){
+				i=dbData.length-1;
+			  }
+			  i+=apiset;
+			  console.log(i);
+			  let listdbDataChunk=dbData.slice(startIndex,i);
+			  console.log(listdbDataChunk);
+			  let result=await nparralCall(listdbDataChunk);
+			  console.warn('all Keys from API ...!');
+			  let timelist=[date];
+	  
+				console.log('inprogress...');
+				// console.log(result);
+				console.log(i);
+				await dbappend(result,timelist);
+			  if(i==dbData.length-1){
+				console.log('loop closed');
+				break;
+			  }
+		
+			}
+			let end=new Date().getTime();
+			console.log('start:'+start,"end:"+end);
+			console.log('completed');
+			res({message:'completed'})
+		  }else{
+			console.log('data exits');
+			res({message:'data exits'});
+		  }
+		}else{
+			res({message:'Data not Available yet wait till tomorrow'});
+		}
+	})
 
+
+}
 app.get('/live',async(req,res)=>{
 	let getlist="["+await readFile()+"]";
 	let listOfCompanies=JSON.parse(getlist);
@@ -160,11 +177,11 @@ app.get('/chart-view',async(req,res)=>{
 		interval=req.query.interval
 	}
 	console.log('progressing...!');
-	// let dbData=await commonService.dbquery('SELECT SYMBOL,CLOSE_PRICE,TITLE,INDUSTRY FROM companyinfo LEFT JOIN (select SYMBOL,CLOSE_PRICE FROM reportdata CROSS JOIN (SELECT TIMESTAMP FROM `reportdata` ORDER by TIMESTAMP DESC LIMIT 1) as t WHERE t.TIMESTAMP=reportdata.TIMESTAMP) as timbased on companyinfo.NSESYMBOL=timbased.SYMBOL WHERE OPTIONTRADE=1 ORDER by MARKETCAP DESC');
 	let options="OPTIONTRADE=1"
 	if(req.query.nonOption=='true'){
 		options="MARKETCAP>=15000"
 	}
+	// let dbData=await commonService.dbquery('SELECT SYMBOL,CLOSE_PRICE,PREV_CLOSE,TITLE,INDUSTRY FROM companyinfo LEFT JOIN (select SYMBOL,CLOSE_PRICE,PREV_CLOSE FROM reportdata CROSS JOIN (SELECT TIMESTAMP FROM `reportdata` ORDER by TIMESTAMP DESC LIMIT 1) as t WHERE t.TIMESTAMP=reportdata.TIMESTAMP) as timbased on companyinfo.NSESYMBOL=timbased.SYMBOL WHERE OPTIONTRADE=1 ORDER by MARKETCAP DESC');
 	let dbData=await commonService.dbquery(`SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE ${options} order BY MARKETCAP DESC`);
 	// let tmp=JSON.parse(await readFile());
 	// let dbData=tmp['list'];
@@ -185,14 +202,14 @@ app.get('/chart-view',async(req,res)=>{
 	  });
 	let keyValue={};
 	dbData.forEach(ele=>{
-		keyValue[ele['SYMBOL']]=ele['CLOSE_PRICE'];
+		keyValue[ele['SYMBOL']]={close:ele['CLOSE_PRICE'],prev:ele['PREV_CLOSE']};
 	});
 	console.log('previous Data fetched...');
 	let result=await commonService.limitParrallCall(apiList,50);
 	console.log('API Data fetched...');
 	let finalObj=result.map(ele=>{
 		let key=Object.keys(ele)?.[0];
-		return chartObjForm(ele[key]?.candles,key,keyValue[key]);
+		return chartObjForm(ele[key]?.candles,key,keyValue[key]?.close,keyValue[key]?.prev);
 	});
 	console.log('completed');
 	res.send(finalObj);
@@ -303,6 +320,7 @@ function checkexistanceData(data,dateonly){
 		}
 		con.query(sql, function (err, result) {
 		  if (err) throw err;
+		  console.log(result,'result')
 		  if(result[0].count==0){
 			resolve(true);
 		  }else{
@@ -321,7 +339,7 @@ async function checkDataAvailablity(time){
 	});
   
   }
-function chartObjForm(data,title,close_price){
+function chartObjForm(data,title,close_price,prev_close){
 	let startPrice=data?.[0]?.[1];
 	let currentPrice=data?.[data.length-1]?.[4];
 	let diff=((currentPrice-startPrice)/startPrice)*100;
@@ -341,13 +359,14 @@ function chartObjForm(data,title,close_price){
 	finalObj['title']=title;
 	finalObj['startDiff']=diff;
 	finalObj['pre_close']=close_price;
+	finalObj['pre_close_old']=prev_close;
 	finalObj['start_price']=startPrice;
 	finalObj['open_diff']=open_diff;
 	return finalObj;
 }
 app.get('/watchtimefram',async(req,res)=>{
 	// let dbData=await getWatchList('time');
-	let dbData=await commonService.dbquery('SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC');
+	let dbData=await commonService.dbquery('SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC limit 5');
 	let start=new Date().getTime();
 	let promiseList=[];
 	let basis='daily';
@@ -402,7 +421,7 @@ function liveminuteObjForm(tmp,symbol){
 	formObj['title']=symbol;
 	formObj['moving_avarage_20']=parsemovinAvarage(tmp?.candles,20);
 	formObj['moving_avarage_50']=parsemovinAvarage(tmp?.candles,50);
-	formObj['last_price']=tmp?.candles[tmp?.candles.length-1][4];
+	formObj['last_price']=tmp?.candles?.[tmp?.candles.length-1]?.[4];
 	formObj['todayDiff']=minutForm(tmp?.candles,tmp?.candles.length);
 	formObj['min3']=minutForm(tmp?.candles,3);
 	formObj['min5']=minutForm(tmp?.candles,5);
@@ -622,7 +641,7 @@ app.post('/addtoList',async(req,res)=>{
 	// })
 	let tempnew=Object.values(req.body);
 	let keys=Object.keys(req.body);
-	let noexistance=await checkexistanceData(req.body);
+	let noexistance=await checkexistanceData(req.body,false);
 	if(noexistance){
 		let sql="INSERT INTO optionwatch  ("+keys+") VALUES (?)";
 		con.query(sql,[tempnew], function (err, result) {
@@ -683,19 +702,19 @@ function checkexistanceWatchData(data){
 		});
 	})
   }
-function checkexistanceData(data){
-	return new Promise((resolve,reject)=>{
-		let sql=`SELECT count(SYMBOL) as count FROM optionwatch WHERE SYMBOL='${data.SYMBOL}'`;
-		con.query(sql, function (err, result) {
-		  if (err) throw err;
-		  if(result[0].count==0){
-			resolve(true);
-		  }else{
-			resolve(false);
-		  }
-		});
-	})
-  }
+// function checkexistanceData(data){
+// 	return new Promise((resolve,reject)=>{
+// 		let sql=`SELECT count(SYMBOL) as count FROM optionwatch WHERE SYMBOL='${data.SYMBOL}'`;
+// 		con.query(sql, function (err, result) {
+// 		  if (err) throw err;
+// 		  if(result[0].count==0){
+// 			resolve(true);
+// 		  }else{
+// 			resolve(false);
+// 		  }
+// 		});
+// 	})
+//   }
   function getWatchList(time){
 	return new Promise((resolve,reject)=>{
 		// let sql=`SELECT * FROM optionwatch`;
@@ -779,7 +798,7 @@ function callAPI(url,label,typeData){
 				formObj['moving_avarage_50']=parsemovinAvarage(tmp?.candles,50);
 				formObj['stocastic14']=stockasticCalclator(tmp?.candles,14);
 				formObj['stocastic50']=stockasticCalclator(tmp?.candles,50);
-				formObj['last_price']=tmp?.candles[tmp?.candles.length-1][4];
+				formObj['last_price']=tmp?.candles[tmp?.candles.length-1]?.[4];
 				res(formObj);
 			}
 			if(typeData=='watch_minute_data'){
@@ -789,7 +808,7 @@ function callAPI(url,label,typeData){
 				formObj['title']=label['TITLE'];
 				formObj['moving_avarage_20']=parsemovinAvarage(tmp?.candles,20);
 				formObj['moving_avarage_50']=parsemovinAvarage(tmp?.candles,50);
-				formObj['last_price']=tmp?.candles[tmp?.candles.length-1][4];
+				formObj['last_price']=tmp?.candles[tmp?.candles.length-1]?.[4];
 				formObj['todayDiff']=minutForm(tmp?.candles,tmp?.candles.length);
 				formObj['min3']=minutForm(tmp?.candles,3);
 				formObj['min5']=minutForm(tmp?.candles,5);
@@ -875,4 +894,5 @@ function handleDisconnect() {
 	  }
 	});
   }
+
   
