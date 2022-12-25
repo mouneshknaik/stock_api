@@ -511,9 +511,13 @@ app.get('/getAllStocks',async(req,res)=>{
 	if(req.query.industry){
 		insustry="and c.INDUSTRY='"+req.query.industry+"'"
 	}
+	let nonoption="c.OPTIONTRADE=1 and"
+	if(req.query.nonoption){
+		nonoption=""
+	}
 	// let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE r.DATE1="${req.query.date}" `
 //and INDUSTRY="Banks"
-	let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE c.OPTIONTRADE=1 and r.TIMESTAMP="${req.query.date}" ${insustry}  order by MARKETCAP DESC`
+	let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE ${nonoption} r.TIMESTAMP="${req.query.date}" ${insustry}  order by MARKETCAP DESC`
 	// console.log(sql);
 	con.query(sql, function (err, result) {
 	  if (err) throw err;

@@ -41,6 +41,13 @@ export class AllStockComponent implements OnInit {
   selectedSymbol1: any;
   sorOrder: string='desc';
   optionListData: any;
+  getallscope: any;
+  industryscope: any;
+  allsymbol: any;
+  optiontradinganascope: any;
+  getsymbolscope: any;
+  fundamentalscope: any;
+  nonoption:boolean=false
   constructor(private sanitizer: DomSanitizer,private http:HttpClient,public cacheInterceptor:CacheInterceptor,public router:Router) { }
 
   dropdown
@@ -52,6 +59,9 @@ export class AllStockComponent implements OnInit {
     this.symbolList();
     this.selectedSymbol='NIFTY';
     this.loadDataBySymbol('');
+  }
+  nonoptionchangedtoggle(){
+  //  this.nonoption= 
   }
   dateForm(date:any){
     let tmp=new Date(date);
@@ -81,7 +91,7 @@ export class AllStockComponent implements OnInit {
     if(industry && industry!='All'){
       industryList="&industry="+industry;
     }
-    this.http.get(environment.domain+'/getAllStocks?date='+this.dateSelected+industryList).subscribe(async (val:any)=>{
+    this.getallscope==this.http.get(environment.domain+'/getAllStocks?date='+this.dateSelected+industryList+'&nonoption='+this.nonoption).subscribe(async (val:any)=>{
       let openposcount=0;
       let opennegcount=0;
       let totalcount=0;
@@ -111,12 +121,12 @@ export class AllStockComponent implements OnInit {
     })
   }
   industryList(){
-    this.http.get(environment.domain+'/getInudtriList').subscribe(async (val:any)=>{
+    this.industryscope=this.http.get(environment.domain+'/getInudtriList').subscribe(async (val:any)=>{
       this.industry=val;
     });
   }
   symbolList(){
-    this.http.get(environment.domain+'/getallsymbol').subscribe(async (val:any)=>{
+    this.allsymbol=this.http.get(environment.domain+'/getallsymbol').subscribe(async (val:any)=>{
       this.symbols=val;
     });
   }
@@ -130,7 +140,7 @@ export class AllStockComponent implements OnInit {
   toggle_isChecked:false;
   changedtoggle(){
     if(this.toggle_isChecked){
-      this.http.get(environment.domain+'/option-trading-analysis?date=1668160800').subscribe(async (val:any)=>{
+      this.optiontradinganascope=this.http.get(environment.domain+'/option-trading-analysis?date=1668160800').subscribe(async (val:any)=>{
         this.myData=val;
         this.rawData=val;
       })
@@ -164,7 +174,7 @@ loadDataBySymbol(auto){
   if(auto){
     symbol=this.selectedSymbol1;
   }
-  this.http.get(environment.domain+'/getBySymbol?symbol='+symbol).subscribe(async (val:any)=>{
+  this.getsymbolscope=this.http.get(environment.domain+'/getBySymbol?symbol='+symbol).subscribe(async (val:any)=>{
 
     val.forEach((element:any) => {
       element['dayChangePerc']=((element['CLOSE_PRICE']-element['PREV_CLOSE'])/element['PREV_CLOSE'])*100;
@@ -241,7 +251,7 @@ dateFormat(date:any){
     }
   }
   loadFundamentals(){
-    this.http.get(environment.domain+'/getFundamentals').subscribe((val:any)=>{
+    this.fundamentalscope=this.http.get(environment.domain+'/getFundamentals').subscribe((val:any)=>{
           console.log(JSON.parse(val[0].STATS));
       })
   }
@@ -294,5 +304,9 @@ dateFormat(date:any){
       this.http.get(environment.domain+'/api-inject?date='+this.selectedDate).subscribe((val:any)=>{
         this.result=val
     })
+    }
+    ngOnDestroy(): void {
+
+      
     }
 }

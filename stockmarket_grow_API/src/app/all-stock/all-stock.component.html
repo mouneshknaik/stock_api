@@ -49,6 +49,7 @@
         </option>
     </select>
     <button  mat-raised-button color="primary" [routerLink]="['/']" >Home </button>    <span style="margin-right: 20px;"></span>
+<mat-slide-toggle [(ngModel)]="nonoption" (ngModelChange)="nonoptionchangedtoggle()">Non Option</mat-slide-toggle>
 <mat-slide-toggle [(ngModel)]="toggle_isChecked" (ngModelChange)="changedtoggle()">Option Trade Analysis</mat-slide-toggle>
 <div class="upload layout">
     <input #fileUpload mat-raised-button color="primary"
