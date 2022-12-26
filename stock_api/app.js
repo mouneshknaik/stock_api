@@ -215,6 +215,43 @@ app.get('/chart-view',async(req,res)=>{
 	console.log('completed');
 	res.send(finalObj);
 });
+app.get('/highperc',async(req,res)=>{
+	let dbData=await commonService.dbquery(`SELECT SEARCHID,TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE OPTIONTRADE=1 order BY MARKETCAP DESC`);
+	let curPriceList=[];
+	let urloptionurlList=[];
+
+	dbData.forEach(ele=>{
+		let urlDefault=`https://groww.in/v1/api/stocks_data/v1/tr_live_prices/exchange/NSE/segment/CASH/${ele?.SYMBOL}/latest`;
+		let urloptionurl=`https://groww.in/v1/api/option_chain_service/v1/option_chain/derivatives/${ele?.SEARCHID}`;
+		curPriceList.push({url:urlDefault,keysymbol:ele?.SYMBOL});
+		urloptionurlList.push({url:urloptionurl,keysymbol:ele?.SYMBOL});
+	  });
+	  let currentPriceList=await commonService.limitParrallCall(curPriceList,50);
+	  let optionListeList=await commonService.limitParrallCall(urloptionurlList,50);
+	//   console.log(currentPriceList,optionListeList);
+	  let result=filterCallPutVal(currentPriceList,optionListeList);
+	// let latestPrice=await commonService.apiCall('https://groww.in/v1/api/option_chain_service/v1/option_chain/derivatives/the-federal-bank-ltd','federal');
+	// let tmp=latestPrice?.federal?.optionChain?.optionChains;
+	// let finalData=tmp?.find(ele=>{
+	// 	return ele?.strikePrice>=13075
+	// })
+	res.send(result) 
+});
+function filterCallPutVal(cur,optionList){
+	let tmp=[]
+	cur.forEach(ele=>{
+		let symbol=Object.keys(ele)?.[0];
+		let optionData=optionList.find(e=>Object.keys(e)?.[0]==symbol)?.[symbol]?.optionChain?.optionChains;
+		tmp.push({price:findValueInIndex(ele?.[symbol]?.ltp,optionData),symbol:symbol});
+	});
+	return(tmp);
+}
+function findValueInIndex(price,list){
+	let tmpPrice=price*100;
+		return list?.find(ele=>{
+			return ele?.strikePrice>=tmpPrice
+	})
+}
 function dbappend(result,timelist){
 	return new Promise((resolve,reject)=>{
 		result?result.forEach(async ele=>{
