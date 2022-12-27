@@ -31,6 +31,8 @@ export class LiveChartComponent implements OnInit {
   optiontradinganascope: any;
   allsymbol: any;
   industryscope: any;
+  highvolumnScope: any;
+  optionHigh:boolean;
   constructor(private http:HttpClient) {
 
    }
@@ -57,6 +59,33 @@ export class LiveChartComponent implements OnInit {
       // console.log(this.tableStepper,'tableStepper')
       this.current_hightoggle();
       // this.chartData=this.candleList.slice(this.skip, this.paginationLimit);
+    });
+  }
+  optionHighToggle(){
+    this.highvolumnScope?this.highvolumnScope.unsubscribe():'';
+    this.chartscope?this.chartscope.unsubscribe():'';
+    if(this.optionHigh){
+      this.optionHighVolumn();
+    }else{
+      this.chartAPI();  
+    }
+  }
+  optionHighVolumn(){
+    this.loader=true;
+    this.highvolumnScope?this.highvolumnScope.unsubscribe():'';
+    this.highvolumnScope=this.http.get(environment.domain+'/highperc').subscribe(async (val:any)=>{
+      this.loader=false;
+      this.tableStepper=val;
+      this.tableStepper=this.tableStepper.map(ele=>{
+        ele['cdayChangePerc']=ele.price?.callOption?.dayChangePerc;
+        ele['pdayChangePerc']=ele.price?.putOption?.dayChangePerc;
+        ele['ltsprice']=ele.price?.callOption?.ltp;
+        ele['pltsprice']=ele.price?.putOption?.ltp;
+        ele['cvolumn']=ele.price?.callOption?.volume;
+        ele['pvolumn']=ele.price?.putOption?.volume;
+        ele['quantity']=ele.price?.callOption?.lastTradeQty;
+        return ele;
+      })
     });
   }
   filterCurrentTime(data,time){
@@ -102,11 +131,13 @@ export class LiveChartComponent implements OnInit {
     }
   }
   steppeDesc(key){
+    // this.formKeyObj(key)
     this.tableStepper.sort((a:any,b:any)=> ((a[key]) < (b[key]) ? 1 : -1));
   }
   stepperAsc(key){
     this.tableStepper.sort((a:any,b:any)=> ((a[key]) > (b[key]) ? 1 : -1));
   }
+
   currentTimeinMinutes(date){
     let formDate=new Date(new Date(date).getTime()-(60*4*1000)).toString().split(":");
     let splittd=formDate[0]+":"+formDate[1];
@@ -190,5 +221,6 @@ export class LiveChartComponent implements OnInit {
   this.optiontradinganascope?this.optiontradinganascope.unsubscribe():'';
   this.allsymbol?this.allsymbol.unsubscribe():'';
   this.industryscope?this.industryscope.unsubscribe():'';
+  this.highvolumnScope?this.highvolumnScope.unsubscribe():'';
   }
 }

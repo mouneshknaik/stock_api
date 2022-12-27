@@ -7,6 +7,7 @@
         <mat-button-toggle value="15">15 Minutes</mat-button-toggle>
     </mat-button-toggle-group>
     <mat-slide-toggle [(ngModel)]="nonOption" (ngModelChange)="nonOption_hightoggle()">Non Option</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="optionHigh" (ngModelChange)="optionHighToggle()">Option High</mat-slide-toggle>
     
     <br>
     <mat-button-toggle-group  [(ngModel)]="inter" (ngModelChange)="changedyear()">
@@ -22,7 +23,7 @@
 
     <button mat-raised-button color="primary" (click)="sort()">Sort</button>
     <button  (click)="chartAPI()" [ngClass]="loader?'inactive':'active'">Reload<span *ngIf="loader" [ngClass]="loader?'inactive':'active'">ing</span></button>
-    <div class="pagination">
+    <div class="pagination" *ngIf="!optionHigh">
         <button mat-raised-button  (click)="leftPagination()">
             <b><</b>
         </button>
@@ -32,7 +33,7 @@
         <span style="margin-right: 20px;"></span>
         <mat-slide-toggle [(ngModel)]="toggle_isChecked" (ngModelChange)="changedtoggle()">Chart Visible</mat-slide-toggle>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!optionHigh">
         <div class="col-md-4" *ngFor="let list of chartData">
             <app-candlestick [seriesData]="list"  *ngIf="list" [chartVisible]="toggle_isChecked"></app-candlestick>
         </div>
@@ -56,4 +57,32 @@
             </td>
         </tr>
         </table> -->
+        <table style="border: 1px gray;" class="table" *ngIf="optionHigh">
+            <thead>
+                <tr>
+                    <th (click)="stepperSort('symbol','')">SYMBOL</th>
+                    <th (click)="stepperSort('cdayChangePerc','')">Call Day Diff %</th>
+                    <th  (click)="stepperSort('ltsprice','')">call Price</th>
+                    <th  (click)="stepperSort('cvolumn','')">call Volume</th>
+                    <th  (click)="stepperSort('pdayChangePerc','')">Put Day Diff %</th>
+                    <th  (click)="stepperSort('pltsprice','')">put Price</th>
+                    <th  (click)="stepperSort('pvolumn','')">call Volume</th>
+                    <th  >Contract</th>
+                    <th  (click)="stepperSort('quantity','')">Quantity</th>
+                </tr>
+            </thead>
+        
+            <tr *ngFor="let ls of tableStepper;let i = index">
+                <td>{{ls?.symbol}}</td>
+                <td><span  [ngClass]="(ls?.price?.callOption?.dayChangePerc)>=0 ?  'active' : 'inactive'">{{ls?.price?.callOption?.dayChangePerc | number : '1.2-2'}}</span></td>
+                <td><span  >{{ls?.ltsprice | number : '1.2-2'}}</span></td>
+                <td><span  >{{ls?.cvolumn | number : '1.2-2'}}</span></td>
+                <td ><span  [ngClass]="(ls?.price?.putOption?.dayChangePerc)>=0 ?  'active' : 'inactive'">{{ls?.price?.putOption?.dayChangePerc | number : '1.2-2'}}</span></td>
+                <td><span  >{{ls?.pltsprice | number : '1.2-2'}}</span></td>
+                <td><span  >{{ls?.pvolumn | number : '1.2-2'}}</span></td>
+                <td><span  >{{ls?.price?.callOption?.longDisplayName}}</span></td>
+                <td><span  >{{ls?.quantity}}</span></td>
+
+            </tr>
+        </table>
 </div>
