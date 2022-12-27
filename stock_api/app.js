@@ -28,7 +28,7 @@ setInterval(function () {
 		// console.log(v,'val');
 	})
 }, 5000);
-setTimeout(async function () {
+setInterval(async function () {
 	let time=new Date();
 	if(time.getHours()==2){
 		console.warn(time.getHours(),'crone called');
