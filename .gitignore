@@ -10,7 +10,7 @@ db.js
 # dependencies
 /stockmarket_grow_API/node_modules
 /stock_api/node_modules
-/stockmarket_grow_API/src/environments
+
 # profiling files
 chrome-profiler-events*.json
 
