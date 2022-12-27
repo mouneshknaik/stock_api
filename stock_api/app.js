@@ -183,7 +183,7 @@ app.get('/chart-view',async(req,res)=>{
 		options="MARKETCAP>=15000"
 	}
 	// let dbData=await commonService.dbquery('SELECT SYMBOL,CLOSE_PRICE,PREV_CLOSE,TITLE,INDUSTRY FROM companyinfo LEFT JOIN (select SYMBOL,CLOSE_PRICE,PREV_CLOSE FROM reportdata CROSS JOIN (SELECT TIMESTAMP FROM `reportdata` ORDER by TIMESTAMP DESC LIMIT 1) as t WHERE t.TIMESTAMP=reportdata.TIMESTAMP) as timbased on companyinfo.NSESYMBOL=timbased.SYMBOL WHERE OPTIONTRADE=1 ORDER by MARKETCAP DESC');
-	let dbData=await commonService.dbquery(`SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE ${options} order BY MARKETCAP DESC`);
+	let dbData=await commonService.dbquery(`SELECT TITLE,BSESYMBOL as CODE,NSESYMBOL as SYMBOL,INDUSTRY FROM companyinfo  WHERE ${options} order BY MARKETCAP DESC `);
 	// let tmp=JSON.parse(await readFile());
 	// let dbData=tmp['list'];
 	console.log('DB Data Got...');
@@ -192,7 +192,7 @@ app.get('/chart-view',async(req,res)=>{
 	dbData.forEach(ele=>{
 		let urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/daily?intervalInMinutes=${interval}&minimal=false`;
 		if(req.query.inter=="week"){
-			urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/weekly?intervalInMinutes=5&minimal=false`;
+			urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/weekly?intervalInMinutes=10&minimal=false`;
 		}else if(req.query.inter=="month"){
 			urlDefault=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${ele?.SYMBOL}/monthly?intervalInMinutes=30&minimal=false`;
 		}else if(req.query.inter=="year"){
