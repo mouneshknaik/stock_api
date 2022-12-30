@@ -41,7 +41,6 @@ setInterval(function () {
 }, 5000);
 setInterval(async function () {
 	let time=new Date();
-	console.warn(time.getHours(),'crone called');
 	if(time.getHours()==2){
 		console.warn(time.getHours(),'crone called');
 		let res=await injectMethod(new Date(time.toLocaleDateString()).getTime()/1000);
@@ -49,7 +48,7 @@ setInterval(async function () {
 	}
 	// console.log(new Date(new Date().toISOString().slice(0, 10)).getTime()/1000);
 	// injectMethod(req.query.date);
-}, 2000);
+}, 60*60*1000);
 // let listOfCompanies=[ { "label": "Adani Green Energy Ltd.", "field": "ADANIGREEN" }, { "label": "Adani Power Ltd.", "field": "ADANIPOWER" }, { "label": "Adani Transmission Ltd.", "field": "ADANITRANS" }, { "label": "Adani Ports and Special Economic Zone Ltd.", "field": "ADANIPORTS" }, { "label": "Adani Wilmar Ltd.", "field": "AWL" }, { "label": "Adani Enterprises Ltd.", "field": "ADANIENT" }, { "label": "Adani Total Gas Ltd.", "field": "ATGL" }, { "label": "Reliance Industries Ltd.", "field": "RELIANCE" }, { "label": "Cipla Ltd.", "field": "CIPLA" }, { "label": "Ram Ratna Wires Ltd.", "field": "RAMRAT" }, { "label": "Ambuja Cements Ltd.", "field": "AMBUJACEM" }, { "label": "ITC Ltd.", "field": "ITC" }, { "label": "Golkunda Diamonds & Jewellery Ltd.", "field": "" }, { "label": "Infosys Ltd.", "field": "INFY" }, { "label": "Suzlon Energy Ltd.", "field": "SUZLON" }, { "label": "Tata Steel Ltd.", "field": "TATASTEEL" }, { "label": "Tata Consultancy Services Ltd.", "field": "TCS" }, { "label": "Tata Power Company Ltd.", "field": "TATAPOWER" }, { "label": "Tata Chemicals Ltd.", "field": "TATACHEM" }, { "label": "Hindustan Construction Company Ltd.", "field": "HCC" } ]
 // let listOfCompanies=[ { "label": "Adani Green Energy Ltd.", "field": "ADANIGREEN" }, { "label": "Adani Power Ltd.", "field": "ADANIPOWER" }, { "label": "Adani Transmission Ltd.", "field": "ADANITRANS" }, { "label": "Adani Ports and Special Economic Zone Ltd.", "field": "ADANIPORTS" },]
 app.use(express.static(__dirname + '/basicApp'));
@@ -383,7 +382,7 @@ async function checkDataAvailablity(time){
 	return new Promise(async (resolve,reject)=>{
 	  let adaniSample=`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/ADANIENT/1y?intervalInDays=1&minimal=false`;
 	  let responseData=await callAPI(adaniSample);
-	  let lastIndex=responseData?responseData.candles[responseData.candles.length-1]:'';
+	  let lastIndex=responseData?responseData.candles[responseData.candles?.length-1]:'';
 	  let result=responseData.candles.some(ele=> ele[0]==time);
 	  resolve(result);
 	});
@@ -561,7 +560,7 @@ app.get('/getAllStocks',async(req,res)=>{
 		insustry="and c.INDUSTRY='"+req.query.industry+"'"
 	}
 	let nonoption="c.OPTIONTRADE=1 and"
-	if(req.query.nonoption){
+	if(req.query.nonoption=="true"){
 		nonoption=""
 	}
 	// let sql=`SELECT * FROM reportdata as r LEFT JOIN companyinfo as c ON r.SYMBOL = c.NSESYMBOL WHERE r.DATE1="${req.query.date}" `
