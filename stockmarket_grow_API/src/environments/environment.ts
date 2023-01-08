@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   domain:"http://localhost:3000",
-  // domain:"https://mouneshknaik.online:3000",
+  // domain:"https://mouneshknaik.website:3000",
 };
 
 /*

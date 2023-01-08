@@ -84,6 +84,8 @@ export class LiveChartComponent implements OnInit {
         ele['cvolumn']=ele.price?.callOption?.volume;
         ele['pvolumn']=ele.price?.putOption?.volume;
         ele['quantity']=ele.price?.callOption?.lastTradeQty;
+        ele['cbuyPrice']=ele.price?.callOption?.lastTradeQty*ele.price?.callOption?.ltp;
+        ele['pbuyPrice']=ele.price?.callOption?.lastTradeQty*ele.price?.putOption?.ltp;
         return ele;
       })
     });

@@ -69,6 +69,8 @@
                     <th  (click)="stepperSort('pvolumn','')">call Volume</th>
                     <th  >Contract</th>
                     <th  (click)="stepperSort('quantity','')">Quantity</th>
+                    <th  (click)="stepperSort('cbuyPrice','')">Call Buy</th>
+                    <th  (click)="stepperSort('pbuyPrice','')">Put Buy</th>
                 </tr>
             </thead>
         
@@ -79,9 +81,11 @@
                 <td><span  >{{ls?.cvolumn | number : '1.2-2'}}</span></td>
                 <td ><span  [ngClass]="(ls?.price?.putOption?.dayChangePerc)>=0 ?  'active' : 'inactive'">{{ls?.price?.putOption?.dayChangePerc | number : '1.2-2'}}</span></td>
                 <td><span  >{{ls?.pltsprice | number : '1.2-2'}}</span></td>
-                <td><span  >{{ls?.pvolumn | number : '1.2-2'}}</span></td>
+                <td><span  >{{ls?.pvolumn }}</span></td>
                 <td><span  >{{ls?.price?.callOption?.longDisplayName}}</span></td>
                 <td><span  >{{ls?.quantity}}</span></td>
+                <td><span  >{{ls?.cbuyPrice | number : '1.0-0'}}</span></td>
+                <td><span  >{{ls?.pbuyPrice | number : '1.0-0'}}</span></td>
 
             </tr>
         </table>
