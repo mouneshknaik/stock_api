@@ -182398,3 +182398,2525 @@ server stared 3000
     ... 96 more items
   ]
 }
+server stared 3000
+[
+  RowDataPacket {
+    TITLE: 'Nifty 50',
+    CODE: null,
+    SYMBOL: 'NIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Nefty',
+    CODE: null,
+    SYMBOL: 'BANKNIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Reliance Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'RELIANCE',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consultancy Services Ltd.',
+    CODE: null,
+    SYMBOL: 'TCS',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFC',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Infosys Ltd.',
+    CODE: null,
+    SYMBOL: 'INFY',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Unilever Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDUNILVR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'State Bank Of India',
+    CODE: null,
+    SYMBOL: 'SBIN',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Bharti Airtel Ltd.',
+    CODE: null,
+    SYMBOL: 'BHARTIARTL',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finance Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJFINANCE',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'ITC Ltd.',
+    CODE: null,
+    SYMBOL: 'ITC',
+    INDUSTRY: 'Tobacco'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Enterprises Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIENT',
+    INDUSTRY: 'Trading Companies'
+  },
+  RowDataPacket {
+    TITLE: 'Kotak Mahindra Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'KOTAKBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Asian Paints Ltd.',
+    CODE: null,
+    SYMBOL: 'ASIANPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'HCL Technologies Ltd.',
+    CODE: null,
+    SYMBOL: 'HCLTECH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finserv Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJFINSV',
+    INDUSTRY: 'Financial Services'
+  },
+  RowDataPacket {
+    TITLE: 'Maruti Suzuki India Ltd.',
+    CODE: null,
+    SYMBOL: 'MARUTI',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Axis Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'AXISBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Sun Pharmaceutical Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'SUNPHARMA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Titan Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TITAN',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'L&TFH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'LT',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'WIPRO',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Nestle India Ltd.',
+    CODE: null,
+    SYMBOL: 'NESTLEIND',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Ultratech Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'ULTRACEMCO',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Ports and Special Economic Zone Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIPORTS',
+    INDUSTRY: 'Transport Infra'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'OIL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'ONGC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'NTPC Ltd.',
+    CODE: null,
+    SYMBOL: 'NTPC',
+    INDUSTRY: 'Energy'
+  },
+  RowDataPacket {
+    TITLE: 'JSW Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'JSWSTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Power Grid Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'POWERGRID',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Coal India Ltd.',
+    CODE: null,
+    SYMBOL: 'COALINDIA',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAMOTORS',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Pidilite Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIDILITIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'TATASTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'SBILIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Life Insurance Co Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCLIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Grasim Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'GRASIM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Vedanta Ltd.',
+    CODE: null,
+    SYMBOL: 'VEDL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Auto Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJ-AUTO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Ambuja Cements Ltd.',
+    CODE: null,
+    SYMBOL: 'AMBUJACEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Tech Mahindra Ltd.',
+    CODE: null,
+    SYMBOL: 'TECHM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Siemens Ltd.',
+    CODE: null,
+    SYMBOL: 'SIEMENS',
+    INDUSTRY: 'Industrial Conglomerates'
+  },
+  RowDataPacket {
+    TITLE: 'Eicher Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'EICHERMOT',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: "Divi's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DIVISLAB',
+    INDUSTRY: 'Life Sciences'
+  },
+  RowDataPacket {
+    TITLE: 'Dabur India Ltd.',
+    CODE: null,
+    SYMBOL: 'DABUR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Oil Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IOC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'IndusInd Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSINDBK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Britannia Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'BRITANNIA',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Cipla Ltd.',
+    CODE: null,
+    SYMBOL: 'CIPLA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Hindalco Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDALCO',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'DLF Ltd.',
+    CODE: null,
+    SYMBOL: 'DLF',
+    INDUSTRY: 'Real Estate'
+  },
+  RowDataPacket {
+    TITLE: 'Godrej Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'GODREJCP',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Larsen & Toubro Infotech Ltd.',
+    CODE: null,
+    SYMBOL: 'LTI',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Cards And Payment Services Ltd.',
+    CODE: null,
+    SYMBOL: 'SBICARD',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Havells India Ltd.',
+    CODE: null,
+    SYMBOL: 'HAVELLS',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Aeronautics Ltd.',
+    CODE: null,
+    SYMBOL: 'HAL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: 'Shree Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'SHREECEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'SRF Ltd.',
+    CODE: null,
+    SYMBOL: 'SRF',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Prudential Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIPRULI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Electronics Ltd.',
+    CODE: null,
+    SYMBOL: 'BEL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: "Dr. Reddy's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DRREDDY',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'TATACONSUM',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Power Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAPOWER',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'ABB India Ltd.',
+    CODE: null,
+    SYMBOL: 'ABB',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Interglobe Aviation Ltd.',
+    CODE: null,
+    SYMBOL: 'INDIGO',
+    INDUSTRY: 'Airlines'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Of Baroda',
+    CODE: null,
+    SYMBOL: 'BANKBARODA',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Marico Ltd.',
+    CODE: null,
+    SYMBOL: 'MARICO',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Petroleum Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'BPCL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'United Spirits Ltd.',
+    CODE: null,
+    SYMBOL: 'MCDOWELL-N',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Cholamandalam Investment and Finance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'CHOLAFIN',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Berger Paints India Ltd.',
+    CODE: null,
+    SYMBOL: 'BERGEPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Railway Catering And Tourism Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IRCTC',
+    INDUSTRY: 'Commercial Serv'
+  },
+  RowDataPacket {
+    TITLE: 'Page Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PAGEIND',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'GAIL (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'GAIL',
+    INDUSTRY: 'Gas Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Mindtree Ltd.',
+    CODE: null,
+    SYMBOL: 'LTIM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Lombard General Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIGI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Torrent Pharmaceuticals Ltd.',
+    CODE: null,
+    SYMBOL: 'TORNTPHARM',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'TVS Motor Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TVSMOTOR',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Indus Towers Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSTOWER',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'UPL Ltd.',
+    CODE: null,
+    SYMBOL: 'UPL',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Hero MotoCorp Ltd.',
+    CODE: null,
+    SYMBOL: 'HEROMOTOCO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Trent Ltd.',
+    CODE: null,
+    SYMBOL: 'TRENT',
+    INDUSTRY: 'Specialty Retail'
+  },
+  RowDataPacket {
+    TITLE: 'Info Edge (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'NAUKRI',
+    INDUSTRY: 'Media Services'
+  },
+  RowDataPacket {
+    TITLE: 'Samvardhana Motherson International Ltd.',
+    CODE: null,
+    SYMBOL: 'MOTHERSON',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'PI Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Bosch Ltd.',
+    CODE: null,
+    SYMBOL: 'BOSCHLTD',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'Jindal Steel & Power Ltd.',
+    CODE: null,
+    SYMBOL: 'JINDALSTEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'The Indian Hotels Company Ltd.',
+    CODE: null,
+    SYMBOL: 'INDHOTEL',
+    INDUSTRY: 'Hotels Leisure'
+  },
+  RowDataPacket {
+    TITLE: 'United Breweries Ltd.',
+    CODE: null,
+    SYMBOL: 'UBL',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Ashok Leyland Ltd.',
+    CODE: null,
+    SYMBOL: 'ASHOKLEY',
+    INDUSTRY: 'Machinery'
+  },
+  RowDataPacket {
+    TITLE: 'Astral Ltd.',
+    CODE: null,
+    SYMBOL: 'ASTRAL',
+    INDUSTRY: 'Building Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bandhan Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'BANDHANBNK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Container Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'CONCOR',
+    INDUSTRY: 'Road Rail'
+  },
+  RowDataPacket {
+    TITLE: 'Colgate-Palmolive (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'COLPAL',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'ACC Ltd.',
+    CODE: null,
+    SYMBOL: 'ACC',
+    INDUSTRY: 'Building Materials'
+  },
+  ... 97 more items
+]
+0 - 100
+100 - 197
+{
+  list: [
+    'HDFCBANK',   'HDFC',       'TCS',        'BANKNIFTY',  'NIFTY',
+    'RELIANCE',   'HINDUNILVR', 'SBIN',       'BHARTIARTL', 'ICICIBANK',
+    'INFY',       'BAJFINANCE', 'ITC',        'ADANIENT',   'ASIANPAINT',
+    'KOTAKBANK',  'HCLTECH',    'BAJAJFINSV', 'MARUTI',     'AXISBANK',
+    'SUNPHARMA',  'TITAN',      'L&TFH',      'LT',         'WIPRO',
+    'NESTLEIND',  'JSWSTEEL',   'OIL',        'ULTRACEMCO', 'TATAMOTORS',
+    'ADANIPORTS', 'TATASTEEL',  'ONGC',       'NTPC',       'COALINDIA',
+    'POWERGRID',  'HDFCLIFE',   'PIDILITIND', 'SBILIFE',    'GRASIM',
+    'VEDL',       'BAJAJ-AUTO', 'DABUR',      'IOC',        'INDUSINDBK',
+    'TECHM',      'BRITANNIA',  'AMBUJACEM',  'SIEMENS',    'EICHERMOT',
+    'DIVISLAB',   'CIPLA',      'HINDALCO',   'HAVELLS',    'DLF',
+    'GODREJCP',   'LTI',        'SBICARD',    'HAL',        'SHREECEM',
+    'SRF',        'BEL',        'ICICIPRULI', 'DRREDDY',    'TATACONSUM',
+    'TATAPOWER',  'ABB',        'INDIGO',     'MARICO',     'BPCL',
+    'APOLLOHOSP', 'CHOLAFIN',   'MCDOWELL-N', 'BERGEPAINT', 'IRCTC',
+    'PAGEIND',    'GAIL',       'LTIM',       'ICICIGI',    'TORNTPHARM',
+    'TVSMOTOR',   'BANKBARODA', 'INDUSTOWER', 'UPL',        'HEROMOTOCO',
+    'JINDALSTEL', 'TRENT',      'NAUKRI',     'PIIND',      'MOTHERSON',
+    'BOSCHLTD',   'INDHOTEL',   'UBL',        'ASHOKLEY',   'BANDHANBNK',
+    'ASTRAL',     'CONCOR',     'COLPAL',     'ACC',        'CANBK',
+    ... 96 more items
+  ]
+}
+[
+  RowDataPacket {
+    TITLE: 'Nifty 50',
+    CODE: null,
+    SYMBOL: 'NIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Nefty',
+    CODE: null,
+    SYMBOL: 'BANKNIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Reliance Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'RELIANCE',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consultancy Services Ltd.',
+    CODE: null,
+    SYMBOL: 'TCS',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFC',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Infosys Ltd.',
+    CODE: null,
+    SYMBOL: 'INFY',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Unilever Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDUNILVR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'State Bank Of India',
+    CODE: null,
+    SYMBOL: 'SBIN',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Bharti Airtel Ltd.',
+    CODE: null,
+    SYMBOL: 'BHARTIARTL',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finance Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJFINANCE',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'ITC Ltd.',
+    CODE: null,
+    SYMBOL: 'ITC',
+    INDUSTRY: 'Tobacco'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Enterprises Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIENT',
+    INDUSTRY: 'Trading Companies'
+  },
+  RowDataPacket {
+    TITLE: 'Kotak Mahindra Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'KOTAKBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Asian Paints Ltd.',
+    CODE: null,
+    SYMBOL: 'ASIANPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'HCL Technologies Ltd.',
+    CODE: null,
+    SYMBOL: 'HCLTECH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finserv Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJFINSV',
+    INDUSTRY: 'Financial Services'
+  },
+  RowDataPacket {
+    TITLE: 'Maruti Suzuki India Ltd.',
+    CODE: null,
+    SYMBOL: 'MARUTI',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Axis Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'AXISBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Sun Pharmaceutical Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'SUNPHARMA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Titan Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TITAN',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'L&TFH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'LT',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'WIPRO',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Nestle India Ltd.',
+    CODE: null,
+    SYMBOL: 'NESTLEIND',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Ultratech Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'ULTRACEMCO',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Ports and Special Economic Zone Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIPORTS',
+    INDUSTRY: 'Transport Infra'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'OIL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'ONGC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'NTPC Ltd.',
+    CODE: null,
+    SYMBOL: 'NTPC',
+    INDUSTRY: 'Energy'
+  },
+  RowDataPacket {
+    TITLE: 'JSW Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'JSWSTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Power Grid Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'POWERGRID',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Coal India Ltd.',
+    CODE: null,
+    SYMBOL: 'COALINDIA',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAMOTORS',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Pidilite Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIDILITIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'TATASTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'SBILIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Life Insurance Co Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCLIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Grasim Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'GRASIM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Vedanta Ltd.',
+    CODE: null,
+    SYMBOL: 'VEDL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Auto Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJ-AUTO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Ambuja Cements Ltd.',
+    CODE: null,
+    SYMBOL: 'AMBUJACEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Tech Mahindra Ltd.',
+    CODE: null,
+    SYMBOL: 'TECHM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Siemens Ltd.',
+    CODE: null,
+    SYMBOL: 'SIEMENS',
+    INDUSTRY: 'Industrial Conglomerates'
+  },
+  RowDataPacket {
+    TITLE: 'Eicher Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'EICHERMOT',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: "Divi's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DIVISLAB',
+    INDUSTRY: 'Life Sciences'
+  },
+  RowDataPacket {
+    TITLE: 'Dabur India Ltd.',
+    CODE: null,
+    SYMBOL: 'DABUR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Oil Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IOC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'IndusInd Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSINDBK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Britannia Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'BRITANNIA',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Cipla Ltd.',
+    CODE: null,
+    SYMBOL: 'CIPLA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Hindalco Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDALCO',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'DLF Ltd.',
+    CODE: null,
+    SYMBOL: 'DLF',
+    INDUSTRY: 'Real Estate'
+  },
+  RowDataPacket {
+    TITLE: 'Godrej Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'GODREJCP',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Larsen & Toubro Infotech Ltd.',
+    CODE: null,
+    SYMBOL: 'LTI',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Cards And Payment Services Ltd.',
+    CODE: null,
+    SYMBOL: 'SBICARD',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Havells India Ltd.',
+    CODE: null,
+    SYMBOL: 'HAVELLS',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Aeronautics Ltd.',
+    CODE: null,
+    SYMBOL: 'HAL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: 'Shree Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'SHREECEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'SRF Ltd.',
+    CODE: null,
+    SYMBOL: 'SRF',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Prudential Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIPRULI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Electronics Ltd.',
+    CODE: null,
+    SYMBOL: 'BEL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: "Dr. Reddy's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DRREDDY',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'TATACONSUM',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Power Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAPOWER',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'ABB India Ltd.',
+    CODE: null,
+    SYMBOL: 'ABB',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Interglobe Aviation Ltd.',
+    CODE: null,
+    SYMBOL: 'INDIGO',
+    INDUSTRY: 'Airlines'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Of Baroda',
+    CODE: null,
+    SYMBOL: 'BANKBARODA',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Marico Ltd.',
+    CODE: null,
+    SYMBOL: 'MARICO',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Petroleum Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'BPCL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'United Spirits Ltd.',
+    CODE: null,
+    SYMBOL: 'MCDOWELL-N',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Cholamandalam Investment and Finance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'CHOLAFIN',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Berger Paints India Ltd.',
+    CODE: null,
+    SYMBOL: 'BERGEPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Railway Catering And Tourism Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IRCTC',
+    INDUSTRY: 'Commercial Serv'
+  },
+  RowDataPacket {
+    TITLE: 'Page Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PAGEIND',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'GAIL (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'GAIL',
+    INDUSTRY: 'Gas Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Mindtree Ltd.',
+    CODE: null,
+    SYMBOL: 'LTIM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Lombard General Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIGI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Torrent Pharmaceuticals Ltd.',
+    CODE: null,
+    SYMBOL: 'TORNTPHARM',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'TVS Motor Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TVSMOTOR',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Indus Towers Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSTOWER',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'UPL Ltd.',
+    CODE: null,
+    SYMBOL: 'UPL',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Hero MotoCorp Ltd.',
+    CODE: null,
+    SYMBOL: 'HEROMOTOCO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Trent Ltd.',
+    CODE: null,
+    SYMBOL: 'TRENT',
+    INDUSTRY: 'Specialty Retail'
+  },
+  RowDataPacket {
+    TITLE: 'Info Edge (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'NAUKRI',
+    INDUSTRY: 'Media Services'
+  },
+  RowDataPacket {
+    TITLE: 'Samvardhana Motherson International Ltd.',
+    CODE: null,
+    SYMBOL: 'MOTHERSON',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'PI Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Bosch Ltd.',
+    CODE: null,
+    SYMBOL: 'BOSCHLTD',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'Jindal Steel & Power Ltd.',
+    CODE: null,
+    SYMBOL: 'JINDALSTEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'The Indian Hotels Company Ltd.',
+    CODE: null,
+    SYMBOL: 'INDHOTEL',
+    INDUSTRY: 'Hotels Leisure'
+  },
+  RowDataPacket {
+    TITLE: 'United Breweries Ltd.',
+    CODE: null,
+    SYMBOL: 'UBL',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Ashok Leyland Ltd.',
+    CODE: null,
+    SYMBOL: 'ASHOKLEY',
+    INDUSTRY: 'Machinery'
+  },
+  RowDataPacket {
+    TITLE: 'Astral Ltd.',
+    CODE: null,
+    SYMBOL: 'ASTRAL',
+    INDUSTRY: 'Building Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bandhan Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'BANDHANBNK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Container Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'CONCOR',
+    INDUSTRY: 'Road Rail'
+  },
+  RowDataPacket {
+    TITLE: 'Colgate-Palmolive (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'COLPAL',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'ACC Ltd.',
+    CODE: null,
+    SYMBOL: 'ACC',
+    INDUSTRY: 'Building Materials'
+  },
+  ... 97 more items
+]
+0 - 100
+100 - 197
+{
+  list: [
+    'NIFTY',      'HDFCBANK',   'TCS',        'BANKNIFTY',  'HDFC',
+    'RELIANCE',   'INFY',       'ICICIBANK',  'SBIN',       'HINDUNILVR',
+    'BHARTIARTL', 'BAJFINANCE', 'ITC',        'KOTAKBANK',  'ADANIENT',
+    'ASIANPAINT', 'HCLTECH',    'BAJAJFINSV', 'MARUTI',     'AXISBANK',
+    'TITAN',      'LT',         'SUNPHARMA',  'WIPRO',      'NESTLEIND',
+    'ADANIPORTS', 'JSWSTEEL',   'OIL',        'ULTRACEMCO', 'TATAMOTORS',
+    'NTPC',       'ONGC',       'TATASTEEL',  'POWERGRID',  'COALINDIA',
+    'PIDILITIND', 'SBILIFE',    'HDFCLIFE',   'GRASIM',     'L&TFH',
+    'VEDL',       'BAJAJ-AUTO', 'DABUR',      'IOC',        'INDUSINDBK',
+    'BRITANNIA',  'AMBUJACEM',  'TECHM',      'SIEMENS',    'EICHERMOT',
+    'DIVISLAB',   'CIPLA',      'HAVELLS',    'HINDALCO',   'GODREJCP',
+    'DLF',        'LTI',        'SBICARD',    'HAL',        'SHREECEM',
+    'SRF',        'ICICIPRULI', 'BEL',        'DRREDDY',    'TATACONSUM',
+    'TATAPOWER',  'INDIGO',     'ABB',        'BANKBARODA', 'MARICO',
+    'BPCL',       'APOLLOHOSP', 'MCDOWELL-N', 'CHOLAFIN',   'BERGEPAINT',
+    'IRCTC',      'PAGEIND',    'GAIL',       'LTIM',       'ICICIGI',
+    'TORNTPHARM', 'TVSMOTOR',   'INDUSTOWER', 'UPL',        'HEROMOTOCO',
+    'TRENT',      'JINDALSTEL', 'MOTHERSON',  'BOSCHLTD',   'INDHOTEL',
+    'UBL',        'ASTRAL',     'BANDHANBNK', 'CONCOR',     'COLPAL',
+    'ACC',        'PIIND',      'ASHOKLEY',   'NAUKRI',     'HDFCAMC',
+    ... 96 more items
+  ]
+}
+[
+  RowDataPacket {
+    TITLE: 'Nifty 50',
+    CODE: null,
+    SYMBOL: 'NIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Nefty',
+    CODE: null,
+    SYMBOL: 'BANKNIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Reliance Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'RELIANCE',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consultancy Services Ltd.',
+    CODE: null,
+    SYMBOL: 'TCS',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFC',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Infosys Ltd.',
+    CODE: null,
+    SYMBOL: 'INFY',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Unilever Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDUNILVR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'State Bank Of India',
+    CODE: null,
+    SYMBOL: 'SBIN',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Bharti Airtel Ltd.',
+    CODE: null,
+    SYMBOL: 'BHARTIARTL',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finance Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJFINANCE',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'ITC Ltd.',
+    CODE: null,
+    SYMBOL: 'ITC',
+    INDUSTRY: 'Tobacco'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Enterprises Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIENT',
+    INDUSTRY: 'Trading Companies'
+  },
+  RowDataPacket {
+    TITLE: 'Kotak Mahindra Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'KOTAKBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Asian Paints Ltd.',
+    CODE: null,
+    SYMBOL: 'ASIANPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'HCL Technologies Ltd.',
+    CODE: null,
+    SYMBOL: 'HCLTECH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finserv Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJFINSV',
+    INDUSTRY: 'Financial Services'
+  },
+  RowDataPacket {
+    TITLE: 'Maruti Suzuki India Ltd.',
+    CODE: null,
+    SYMBOL: 'MARUTI',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Axis Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'AXISBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Sun Pharmaceutical Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'SUNPHARMA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Titan Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TITAN',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'L&TFH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'LT',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'WIPRO',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Nestle India Ltd.',
+    CODE: null,
+    SYMBOL: 'NESTLEIND',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Ultratech Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'ULTRACEMCO',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Ports and Special Economic Zone Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIPORTS',
+    INDUSTRY: 'Transport Infra'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'OIL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'ONGC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'NTPC Ltd.',
+    CODE: null,
+    SYMBOL: 'NTPC',
+    INDUSTRY: 'Energy'
+  },
+  RowDataPacket {
+    TITLE: 'JSW Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'JSWSTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Power Grid Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'POWERGRID',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Coal India Ltd.',
+    CODE: null,
+    SYMBOL: 'COALINDIA',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAMOTORS',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Pidilite Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIDILITIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'TATASTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'SBILIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Life Insurance Co Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCLIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Grasim Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'GRASIM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Vedanta Ltd.',
+    CODE: null,
+    SYMBOL: 'VEDL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Auto Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJ-AUTO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Ambuja Cements Ltd.',
+    CODE: null,
+    SYMBOL: 'AMBUJACEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Tech Mahindra Ltd.',
+    CODE: null,
+    SYMBOL: 'TECHM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Siemens Ltd.',
+    CODE: null,
+    SYMBOL: 'SIEMENS',
+    INDUSTRY: 'Industrial Conglomerates'
+  },
+  RowDataPacket {
+    TITLE: 'Eicher Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'EICHERMOT',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: "Divi's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DIVISLAB',
+    INDUSTRY: 'Life Sciences'
+  },
+  RowDataPacket {
+    TITLE: 'Dabur India Ltd.',
+    CODE: null,
+    SYMBOL: 'DABUR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Oil Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IOC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'IndusInd Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSINDBK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Britannia Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'BRITANNIA',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Cipla Ltd.',
+    CODE: null,
+    SYMBOL: 'CIPLA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Hindalco Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDALCO',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'DLF Ltd.',
+    CODE: null,
+    SYMBOL: 'DLF',
+    INDUSTRY: 'Real Estate'
+  },
+  RowDataPacket {
+    TITLE: 'Godrej Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'GODREJCP',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Larsen & Toubro Infotech Ltd.',
+    CODE: null,
+    SYMBOL: 'LTI',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Cards And Payment Services Ltd.',
+    CODE: null,
+    SYMBOL: 'SBICARD',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Havells India Ltd.',
+    CODE: null,
+    SYMBOL: 'HAVELLS',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Aeronautics Ltd.',
+    CODE: null,
+    SYMBOL: 'HAL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: 'Shree Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'SHREECEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'SRF Ltd.',
+    CODE: null,
+    SYMBOL: 'SRF',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Prudential Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIPRULI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Electronics Ltd.',
+    CODE: null,
+    SYMBOL: 'BEL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: "Dr. Reddy's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DRREDDY',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'TATACONSUM',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Power Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAPOWER',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'ABB India Ltd.',
+    CODE: null,
+    SYMBOL: 'ABB',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Interglobe Aviation Ltd.',
+    CODE: null,
+    SYMBOL: 'INDIGO',
+    INDUSTRY: 'Airlines'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Of Baroda',
+    CODE: null,
+    SYMBOL: 'BANKBARODA',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Marico Ltd.',
+    CODE: null,
+    SYMBOL: 'MARICO',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Petroleum Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'BPCL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'United Spirits Ltd.',
+    CODE: null,
+    SYMBOL: 'MCDOWELL-N',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Cholamandalam Investment and Finance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'CHOLAFIN',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Berger Paints India Ltd.',
+    CODE: null,
+    SYMBOL: 'BERGEPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Railway Catering And Tourism Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IRCTC',
+    INDUSTRY: 'Commercial Serv'
+  },
+  RowDataPacket {
+    TITLE: 'Page Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PAGEIND',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'GAIL (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'GAIL',
+    INDUSTRY: 'Gas Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Mindtree Ltd.',
+    CODE: null,
+    SYMBOL: 'LTIM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Lombard General Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIGI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Torrent Pharmaceuticals Ltd.',
+    CODE: null,
+    SYMBOL: 'TORNTPHARM',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'TVS Motor Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TVSMOTOR',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Indus Towers Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSTOWER',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'UPL Ltd.',
+    CODE: null,
+    SYMBOL: 'UPL',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Hero MotoCorp Ltd.',
+    CODE: null,
+    SYMBOL: 'HEROMOTOCO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Trent Ltd.',
+    CODE: null,
+    SYMBOL: 'TRENT',
+    INDUSTRY: 'Specialty Retail'
+  },
+  RowDataPacket {
+    TITLE: 'Info Edge (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'NAUKRI',
+    INDUSTRY: 'Media Services'
+  },
+  RowDataPacket {
+    TITLE: 'Samvardhana Motherson International Ltd.',
+    CODE: null,
+    SYMBOL: 'MOTHERSON',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'PI Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Bosch Ltd.',
+    CODE: null,
+    SYMBOL: 'BOSCHLTD',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'Jindal Steel & Power Ltd.',
+    CODE: null,
+    SYMBOL: 'JINDALSTEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'The Indian Hotels Company Ltd.',
+    CODE: null,
+    SYMBOL: 'INDHOTEL',
+    INDUSTRY: 'Hotels Leisure'
+  },
+  RowDataPacket {
+    TITLE: 'United Breweries Ltd.',
+    CODE: null,
+    SYMBOL: 'UBL',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Ashok Leyland Ltd.',
+    CODE: null,
+    SYMBOL: 'ASHOKLEY',
+    INDUSTRY: 'Machinery'
+  },
+  RowDataPacket {
+    TITLE: 'Astral Ltd.',
+    CODE: null,
+    SYMBOL: 'ASTRAL',
+    INDUSTRY: 'Building Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bandhan Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'BANDHANBNK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Container Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'CONCOR',
+    INDUSTRY: 'Road Rail'
+  },
+  RowDataPacket {
+    TITLE: 'Colgate-Palmolive (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'COLPAL',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'ACC Ltd.',
+    CODE: null,
+    SYMBOL: 'ACC',
+    INDUSTRY: 'Building Materials'
+  },
+  ... 97 more items
+]
+0 - 100
+100 - 197
+{
+  list: [
+    'HDFCBANK',   'HDFC',       'TCS',        'RELIANCE',   'INFY',
+    'ICICIBANK',  'SBIN',       'HINDUNILVR', 'BHARTIARTL', 'ITC',
+    'ADANIENT',   'BAJFINANCE', 'KOTAKBANK',  'ASIANPAINT', 'BAJAJFINSV',
+    'MARUTI',     'HCLTECH',    'SUNPHARMA',  'AXISBANK',   'TITAN',
+    'LT',         'WIPRO',      'L&TFH',      'NESTLEIND',  'ADANIPORTS',
+    'ONGC',       'ULTRACEMCO', 'NTPC',       'POWERGRID',  'JSWSTEEL',
+    'COALINDIA',  'TATAMOTORS', 'TATASTEEL',  'SBILIFE',    'HDFCLIFE',
+    'GRASIM',     'BAJAJ-AUTO', 'NIFTY',      'TECHM',      'BANKNIFTY',
+    'OIL',        'EICHERMOT',  'DIVISLAB',   'PIDILITIND', 'DABUR',
+    'IOC',        'BRITANNIA',  'INDUSINDBK', 'VEDL',       'HINDALCO',
+    'GODREJCP',   'CIPLA',      'HAVELLS',    'AMBUJACEM',  'SIEMENS',
+    'DLF',        'LTI',        'SHREECEM',   'SBICARD',    'HAL',
+    'TATACONSUM', 'TATAPOWER',  'SRF',        'BANKBARODA', 'ICICIPRULI',
+    'BPCL',       'APOLLOHOSP', 'ABB',        'BEL',        'INDIGO',
+    'IRCTC',      'MARICO',     'CHOLAFIN',   'MCDOWELL-N', 'BERGEPAINT',
+    'GAIL',       'PAGEIND',    'LTIM',       'ICICIGI',    'UPL',
+    'HEROMOTOCO', 'TORNTPHARM', 'NAUKRI',     'TVSMOTOR',   'INDUSTOWER',
+    'JINDALSTEL', 'DRREDDY',    'TRENT',      'PIIND',      'MOTHERSON',
+    'BANDHANBNK', 'BOSCHLTD',   'INDHOTEL',   'UBL',        'ASHOKLEY',
+    'ASTRAL',     'CONCOR',     'ACC',        'COLPAL',     'ZYDUSLIFE',
+    ... 96 more items
+  ]
+}
+[
+  RowDataPacket {
+    TITLE: 'Nifty 50',
+    CODE: null,
+    SYMBOL: 'NIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Nefty',
+    CODE: null,
+    SYMBOL: 'BANKNIFTY',
+    INDUSTRY: 'Index'
+  },
+  RowDataPacket {
+    TITLE: 'Reliance Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'RELIANCE',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consultancy Services Ltd.',
+    CODE: null,
+    SYMBOL: 'TCS',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFC',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Infosys Ltd.',
+    CODE: null,
+    SYMBOL: 'INFY',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Unilever Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDUNILVR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'State Bank Of India',
+    CODE: null,
+    SYMBOL: 'SBIN',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Bharti Airtel Ltd.',
+    CODE: null,
+    SYMBOL: 'BHARTIARTL',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finance Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJFINANCE',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'ITC Ltd.',
+    CODE: null,
+    SYMBOL: 'ITC',
+    INDUSTRY: 'Tobacco'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Enterprises Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIENT',
+    INDUSTRY: 'Trading Companies'
+  },
+  RowDataPacket {
+    TITLE: 'Kotak Mahindra Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'KOTAKBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Asian Paints Ltd.',
+    CODE: null,
+    SYMBOL: 'ASIANPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'HCL Technologies Ltd.',
+    CODE: null,
+    SYMBOL: 'HCLTECH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Finserv Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJFINSV',
+    INDUSTRY: 'Financial Services'
+  },
+  RowDataPacket {
+    TITLE: 'Maruti Suzuki India Ltd.',
+    CODE: null,
+    SYMBOL: 'MARUTI',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Axis Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'AXISBANK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Sun Pharmaceutical Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'SUNPHARMA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Titan Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TITAN',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'L&TFH',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'LT',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Wipro Ltd.',
+    CODE: null,
+    SYMBOL: 'WIPRO',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Nestle India Ltd.',
+    CODE: null,
+    SYMBOL: 'NESTLEIND',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Ultratech Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'ULTRACEMCO',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Adani Ports and Special Economic Zone Ltd.',
+    CODE: null,
+    SYMBOL: 'ADANIPORTS',
+    INDUSTRY: 'Transport Infra'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'OIL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Oil & Natural Gas Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'ONGC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'NTPC Ltd.',
+    CODE: null,
+    SYMBOL: 'NTPC',
+    INDUSTRY: 'Energy'
+  },
+  RowDataPacket {
+    TITLE: 'JSW Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'JSWSTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Power Grid Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'POWERGRID',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Coal India Ltd.',
+    CODE: null,
+    SYMBOL: 'COALINDIA',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAMOTORS',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Pidilite Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIDILITIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Steel Ltd.',
+    CODE: null,
+    SYMBOL: 'TATASTEEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'SBILIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'HDFC Life Insurance Co Ltd.',
+    CODE: null,
+    SYMBOL: 'HDFCLIFE',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Grasim Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'GRASIM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Vedanta Ltd.',
+    CODE: null,
+    SYMBOL: 'VEDL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'Bajaj Auto Ltd.',
+    CODE: null,
+    SYMBOL: 'BAJAJ-AUTO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Ambuja Cements Ltd.',
+    CODE: null,
+    SYMBOL: 'AMBUJACEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'Tech Mahindra Ltd.',
+    CODE: null,
+    SYMBOL: 'TECHM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'Siemens Ltd.',
+    CODE: null,
+    SYMBOL: 'SIEMENS',
+    INDUSTRY: 'Industrial Conglomerates'
+  },
+  RowDataPacket {
+    TITLE: 'Eicher Motors Ltd.',
+    CODE: null,
+    SYMBOL: 'EICHERMOT',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: "Divi's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DIVISLAB',
+    INDUSTRY: 'Life Sciences'
+  },
+  RowDataPacket {
+    TITLE: 'Dabur India Ltd.',
+    CODE: null,
+    SYMBOL: 'DABUR',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Oil Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IOC',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'IndusInd Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSINDBK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Britannia Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'BRITANNIA',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Cipla Ltd.',
+    CODE: null,
+    SYMBOL: 'CIPLA',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Hindalco Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'HINDALCO',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'DLF Ltd.',
+    CODE: null,
+    SYMBOL: 'DLF',
+    INDUSTRY: 'Real Estate'
+  },
+  RowDataPacket {
+    TITLE: 'Godrej Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'GODREJCP',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'Larsen & Toubro Infotech Ltd.',
+    CODE: null,
+    SYMBOL: 'LTI',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'SBI Cards And Payment Services Ltd.',
+    CODE: null,
+    SYMBOL: 'SBICARD',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Havells India Ltd.',
+    CODE: null,
+    SYMBOL: 'HAVELLS',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Hindustan Aeronautics Ltd.',
+    CODE: null,
+    SYMBOL: 'HAL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: 'Shree Cement Ltd.',
+    CODE: null,
+    SYMBOL: 'SHREECEM',
+    INDUSTRY: 'Building Materials'
+  },
+  RowDataPacket {
+    TITLE: 'SRF Ltd.',
+    CODE: null,
+    SYMBOL: 'SRF',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Prudential Life Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIPRULI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Electronics Ltd.',
+    CODE: null,
+    SYMBOL: 'BEL',
+    INDUSTRY: 'Aerospace Defense'
+  },
+  RowDataPacket {
+    TITLE: "Dr. Reddy's Laboratories Ltd.",
+    CODE: null,
+    SYMBOL: 'DRREDDY',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Consumer Products Ltd.',
+    CODE: null,
+    SYMBOL: 'TATACONSUM',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Tata Power Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TATAPOWER',
+    INDUSTRY: 'Electric Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'ABB India Ltd.',
+    CODE: null,
+    SYMBOL: 'ABB',
+    INDUSTRY: 'Electrical Equip.'
+  },
+  RowDataPacket {
+    TITLE: 'Interglobe Aviation Ltd.',
+    CODE: null,
+    SYMBOL: 'INDIGO',
+    INDUSTRY: 'Airlines'
+  },
+  RowDataPacket {
+    TITLE: 'Bank Of Baroda',
+    CODE: null,
+    SYMBOL: 'BANKBARODA',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Marico Ltd.',
+    CODE: null,
+    SYMBOL: 'MARICO',
+    INDUSTRY: 'Food Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bharat Petroleum Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'BPCL',
+    INDUSTRY: 'Oil, Gas Fuels'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'Apollo Hospitals Enterprise Ltd.',
+    CODE: null,
+    SYMBOL: 'APOLLOHOSP',
+    INDUSTRY: 'Health Care'
+  },
+  RowDataPacket {
+    TITLE: 'United Spirits Ltd.',
+    CODE: null,
+    SYMBOL: 'MCDOWELL-N',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Cholamandalam Investment and Finance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'CHOLAFIN',
+    INDUSTRY: 'Consumer Finance'
+  },
+  RowDataPacket {
+    TITLE: 'Berger Paints India Ltd.',
+    CODE: null,
+    SYMBOL: 'BERGEPAINT',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Indian Railway Catering And Tourism Corporation Ltd.',
+    CODE: null,
+    SYMBOL: 'IRCTC',
+    INDUSTRY: 'Commercial Serv'
+  },
+  RowDataPacket {
+    TITLE: 'Page Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PAGEIND',
+    INDUSTRY: 'Apparel Luxury'
+  },
+  RowDataPacket {
+    TITLE: 'GAIL (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'GAIL',
+    INDUSTRY: 'Gas Utilities'
+  },
+  RowDataPacket {
+    TITLE: 'Mindtree Ltd.',
+    CODE: null,
+    SYMBOL: 'LTIM',
+    INDUSTRY: 'IT Services'
+  },
+  RowDataPacket {
+    TITLE: 'ICICI Lombard General Insurance Company Ltd.',
+    CODE: null,
+    SYMBOL: 'ICICIGI',
+    INDUSTRY: 'Insurance'
+  },
+  RowDataPacket {
+    TITLE: 'Torrent Pharmaceuticals Ltd.',
+    CODE: null,
+    SYMBOL: 'TORNTPHARM',
+    INDUSTRY: 'Pharmaceuticals'
+  },
+  RowDataPacket {
+    TITLE: 'TVS Motor Company Ltd.',
+    CODE: null,
+    SYMBOL: 'TVSMOTOR',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Indus Towers Ltd.',
+    CODE: null,
+    SYMBOL: 'INDUSTOWER',
+    INDUSTRY: 'Telecom Services'
+  },
+  RowDataPacket {
+    TITLE: 'UPL Ltd.',
+    CODE: null,
+    SYMBOL: 'UPL',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Hero MotoCorp Ltd.',
+    CODE: null,
+    SYMBOL: 'HEROMOTOCO',
+    INDUSTRY: 'Auto Manufacturers'
+  },
+  RowDataPacket {
+    TITLE: 'Trent Ltd.',
+    CODE: null,
+    SYMBOL: 'TRENT',
+    INDUSTRY: 'Specialty Retail'
+  },
+  RowDataPacket {
+    TITLE: 'Info Edge (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'NAUKRI',
+    INDUSTRY: 'Media Services'
+  },
+  RowDataPacket {
+    TITLE: 'Samvardhana Motherson International Ltd.',
+    CODE: null,
+    SYMBOL: 'MOTHERSON',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'PI Industries Ltd.',
+    CODE: null,
+    SYMBOL: 'PIIND',
+    INDUSTRY: 'Chemicals'
+  },
+  RowDataPacket {
+    TITLE: 'Bosch Ltd.',
+    CODE: null,
+    SYMBOL: 'BOSCHLTD',
+    INDUSTRY: 'Auto Components'
+  },
+  RowDataPacket {
+    TITLE: 'Jindal Steel & Power Ltd.',
+    CODE: null,
+    SYMBOL: 'JINDALSTEL',
+    INDUSTRY: 'Metals Mining'
+  },
+  RowDataPacket {
+    TITLE: 'The Indian Hotels Company Ltd.',
+    CODE: null,
+    SYMBOL: 'INDHOTEL',
+    INDUSTRY: 'Hotels Leisure'
+  },
+  RowDataPacket {
+    TITLE: 'United Breweries Ltd.',
+    CODE: null,
+    SYMBOL: 'UBL',
+    INDUSTRY: 'Beverages'
+  },
+  RowDataPacket {
+    TITLE: 'Ashok Leyland Ltd.',
+    CODE: null,
+    SYMBOL: 'ASHOKLEY',
+    INDUSTRY: 'Machinery'
+  },
+  RowDataPacket {
+    TITLE: 'Astral Ltd.',
+    CODE: null,
+    SYMBOL: 'ASTRAL',
+    INDUSTRY: 'Building Products'
+  },
+  RowDataPacket {
+    TITLE: 'Bandhan Bank Ltd.',
+    CODE: null,
+    SYMBOL: 'BANDHANBNK',
+    INDUSTRY: 'Banks'
+  },
+  RowDataPacket {
+    TITLE: 'Container Corporation Of India Ltd.',
+    CODE: null,
+    SYMBOL: 'CONCOR',
+    INDUSTRY: 'Road Rail'
+  },
+  RowDataPacket {
+    TITLE: 'Colgate-Palmolive (India) Ltd.',
+    CODE: null,
+    SYMBOL: 'COLPAL',
+    INDUSTRY: 'Personal Products'
+  },
+  RowDataPacket {
+    TITLE: 'ACC Ltd.',
+    CODE: null,
+    SYMBOL: 'ACC',
+    INDUSTRY: 'Building Materials'
+  },
+  ... 97 more items
+]
+0 - 100
+100 - 197
+{
+  list: [
+    'HDFCBANK',   'NIFTY',      'TCS',        'HDFC',      'RELIANCE',
+    'BANKNIFTY',  'INFY',       'HINDUNILVR', 'ICICIBANK', 'BAJFINANCE',
+    'SBIN',       'BHARTIARTL', 'ADANIENT',   'ITC',       'KOTAKBANK',
+    'HCLTECH',    'BAJAJFINSV', 'ASIANPAINT', 'MARUTI',    'AXISBANK',
+    'SUNPHARMA',  'LT',         'TITAN',      'L&TFH',     'NESTLEIND',
+    'WIPRO',      'ADANIPORTS', 'ONGC',       'OIL',       'ULTRACEMCO',
+    'NTPC',       'POWERGRID',  'COALINDIA',  'JSWSTEEL',  'TATAMOTORS',
+    'PIDILITIND', 'SBILIFE',    'TATASTEEL',  'HDFCLIFE',  'GRASIM',
+    'BAJAJ-AUTO', 'VEDL',       'AMBUJACEM',  'TECHM',     'SIEMENS',
+    'DIVISLAB',   'DABUR',      'EICHERMOT',  'BRITANNIA', 'INDUSINDBK',
+    'IOC',        'CIPLA',      'HINDALCO',   'DLF',       'GODREJCP',
+    'SBICARD',    'LTI',        'HAVELLS',    'HAL',       'SHREECEM',
+    'BEL',        'SRF',        'ICICIPRULI', 'DRREDDY',   'TATACONSUM',
+    'TATAPOWER',  'INDIGO',     'ABB',        'MARICO',    'BPCL',
+    'BANKBARODA', 'APOLLOHOSP', 'MCDOWELL-N', 'CHOLAFIN',  'BERGEPAINT',
+    'IRCTC',      'PAGEIND',    'GAIL',       'ICICIGI',   'LTIM',
+    'TVSMOTOR',   'TORNTPHARM', 'INDUSTOWER', 'UPL',       'HEROMOTOCO',
+    'TRENT',      'MOTHERSON',  'NAUKRI',     'PIIND',     'JINDALSTEL',
+    'BOSCHLTD',   'INDHOTEL',   'ASHOKLEY',   'UBL',       'ASTRAL',
+    'COLPAL',     'BANDHANBNK', 'CONCOR',     'ACC',       'HDFCAMC',
+    ... 96 more items
+  ]
+}
+server stared 3000
